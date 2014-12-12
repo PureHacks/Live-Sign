@@ -35,20 +35,17 @@
                     </div>
                     <div role="tabpanel" class="tab-pane active" id="images">
                         <h2>{{images}}</h2>
-                        <form>
+                        <form method="POST" action="/api/images">
                             <label>Select and image:
-                            <input type="file"></label>
+                            <input ng-model='image' type="file" name="image"></label>
 
                             <label>Image name:
-                            <input type="text" name="image" id="image"></label>
+                            <input ng-model='imagename' type="text" name="imagename" id="imagename"></label>
                             
                             <button type="submit">Upload Image</button>
                         </form>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
 

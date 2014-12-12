@@ -1,11 +1,12 @@
-var Image = require('../../models/image');
+//var Image = require('../../models/image');
 var router = require('express').Router();
 
 var ml =  require('mongolink');
 
 
-router.get('/api/images', function (req, res, next) {
-
+router.get('/api/images', function (req, res) {
+	console.log(req.body);
+	res.send("<h1>" + req.body + "test</h1>");
 });
 
 var handler = function(err, object) {
@@ -21,19 +22,21 @@ var handler = function(err, object) {
 			"ok": "Added new user"
 		});
 	}
-});
+};
 
-router.post('/api/images', function(req, res, next) {
+router.post('/api/images', function(req, res) {
 
 	var cloud = require("../cloudinary");
 
-	var result = cloud.upload(req.image);
+	var result = cloud.upload(req.body.image);
+	console.log(req.body, req.body.image, req.body.imagename, req.imagename, result);
 
 	if (result !== false && result.url) {
-		var image = new Image({
-			filename: req.filename,
-			url: result.url
-		});
+		var image = {
+			filename: req.body.imagename,
+			url: result.url,
+			date: Date.now
+		};
 		ml.insertData(image, handler);
 		
 	}
@@ -42,3 +45,6 @@ router.post('/api/images', function(req, res, next) {
 	}
 	
 });
+
+
+module.exports = router;

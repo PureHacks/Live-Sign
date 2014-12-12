@@ -9,6 +9,7 @@ cloudinary.config({
 var cloud = {};
 
 cloud.upload = function(image) {
+	console.log(image);
 	if (image) {
 		cloudinary.uploader.upload(image, function(result) { 
 			return result; 
