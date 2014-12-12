@@ -11,3 +11,9 @@ app.use(require('./controllers/static'));
 app.listen(port, function(){
 	console.log("listening on localhost:" + port);
 })
+
+
+//var cloud = require('./controllers/cloudinary');
+
+
+//cloud.upload("http://i.imgur.com/iZo1Qa8.gif");
