@@ -2,11 +2,82 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>Admin Panel</title>
+		<title>Live Sign - Admin Panel</title>
 	</head>
 	<body ng-app="app">
-		<h1>hello world {{1 + 1}}</h1>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header live-sign-logo">Live Sign</div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#scheduling" aria-controls="home" role="tab" data-toggle="tab">Scheduling</a></li>
+                        <li role="presentation"><a href="#campaign" aria-controls="profile" role="tab" data-toggle="tab">Campaign</a></li>
+                        <li role="presentation"><a href="#images" aria-controls="messages" role="tab" data-toggle="tab">Images</a></li>
+                    </ul>
+                </div><!--/.navbar-collapse -->
+            </div>
+        </nav>
+
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
+
+                <h1>{{pageView}}</h1>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="scheduling">Scheduling</div>
+                    <div role="tabpanel" class="tab-pane" id="campaign">Campaign</div>
+                    <div role="tabpanel" class="tab-pane" id="images">Images</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+
+
+            <!-- Example row of columns
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>Heading</h2>
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Heading</h2>
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Heading</h2>
+                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                </div>
+            </div>-->
+
+            <hr>
+
+            <footer>
+                <p>&copy; Team Live Design - Dec 2014</p>
+            </footer>
+        </div> <!-- /container -->
+
 	</body>
-	<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js'></script>
+
 	<script src="/app.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <link href="jumbotron.css" rel="stylesheet">
+    <!-- LiveSign style sheets -->
+    <link href="css/liveSign.css" rel="stylesheet">
+
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </html>
