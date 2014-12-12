@@ -11,9 +11,10 @@ var cloud = {};
 cloud.upload = function(image) {
 	if (image) {
 		cloudinary.uploader.upload(image, function(result) { 
-			console.log(result) 
+			return result; 
 		});
 	}
+	return false;
 }
 
 module.exports = cloud;
