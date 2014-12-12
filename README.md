@@ -21,3 +21,8 @@ PureHacks
 	```
 	nodemon server.js
 	```
+
+* open browser
+	```
+	localhost:8888
+	```
