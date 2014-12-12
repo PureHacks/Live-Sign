@@ -13,7 +13,7 @@ app.listen(port, function(){
 })
 
 
-var cloud = require('./controllers/cloudinary');
+//var cloud = require('./controllers/cloudinary');
 
 
-cloud.upload("http://i.imgur.com/iZo1Qa8.gif");
+//cloud.upload("http://i.imgur.com/iZo1Qa8.gif");
