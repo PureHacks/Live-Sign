@@ -1,4 +1,4 @@
-var Img = require('../../models/image');
+var Img = require('.././image');
 var router = require('express').Router();
 
 

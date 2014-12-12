@@ -9,9 +9,8 @@ app.use(bodyParser.json());
 app.use(require('./controllers/static'));
 
 app.listen(port, function(){
-	console.log("listening on localhost:" + port);
+    console.log("listening on localhost:" + port);
 })
-
 
 //var cloud = require('./controllers/cloudinary');
 
