@@ -1,10 +1,6 @@
 var Img = require('../../models/image');
 var router = require('express').Router();
 
-var cloud = require('../controllers/cloudinary');
-
-
-cloud.upload("http://i.imgur.com/iZo1Qa8.gif");
 
 router.get('/api/image', function (req, res, next) {
 
