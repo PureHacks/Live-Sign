@@ -1,7 +1,10 @@
-var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/livesign', function () {
-	console.log('mongodb connected');
-});
+var uri = "mongodb://livesign:livesign@ds053190.mongolab.com:53190/heroku_app32455663";
 
-module.exports = mongoose;
+
+var mongodb = require("mongodb");
+
+var ml = require("mongolink");
+ml.uri = uri;
+
+
