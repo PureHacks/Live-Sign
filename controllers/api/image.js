@@ -1,4 +1,3 @@
-//var Image = require('../../models/image');
 var router = require('express').Router();
 
 var ml =  require('mongolink');

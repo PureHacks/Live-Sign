@@ -9,5 +9,6 @@ app.use(require('./controllers/static'));
 app.use(require("./controllers/api/image"))
 
 app.listen(port, function(){
-	console.log("listening on localhost:" + port);
+    console.log("listening on localhost:" + port);
 })
+
