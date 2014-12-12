@@ -4,16 +4,16 @@
 		<meta charset="UTF-8">
 		<title>Live Sign - Admin Panel</title>
 	</head>
-	<body ng-app="app">
+	<body ng-app="app" ng-controller="mainController" ng-init="init()">
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header live-sign-logo">Live Sign</div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#scheduling" aria-controls="home" role="tab" data-toggle="tab">Scheduling</a></li>
-                        <li role="presentation"><a href="#campaign" aria-controls="profile" role="tab" data-toggle="tab">Campaign</a></li>
-                        <li role="presentation"><a href="#images" aria-controls="messages" role="tab" data-toggle="tab">Images</a></li>
+                        <li role="presentation" class="active"><a href="#scheduling" aria-controls="home" role="tab" data-toggle="tab">{{scheduling}}</a></li>
+                        <li role="presentation"><a href="#campaign" aria-controls="profile" role="tab" data-toggle="tab">{{campaign}}</a></li>
+                        <li role="presentation"><a href="#images" aria-controls="messages" role="tab" data-toggle="tab">{{images}}</a></li>
                     </ul>
                 </div><!--/.navbar-collapse -->
             </div>
@@ -24,13 +24,26 @@
         <div class="jumbotron">
             <div class="container">
 
-                <h1>{{pageView}}</h1>
+                <h1>Title: {{pageView}}</h1>
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="scheduling">Scheduling</div>
-                    <div role="tabpanel" class="tab-pane" id="campaign">Campaign</div>
-                    <div role="tabpanel" class="tab-pane" id="images">Images</div>
+                    <div role="tabpanel" class="tab-pane active" id="scheduling">
+                        <h2>{{scheduling}}</h2>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="campaign">
+                        <h2>{{campaign}}</h2>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="images">
+                        <h2>{{images}}</h2>
+                        <form>
+                            <input>
+                            <button type="button">Upload Image</button>
+                        </form>
+                    </div>
                 </div>
+
+
+
             </div>
         </div>
 
@@ -75,10 +88,10 @@
     <link href="jumbotron.css" rel="stylesheet">
     <!-- LiveSign style sheets -->
     <link href="css/liveSign.css" rel="stylesheet">
-
-
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <!-- controllers -->
+    <script src="/controllers/mainController.js"></script>
 </html>
