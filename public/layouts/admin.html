@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Live Sign - Admin Panel</title>
+	</head>
+	<body ng-app="app" ng-controller="MainController" ng-init="init()">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header live-sign-logo">Live Sign</div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation"><a href="#scheduling" ng-click="changeView(scheduling)" aria-controls="{{scheduling}}" role="tab" data-toggle="tab">{{scheduling}}</a></li>
+                        <li role="presentation"><a href="#campaign" ng-click="changeView(campaign)" aria-controls="{{campaign}}" role="tab" data-toggle="tab">{{campaign}}</a></li>
+                        <li role="presentation" class="active"><a href="#images" ng-model="images" ng-click="changeView(images)" aria-controls="{{images}}" role="tab" data-toggle="tab">{{images}}</a></li>
+                    </ul>
+                </div><!--/.navbar-collapse -->
+            </div>
+        </nav>
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
+
+                 <h2>{{pageView}}</h2>
+                 <!-- Tab panes -->
+                <!--<div class="tab-content">
+                    <div role="tabpanel" class="tab-pane" id="scheduling">
+                        <p>{{scheduling}} - more to come</p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="campaign">
+                        <p>{{campaign}} - more to come</p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane active" id="images">
+                        <p>{{images}} - more to come</p>
+                        <form>
+                            <label>Select and image:
+                            <input ng-model='image' type="file" name="image"></label>
+
+                            <label>Image name:
+                            <input ng-model='imagename' type="text" name="imagename" id="imagename"></label>
+                            
+                            <button type="submit">Upload Image</button>
+                        </form>
+                    </div>
+                </div>-->
+                <div ng-switch on="pageView">
+                    {{component}}
+                    <div ng-switch-when="Scheduling">
+                        <span ng-include="'layouts/partials/scheduling.html'"/>
+                    </div>
+                    <div ng-switch-when="Campaign">
+                        <span ng-include="'layouts/partials/campaign.html'"/>
+                    </div>
+                    <div ng-switch-when="Images">
+                        <span ng-include="'layouts/partials/images.html'"/>
+                    </div>
+                    <div ng-switch-default></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+
+
+            <!-- Example row of columns
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>Heading</h2>
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Heading</h2>
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Heading</h2>
+                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                </div>
+            </div>-->
+
+            <hr>
+
+            <footer>
+                <p>&copy; Team Live Design - Dec 2014</p>
+            </footer>
+        </div> <!-- /container -->
+
+	</body>
+    <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js'></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+	<script src="assets/app.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">   
+    <!-- LiveSign style sheets -->
+    <link rel="stylesheet" href="assets/css/app.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <!-- controllers -->
+    <script src="assets/controllers/mainController.js"></script>
+</html>
