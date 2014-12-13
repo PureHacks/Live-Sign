@@ -23,27 +23,42 @@ var handler = function(err, object) {
 	}
 };
 
-router.post('/api/images', function(req, res) {
+// router.post('/api/images', function(req, res) {
 
-	var cloud = require("../cloudinary");
+// 	var fs = require("fs");
 
-	var result = cloud.upload(req.body.image);
-	console.log(req.body, req.body.image, req.body.imagename, req.imagename, result);
+// 	console.log(req.body);
 
-	if (result !== false && result.url) {
-		var image = {
-			filename: req.body.imagename,
-			url: result.url,
-			date: Date.now
-		};
-		ml.insertData(image, handler);
+// 	fs.readFile(req.body.image.path, function(err, data){
+// 		var imageName = req.files.image.name;
+
+// 		console.log(imageName);
+// 	})
+
+
+// 	var cloud = require("../cloudinary");
+
+// 	console.log("TEST");
+// 	console.log(req.body);
+
+// 	var result = cloud.upload(req.body.image);
+
+// 	console.log(req.body, req.body.image, req.body.imagename, req.imagename, result);
+
+// 	if (result !== false && result.url) {
+// 		var image = {
+// 			filename: req.body.imagename,
+// 			url: result.url,
+// 			date: Date.now
+// 		};
+// 		ml.insertData(image, handler);
 		
-	}
-	else {
-		console.log("errorz");
-	}
+// 	}
+// 	else {
+// 		console.log("errorz");
+// 	}
 	
-});
+// });
 
 
 module.exports = router;

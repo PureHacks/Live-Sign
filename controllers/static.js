@@ -1,8 +1,9 @@
 var express = require("express");
 var router = express.Router();
 
+
 router.get('/', function (req, res) {
-	res.sendfile('layouts/admin.html');
+	res.sendfile('assets/layouts/admin.html');
 });
 
 // make filepath assets
