@@ -34,9 +34,47 @@ app.post("/api/test",function(req, res) {
 	console.log("busboy");
 
 	req.busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-		console.log(filename);
-		res.status(200).send("<h2>"+filename+"</h2>");
+		
+		console.log(fieldname, filename, encoding, mimetype);
+		console.log("Uploading: " + filename); 
 
+		var fs = require("fs")
+
+       	var fstream = fs.createWriteStream('/temp/' + filename);
+
+        file.pipe(fstream);
+
+        fstream.on('close', function () {
+
+        	console.log("done");
+			res.redirect('back');
+
+        });
+
+		// var cloudinary = require('cloudinary');
+
+		// cloudinary.config({ 
+		// 	cloud_name: 'mattmcfad', 
+		// 	api_key: '339735699794268', 
+		// 	api_secret: 'ecRVlmjdaXTG1mX1DcJm7sMp6Pg' 
+		// });
+
+		// var cloud = {};
+
+		// cloud.upload = function(image) {
+		// 	console.log(image);
+		// 	if (image) {
+		// 		cloudinary.uploader.upload(image, function(result) { 
+		// 			return result; 
+		// 		});
+		// 	}
+		// 	return false;
+		// }
+
+		// var result = cloud.upload(file)
+		// console.log(result);
+
+		// res.status(200).send("<h2>"+filename+"</h2>");
 	});
 
 	req.busboy.on('field', function(key, value, keyTruncated, valueTruncated) {
