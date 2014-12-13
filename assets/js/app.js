@@ -9,8 +9,7 @@ app.service("ImageService", function ($http) {
 	this.post = function(image) {
 		return $http.post('/api/images', image, { 
 			headers: {
-			'Content-Type': 'image/jpg'}
-		
+			'Content-Type': 'image/jpg'}		
 		});
 	}
 });

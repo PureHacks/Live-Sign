@@ -5,6 +5,11 @@ var	app = express(),
 	port = 8888;
 
 app.use(bodyParser.json());
+
+
+
+
+
 app.use(express.static(__dirname + "/assets"));
 
 // -----------------------------------
@@ -19,20 +24,34 @@ app.get('/api/images/:id', function (req, res) {
 
 
 // -----------------------------------
+var busboy = require('connect-busboy');
+
+app.use(busboy({ immediate: true }));
 
 
-app.post('/api/test/', function(req, res) {
-	console.log("HIT SERVER");
-	console.log(req.body, req.body.file);
-	console.log("node:",req.body.message);
-})
+app.post("/api/test",function(req, res) {
 
+	console.log("busboy");
 
+	req.busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+		console.log(filename);
+		res.status(200).send("<h2>"+filename+"</h2>");
+
+	});
+
+	req.busboy.on('field', function(key, value, keyTruncated, valueTruncated) {
+		
+	});
+
+	req.pipe(req.busboy);
+ 	
+});
 
 // GET /
 
 app.get('/', function (req, res) {
-	res.sendfile('assets/layouts/admin.html');
+	//res.sendfile('assets/layouts/admin.html');
+	res.sendfile('test.html');
 });
 
 
