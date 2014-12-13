@@ -38,41 +38,31 @@ app.post("/api/test",function(req, res) {
 		console.log(fieldname, filename, encoding, mimetype);
 		console.log("Uploading: " + filename); 
 
-		var fs = require("fs")
+		var fs = require("fs");
 
-       	var fstream = fs.createWriteStream('/temp/' + filename);
+        //Path where image will be uploaded
+		fstream = fs.createWriteStream(__dirname + '/tmp/' + filename);
+		file.pipe(fstream);
+		
+		fstream.on('close', function () {    
+			console.log("Upload Finished of " + filename);
 
-        file.pipe(fstream);
+			var cloudinary = require('cloudinary');
 
-        fstream.on('close', function () {
+			cloudinary.config({ 
+				cloud_name: 'mattmcfad', 
+				api_key: '339735699794268', 
+				api_secret: 'ecRVlmjdaXTG1mX1DcJm7sMp6Pg' 
+			});
 
-        	console.log("done");
-			res.redirect('back');
+			var filepath = __dirname + "/tmp/" + filename;
 
-        });
+			cloudinary.uploader.upload(filepath, function(result) {
+				console.log(result);
+				res.redirect('back');           //where to go next
+			})
+		});
 
-		// var cloudinary = require('cloudinary');
-
-		// cloudinary.config({ 
-		// 	cloud_name: 'mattmcfad', 
-		// 	api_key: '339735699794268', 
-		// 	api_secret: 'ecRVlmjdaXTG1mX1DcJm7sMp6Pg' 
-		// });
-
-		// var cloud = {};
-
-		// cloud.upload = function(image) {
-		// 	console.log(image);
-		// 	if (image) {
-		// 		cloudinary.uploader.upload(image, function(result) { 
-		// 			return result; 
-		// 		});
-		// 	}
-		// 	return false;
-		// }
-
-		// var result = cloud.upload(file)
-		// console.log(result);
 
 		// res.status(200).send("<h2>"+filename+"</h2>");
 	});
@@ -91,8 +81,6 @@ app.get('/', function (req, res) {
 	//res.sendfile('assets/layouts/admin.html');
 	res.sendfile('test.html');
 });
-
-
 
 
 app.listen(port, function() {
