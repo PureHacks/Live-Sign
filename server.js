@@ -22,6 +22,7 @@ app.use(busboy({
 app.saveImage = function(req, res) {
 	console.log("busboy");
 
+	var friendlyName = req.body.imageName || "Image name undefined";
 	req.busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
 
 		console.log(fieldname, filename, encoding, mimetype);
@@ -51,6 +52,7 @@ app.saveImage = function(req, res) {
 				if (result.error) {
 					console.log(result.error.message);
 				} else {
+					result.friendlyName = friendlyName;
 					app.saveImageUrlToDataBase(result);
 				}
 				res.redirect('back'); //where to go next
