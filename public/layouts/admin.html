@@ -11,9 +11,9 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation"><a href="#scheduling" ng-click="changeView(scheduling)" aria-controls="{{scheduling}}" role="tab" data-toggle="tab">{{scheduling}}</a></li>
+                        <li role="presentation" class="active"><a href="#scheduling" ng-click="changeView(scheduling)" aria-controls="{{scheduling}}" role="tab" data-toggle="tab">{{scheduling}}</a></li>
                         <li role="presentation"><a href="#campaign" ng-click="changeView(campaign)" aria-controls="{{campaign}}" role="tab" data-toggle="tab">{{campaign}}</a></li>
-                        <li role="presentation" class="active"><a href="#images" ng-model="images" ng-click="changeView(images)" aria-controls="{{images}}" role="tab" data-toggle="tab">{{images}}</a></li>
+                        <li role="presentation"><a href="#images" ng-click="changeView(images)" ng-model="images" aria-controls="{{images}}" role="tab" data-toggle="tab">{{images}}</a></li>
                     </ul>
                 </div><!--/.navbar-collapse -->
             </div>
@@ -22,29 +22,7 @@
         <!-- Main jumbotron for a primary marketing message or call to action -->
         <div class="jumbotron">
             <div class="container">
-
-                 <h2>{{pageView}}</h2>
-                 <!-- Tab panes -->
-                <!--<div class="tab-content">
-                    <div role="tabpanel" class="tab-pane" id="scheduling">
-                        <p>{{scheduling}} - more to come</p>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="campaign">
-                        <p>{{campaign}} - more to come</p>
-                    </div>
-                    <div role="tabpanel" class="tab-pane active" id="images">
-                        <p>{{images}} - more to come</p>
-                        <form>
-                            <label>Select and image:
-                            <input ng-model='image' type="file" name="image"></label>
-
-                            <label>Image name:
-                            <input ng-model='imagename' type="text" name="imagename" id="imagename"></label>
-                            
-                            <button type="submit">Upload Image</button>
-                        </form>
-                    </div>
-                </div>-->
+                <h2>{{pageView}}</h2>
                 <div ng-switch on="pageView">
                     {{component}}
                     <div ng-switch-when="Scheduling">
@@ -62,10 +40,7 @@
         </div>
 
         <div class="container">
-
-
-
-            <!-- Example row of columns
+            <!-- Example row of columns --
             <div class="row">
                 <div class="col-md-4">
                     <h2>Heading</h2>
@@ -96,8 +71,9 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 	<script src="assets/app.js"></script>
+	<script src="assets/lib/dictionary.js"></script>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">   
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <!-- LiveSign style sheets -->
     <link rel="stylesheet" href="assets/css/app.css">
     <!-- Optional theme -->

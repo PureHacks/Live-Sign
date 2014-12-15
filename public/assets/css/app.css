@@ -1,0 +1,31 @@
+@import url(http://fonts.googleapis.com/css?family=Archivo+Narrow);
+body {
+    background-color: #5dace9;
+    font-family: 'Archivo Narrow', sans-serif;
+}
+
+.nav-tabs {
+    border: none;
+}
+
+ul, lo {
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+
+li {
+    width: 150px;
+    text-align: center;
+}
+
+.live-sign-logo {
+    font-size: 24px;
+    line-height: 32px;
+    color: aliceblue;
+    width: 300px;
+    margin-top: 10px;
+}
+
+.tab-content {
+    min-height: 600px;
+}
