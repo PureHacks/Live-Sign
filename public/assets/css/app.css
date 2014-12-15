@@ -29,3 +29,37 @@ li {
 .tab-content {
     min-height: 600px;
 }
+
+.image-container form{
+    border-bottom: 1px solid black;
+    padding: 10px 0 10px 0;
+    width: 100%;
+    display: block;
+}
+
+.image-container input {
+    float: left;
+    margin: 0 10px 0 10px;
+    width: 300px;
+}
+
+.image-container .image-list {
+}
+
+.image-container .image-list li {
+    display: inline-block;
+    width: 90%;
+    border-bottom: 1px solid black;
+    padding: 10px;
+}
+
+.image-container .image-list span {
+    font-weight: bold;
+    float: left;
+    margin: 0 10px 0 10px;
+}
+
+.image-container .image-list .thumb {
+    max-width: 100px;
+    float: left;
+ }

@@ -1,47 +1,49 @@
 function MainController($scope,$http){
     window.mc_scope = $scope;
     // scope variables
-    $scope.results = [];
-
     $scope.pageView = "";
     $scope.dict = window.dictionary;
-    console.log('dicionary: ', $scope.dict);
-
     //constants
     // page titles
     $scope.scheduling = "Scheduling";
     $scope.campaign = "Campaign";
     $scope.images = "Images";
 
-    $scope.saveImage = "Save Image";
-    $scope.selectImage = "Select Image";
-
-    //$scope.saveCampaign = "Save Campaign";
-    //$scope.scheduleCampaign = "Schedule Campaign";
-
     $scope.setFilterDate = function(date) {
         $scope.filterDate = date;
-    }
+    };
 
     $scope.changeView = function(viewName){
         console.log('changeView:',viewName);
         $scope.pageView = viewName;
-    }
+    };
 
     $scope.init = function() {
         // set page view to default of 'scheduling'
         $scope.changeView($scope.images);
-
-        // reset list
-        $scope.results = [];
-
-        // get data
-        // TODO: tie in to live data
-        /*
-         $scope.results = the results of query
-         */
     };
 };
+
+function ImageController($scope,$http){
+    $scope.init = function(){
+        $scope.getImages();
+    };
+
+    $scope.imageData = [];
+    $scope.error = '';
+
+    $scope.getImages = function(){
+        $http({url: '/api/getImages'
+            , type: 'GET'
+        }).success(function(data, status, headers, config){
+            $scope.imageData = data.images;
+        }).error(function(data, status, headers, config){
+            console.log('image failed:',status);
+            $scope.error = 'image failed: '+status;
+        });
+    }
+
+}
 
 
 /* FILTER DATE EXAMPLE
