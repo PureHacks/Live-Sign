@@ -54,6 +54,40 @@ function ImageController($scope,$http){
 
 }
 
+function CampaignController($scope, $http){
+    $scope.init = function(){
+        //$scope.getCampaigns();
+        $scope.getImages();
+    }
+
+    $scope.imageData = [];
+    $scope.error = '';
+
+    // this should be a service...
+    $scope.getImages = function(){
+        $http({url: '/api/getImages'
+            , type: 'GET'
+        }).success(function(data, status, headers, config){
+            $scope.imageData = data.images;
+        }).error(function(data, status, headers, config){
+            console.log('image failed:',status);
+            $scope.error = 'image failed: '+status;
+        });
+    }
+
+    $scope.addImage = function(index) {
+        image = $scope.imageData[index];
+        console.log(image);
+    }
+
+    $scope.getCampaigns = function() {
+        $http({url: "/api/getCampaigns", type: "GET"})
+        .success(function(data, status, headers, config) {
+            $scope.campaigs = data.campaigns;
+        })
+    }
+}
+
 
 /* FILTER DATE EXAMPLE
  app.filter('filterDate', function() {

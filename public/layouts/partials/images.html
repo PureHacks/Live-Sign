@@ -9,7 +9,7 @@
     <div class="image-list">
         <ul>
             <li ng-repeat="image in imageData">
-                <img class="thumb" src="{{image.secure_url}}" id="{{image.friendlyName}}"/>
+                <img class="thumb" ng-src="{{image.secure_url}}" id="{{image.friendlyName}}"/>
                 <span>{{image.friendlyName}}</span>
                 <span>{{convertBytes(image.bytes)}}</span>
             </li>

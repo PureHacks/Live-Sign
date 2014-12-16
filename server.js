@@ -27,8 +27,8 @@ app.saveImage = function(req, res) {
 	var fileName = req.body.friendlyName || "Image name undefined";
 
 	cloudinary.upload(filePath, fileName, function(result){
-			app.saveImageUrlToDataBase(result);
-			res.redirect('/admin.html'); //where to go next
+		app.saveImageUrlToDataBase(result);
+		res.redirect('/admin.html'); //where to go next
 	});
 };
 
@@ -66,9 +66,36 @@ app.getImages = function(req, res) {
 	});
 };
 
+app.createCampaign = function(req, res) {
+	var campaign = {}
+	campaign.name = req.body.campaignName || "No Name";
+	campaign.description = req.body.campaignDescription || "No description";
+	
+
+};
+
+app.saveCampaigntoDataBase = function(data) {
+	var nosql = {
+		"collection" : "campaigns",
+		"document": data
+	};
+	ml.insertData(nosql, function(err, object) {
+		console.log("inserting new campaign");
+		if (err) {
+			console.warn(err.message);
+		} else {
+			console.info("Added new campaign:", object[0]._id);
+		}
+	});
+};
+
+
 app.post("/api/saveImage", app.saveImage);
 
 app.get("/api/getImages", app.getImages);
+
+app.post("/api/createCampaign", app.createCampaign);
+
 
 app.get("/", function (req, res) {
 	if (req.err){

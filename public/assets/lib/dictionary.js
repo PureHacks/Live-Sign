@@ -9,6 +9,7 @@ window.dictionary.images = {
 };
 
 window.dictionary.campaign = {
-    "saveCampaign" : "Save Campaign",
+    "createCampaignTitle" : "Create a new Campaign",
+    "createButton" : "Save Campaign",
     "scheduleCampaign" : "Schedule Campaign"
 }

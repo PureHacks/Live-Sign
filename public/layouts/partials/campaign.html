@@ -1,1 +1,21 @@
-<p>this is a campaign.</p>
+<div ng-controller="CampaignController" ng-init="init()">
+	<h4>Create a new Campaign</h4>
+	<form action="/api/createCampaign" method="POST" enctype="multipart/form-data">
+		<label>Campaign Name
+		<input type="text" name="campaigName">
+		</label>
+		<label for="campaignDescription">Campaign Description</label>
+		<textarea name="campaignDescription" id="campaignDescription" cols="30" rows="10"></textarea>
+		<button type="submit">Create Campaign</button>
+
+		<div class="image-list">
+			<ul>
+				<li ng-repeat="image in imageData">
+					<img class="thumb" ng-src="{{image.secure_url}}" id="{{image.friendlyName}}"/>
+					<span>{{image.friendlyName}}</span>
+					<button ng-click="addImage($index)">Add Image</button>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
