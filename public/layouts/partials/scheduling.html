@@ -1,1 +1,12 @@
-<p>this is a scheduling page.</p>
+<div ng-controller="ScheduleController" ng-init="init()">
+	<h4>Schedule a campaign</h4>
+	<div class="image-container">
+		<ul class="image-list">
+			<li ng-repeat="campaign in campaigns">
+				<span>{{campaign.name}}</span>
+				<span>{{campaign.description}}</span>
+				<img class="thumb" ng-src="{{campaign.images[1].secure_url}}">
+			</li>
+		</ul>
+	</div>
+</div>

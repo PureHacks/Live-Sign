@@ -95,12 +95,32 @@ app.saveCampaignToDataBase = function(data, callback) {
 	});
 };
 
+app.getCampaigns = function(req, res) {
+	var nosql = {
+		"collection": "campaigns"
+	};
+
+	ml.getData(nosql, function(err, result) {
+		if (err) {
+			res.send(200, {
+				"error": "Something is wrong with your query" + err.message
+			});
+		} else {
+			res.send(200, {
+				"campaigns": result
+			});
+		}
+	});
+}
+
 
 app.post("/api/saveImage", app.saveImage);
 
 app.get("/api/getImages", app.getImages);
 
 app.post("/api/createCampaign", app.createCampaign);
+
+app.get("/api/getCampaigns", app.getCampaigns);
 
 
 app.get("/", function (req, res) {

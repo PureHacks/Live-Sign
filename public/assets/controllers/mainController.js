@@ -42,8 +42,9 @@ function ImageController($scope,$http){
 	$scope.error = '';
 
 	$scope.getImages = function(){
-		$http({url: '/api/getImages'
-			, type: 'GET'
+		$http({
+			url: '/api/getImages',
+			type: 'GET'
 		}).success(function(data, status, headers, config){
 			$scope.imageData = data.images;
 		}).error(function(data, status, headers, config){
@@ -52,11 +53,10 @@ function ImageController($scope,$http){
 		});
 	};
 
-}
+};
 
 function CampaignController($scope, $http){
 	$scope.init = function(){
-		//$scope.getCampaigns();
 		$scope.getImages();
 
 	};
@@ -87,13 +87,6 @@ function CampaignController($scope, $http){
 		$scope.selectedImages.push(image);
 	};
 
-	$scope.getCampaigns = function() {
-		$http({url: "/api/getCampaigns", type: "GET"})
-		.success(function(data, status, headers, config) {
-			$scope.campaigns = data.campaigns;
-		});
-	};
-
 	$scope.saveCampaign = function() {
 		// need validation
 		var campaign = {};
@@ -118,4 +111,26 @@ function CampaignController($scope, $http){
 			console.error(data.error);
 		});
 	}
-}
+};
+
+function ScheduleController($scope, $http){
+	
+	$scope.init = function() {
+		$scope.getCampaigns();
+	};
+
+	$scope.campaigns = [];
+
+	$scope.getCampaigns = function() {
+		$http({
+			url: '/api/getCampaigns',
+			type: 'GET'
+		}).success(function(data, status, headers, config){
+			$scope.campaigns = data.campaigns;
+			$scope.selectedImages;
+		}).error(function(data, status, headers, config){
+			console.log('image failed:',status);
+			$scope.error = 'image failed: '+status;
+		});
+	};
+};
