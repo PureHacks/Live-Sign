@@ -30,7 +30,7 @@ app.publishCampaign = function(req, res) {
 			});
 		} else {
 			res.send(200, {
-				"images": result
+				"campaigns": result
 			});
 			io.emit("publishCampaign", result[0])
 		}

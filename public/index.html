@@ -9,32 +9,32 @@
     
     <link rel="stylesheet" type="text/css" href="lib/jquery.bxslider.css">
     <style type="text/css">
-    	
-    	*{
-    margin: 0px;
-    padding: 0px;
-}
-body, html{
-    height: 100%;
-}
-.bx-viewport, .bx-wrapper{
-    position:relative;
-    width:100%;
-    height:100% !important;
-    top:0;
-    left:0;
-}
-.bxslider, .bxslider li{
-    height: 100% !important;;
-}
-.bxslider li{
-    background-repeat: no-repeat;
-    background-position: top center;
-    background-size: cover;
-}
-.bx-wrapper .bx-viewport{
-    border: none !important;
-}
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+		body, html {
+			height: 100%;
+		}
+		.bx-viewport, .bx-wrapper {
+			position: relative;
+			width: 100%;
+			height: 100% !important;
+			top: 0;
+			left: 0;
+		}
+		.bxslider, .bxslider li {
+			height: 100% !important;
+			width: 100%;
+		}
+		.bxslider li {
+			background-repeat: no-repeat;
+			background-position: top center;
+			background-size: cover;
+		}
+		.bx-wrapper .bx-viewport {
+			border: none !important;
+		}
     </style>
  	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="lib/jquery.bxslider.min.js"></script>
@@ -68,7 +68,7 @@ body, html{
 						  imageDom+='<li style="background-image: url(\'' + data.images[i].url + '\');"></li>';
 					};
 
-					slider.html(imageDom).reloadSlider({mode:'fade',auto:true});
+					slider.html(imageDom).reloadSlider({mode:'fade',auto:true, pager: false});
 					
 				});			
 				
