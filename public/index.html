@@ -21,12 +21,14 @@
 			var socket = io.connect();
 
 			// if we get an "publishCampaign" emit from the socket server then console.log the data we recive
-			socket.on('publishCampaign', function(data) {
-				console.log(data);
+			socket.on('publishCampaign', function(campaigns) {
+				console.log(campaigns);
 				var imageDom = "";
 
-				for (var i = data.images.length - 1; i >= 0; i--) {
-					imageDom += '<li style="background-image: url(\'' + data.images[i].url + '\');"></li>';
+				for (var c = campaigns.length - 1; c >= 0; c--) {					
+					for (var i = campaigns[c].images.length - 1; i >= 0; i--) {
+						imageDom += '<li style="background-image: url(\'' + campaigns[c].images[i].url + '\');"></li>';
+					};
 				};
 
 				slider.html(imageDom).reloadSlider({

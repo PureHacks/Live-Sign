@@ -32,7 +32,7 @@ app.publishCampaign = function(req, res) {
 			res.send(200, {
 				"campaigns": result
 			});
-			io.emit("publishCampaign", result[0])
+			io.emit("publishCampaign", result)
 		}
 	});
 };
