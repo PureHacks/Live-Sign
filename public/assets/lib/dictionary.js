@@ -23,6 +23,7 @@ window.dictionary.campaign = {
 }
 
 window.dictionary.schedule = {
+<<<<<<< HEAD
     "scheduleCampaign" : "Schedule a campaign",
     "showCampaigns" : "Show Scheduled Campaigns",
     "selectCampaign" : "Select Campaign",
@@ -31,4 +32,7 @@ window.dictionary.schedule = {
     "startTime" : "Starts",
     "endTime" : "Ends",
     "edit" : "Edit"
+=======
+    "scheduleCampaign" : "Schedule a campaign"
+>>>>>>> merge conflicts
 }
