@@ -50,7 +50,7 @@ function ImageController($scope,$http){
             console.log('image failed:',status);
             $scope.error = 'image failed: '+status;
         });
-    }
+    };
 
 }
 
@@ -58,10 +58,13 @@ function CampaignController($scope, $http){
     $scope.init = function(){
         //$scope.getCampaigns();
         $scope.getImages();
-    }
+    };
 
     $scope.imageData = [];
+    $scope.selectedImages = [];
     $scope.error = '';
+    $scope.campaignDescription = "";
+    $scope.campaignName = "";
 
     // this should be a service...
     $scope.getImages = function(){
@@ -73,18 +76,36 @@ function CampaignController($scope, $http){
             console.log('image failed:',status);
             $scope.error = 'image failed: '+status;
         });
-    }
+    };
 
     $scope.addImage = function(index) {
         image = $scope.imageData[index];
-        console.log(image);
-    }
+        $scope.selectedImages.push($scope.imageData[index]);
+    };
 
     $scope.getCampaigns = function() {
         $http({url: "/api/getCampaigns", type: "GET"})
         .success(function(data, status, headers, config) {
             $scope.campaigs = data.campaigns;
+        });
+    };
+
+    $scope.saveCampaign = function() {
+        // need validation
+        var campaign = {};
+        campaign.images = $scope.selectedImages;
+        campaign.name = $scope.campaignName;
+        campaign.description = $scope.campaignDescription;
+        console.log(campaign);
+        $http({
+            method: "POST",
+            url:"/api/createCampaign",
+            data: campaign,
+            headers: { 'Content-type': 'application/json'}
         })
+        .success(function(data, status, headers, config){
+            console.log("win");
+        });
     }
 }
 

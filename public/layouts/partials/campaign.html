@@ -1,15 +1,15 @@
 <div ng-controller="CampaignController" ng-init="init()">
 	<h4>Create a new Campaign</h4>
-	<form action="/api/createCampaign" method="POST" enctype="multipart/form-data">
+	<form >
 		<label>Campaign Name
-		<input type="text" name="campaigName">
+		<input type="text" ng-model="campaignName" name="campaignName">
 		</label>
 		<label for="campaignDescription">Campaign Description</label>
-		<textarea name="campaignDescription" id="campaignDescription" cols="30" rows="10"></textarea>
-		<button type="submit">Create Campaign</button>
+		<textarea ng-model="campaignDescription" name="campaignDescription" id="campaignDescription" cols="10" rows="3"></textarea>
+		<button ng-click="saveCampaign()">Create Campaign</button>
 
-		<div class="image-list">
-			<ul>
+		<div class="image-container">
+			<ul class="image-list">
 				<li ng-repeat="image in imageData">
 					<img class="thumb" ng-src="{{image.secure_url}}" id="{{image.friendlyName}}"/>
 					<span>{{image.friendlyName}}</span>

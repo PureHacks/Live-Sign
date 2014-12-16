@@ -67,14 +67,17 @@ app.getImages = function(req, res) {
 };
 
 app.createCampaign = function(req, res) {
-	var campaign = {}
-	campaign.name = req.body.campaignName || "No Name";
-	campaign.description = req.body.campaignDescription || "No description";
 	
+	var campaign = {}
+	campaign.name = req.body.name || "No Name";
+	campaign.description = req.body.description || "No description";
+	campaign.images = req.body.images;
+
+	app.saveCampaignToDataBase(campaign);
 
 };
 
-app.saveCampaigntoDataBase = function(data) {
+app.saveCampaignToDataBase = function(data) {
 	var nosql = {
 		"collection" : "campaigns",
 		"document": data
