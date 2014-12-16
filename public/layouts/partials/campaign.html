@@ -10,10 +10,11 @@
 
 		<div class="image-container">
 			<ul class="image-list">
-				<li ng-repeat="image in imageData">
+				<li ng-repeat="image in imageData"
+					ng-class="{'selected': selectedIndex[$index] === true}">
 					<img class="thumb" ng-src="{{image.secure_url}}" id="{{image.friendlyName}}"/>
 					<span>{{image.friendlyName}}</span>
-					<button ng-click="addImage($index)">Add Image</button>
+					<button ng-hide="selectedIndex[$index] === true" ng-click="addImage($index)">Add Image</button>
 				</li>
 			</ul>
 		</div>

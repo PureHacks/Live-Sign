@@ -63,3 +63,7 @@ li {
     max-width: 100px;
     float: left;
  }
+
+ .image-container .image-list li.selected {
+    background-color: pink;
+ }

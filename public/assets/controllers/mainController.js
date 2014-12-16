@@ -58,10 +58,12 @@ function CampaignController($scope, $http){
     $scope.init = function(){
         //$scope.getCampaigns();
         $scope.getImages();
+
     };
 
     $scope.imageData = [];
     $scope.selectedImages = [];
+    $scope.selectedIndex = [];
     $scope.error = '';
     $scope.campaignDescription = "";
     $scope.campaignName = "";
@@ -72,6 +74,7 @@ function CampaignController($scope, $http){
             , type: 'GET'
         }).success(function(data, status, headers, config){
             $scope.imageData = data.images;
+            $scope.selectedImages;
         }).error(function(data, status, headers, config){
             console.log('image failed:',status);
             $scope.error = 'image failed: '+status;
@@ -80,13 +83,14 @@ function CampaignController($scope, $http){
 
     $scope.addImage = function(index) {
         image = $scope.imageData[index];
-        $scope.selectedImages.push($scope.imageData[index]);
+        $scope.selectedIndex[index] = true;
+        $scope.selectedImages.push(image);
     };
 
     $scope.getCampaigns = function() {
         $http({url: "/api/getCampaigns", type: "GET"})
         .success(function(data, status, headers, config) {
-            $scope.campaigs = data.campaigns;
+            $scope.campaigns = data.campaigns;
         });
     };
 
@@ -104,7 +108,9 @@ function CampaignController($scope, $http){
             headers: { 'Content-type': 'application/json'}
         })
         .success(function(data, status, headers, config){
-            console.log("win");
+            $scope.selectedImages = [];
+            $scope.campaignName = "";
+            $scope.description = "";
         });
     }
 }
