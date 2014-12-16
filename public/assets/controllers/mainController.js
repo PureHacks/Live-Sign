@@ -135,8 +135,8 @@ function ScheduleController($scope, $http){
 
 	$scope.campaigns = [];
     
-    $scope.scheduleCampaign = function(){
-        console.log('schedule campaign!');
+    $scope.createCampaign = function(){
+        console.log('create campaign!');
         /*
         var campaign = {};
         campaign.images = $scope.selectedImages;

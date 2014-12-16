@@ -24,9 +24,9 @@ window.dictionary.campaign = {
 
 window.dictionary.schedule = {
     "scheduleCampaign" : "Schedule a campaign",
-    "showCampaigns" : "Show Scheduled Campaigns",
+    "showCampaigns" : "Show Campaigns",
     "selectCampaign" : "Select Campaign",
-    "scheduleCampaign" : "Schedule Campaign",
+    "createCampaign" : "Create Campaign",
     "campaign" : "Campaign",
     "startTime" : "Starts",
     "endTime" : "Ends",
