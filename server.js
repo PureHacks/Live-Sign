@@ -2,7 +2,6 @@ var express = require('express'),
 	bodyParser = require("body-parser"),
 	fs = require("fs"),
 	multer = require("multer"),
-	cloudinary = require("./controllers/cloudinary"),
 	app = express();
 
 var	port = 8888;
@@ -11,128 +10,25 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(multer()); // for parsing multipart/form-data
 
-var ObjectID = require('mongodb').ObjectID,
-	uri = 'mongodb://livesign:livesign@ds053190.mongolab.com:53190/heroku_app32455663',
-	ml = require("mongolink");
-
-ml.uri = uri;
-
-
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/public/layouts"));
 
-app.saveImage = function(req, res) {
-	var filePath = req.files.imageFileName.path;
-	var fileName = req.body.friendlyName || "Image name undefined";
 
-	cloudinary.upload(filePath, fileName, function(result){
-		app.saveImageUrlToDataBase(result);
-		res.redirect('/admin.html'); //where to go next
-	});
-};
+app.use("/api/saveImage", require("./controllers/api/saveImage"));
 
-app.saveImageUrlToDataBase = function(data) {
-	var nosql = {
-		"collection": "images",
-		"document": data
-	};
+app.use("/api/getImages", require("./controllers/api/getImages"));
 
-	ml.insertData(nosql, function(err, object) {
-		console.log("inserting new image");
-		if (err) {
-			console.warn(err.message);
-		} else {
-			console.info("Added new image", object[0]._id);
-		}
-	});
-};
+app.use("/api/createCampaign", require("./controllers/api/createCampaign"));
 
-app.getImages = function(req, res) {
-	var nosql = {
-		"collection": "images"
-	};
+app.use("/api/getCampaigns", require("./controllers/api/getCampaigns"));
 
-	ml.getData(nosql, function(err, result) {
-		if (err) {
-			res.send(200, {
-				"error": "Something is wrong with your query" + err.message
-			});
-		} else {
-			res.send(200, {
-				"images": result
-			});
-		}
-	});
-};
+app.use("/", require("./controllers/static"));
 
-app.createCampaign = function(req, res) {
-	
-	var campaign = {}
-	campaign.name = req.body.name || "No Name";
-	campaign.description = req.body.description || "No description";
-	campaign.images = req.body.images;
-
-	app.saveCampaignToDataBase(campaign, function(){
-		res.status(200).end('{"success": "Inserted Campaign into DB"}');
-	});
-};
-
-app.saveCampaignToDataBase = function(data, callback) {
-	var nosql = {
-		"collection" : "campaigns",
-		"document": data
-	};
-	ml.insertData(nosql, function(err, object) {
-		console.log("inserting new campaign");
-		if (err) {
-			console.warn(err.message);
-		} else {
-			console.info("Added new campaign:", object[0]._id);
-			callback();
-		}
-	});
-};
-
-app.getCampaigns = function(req, res) {
-	var nosql = {
-		"collection": "campaigns"
-	};
-
-	ml.getData(nosql, function(err, result) {
-		if (err) {
-			res.send(200, {
-				"error": "Something is wrong with your query" + err.message
-			});
-		} else {
-			res.send(200, {
-				"campaigns": result
-			});
-		}
-	});
-}
-
-
-app.post("/api/saveImage", app.saveImage);
-
-app.get("/api/getImages", app.getImages);
-
-app.post("/api/createCampaign", app.createCampaign);
-
-app.get("/api/getCampaigns", app.getCampaigns);
-
-
-app.get("/", function (req, res) {
-	if (req.err){
-		console.warn(err.message);
-	}
-	else {
-		res.status(200).redirect("/admin.html");
-	}
-})
 
 var server = app.listen(port, function() {
 	console.log("listening on localhost:" + port);
 });
+
 
 var io = require('socket.io').listen(server); // this tells socket.io to use our express server
 
