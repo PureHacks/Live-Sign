@@ -29,7 +29,7 @@ function MainController($scope,$http){
 
 	$scope.init = function() {
 		// set page view to default of 'scheduling'
-		$scope.changeView($scope.images);
+		$scope.changeView($scope.scheduling);
 	};
 };
 
@@ -52,6 +52,20 @@ function ImageController($scope,$http){
 			$scope.error = 'image failed: '+status;
 		});
 	};
+
+    $scope.imagePreview = '';
+    $scope.imagePreviewText = '';
+
+    $scope.convertToDate = function (stringDate){
+        var dateOut = new Date(stringDate);
+        dateOut.setDate(dateOut.getDate() + 1);
+        return dateOut;
+    };
+
+    $scope.setPreview = function(url, name){
+        $scope.imagePreview = url;
+        $scope.imagePreviewText = name;
+    };
 
 };
 

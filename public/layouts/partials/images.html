@@ -7,13 +7,30 @@
         <button type="submit">{{dict.images.saveImage}}</button>
     </form>
     <div class="image-list">
-        <ul>
-            <li ng-repeat="image in imageData">
-                <img class="thumb" ng-src="{{image.secure_url}}" id="{{image.friendlyName}}"/>
-                <span>{{image.friendlyName}}</span>
-                <span>{{convertBytes(image.bytes)}}</span>
-            </li>
-        </ul>
-    </div>
+        <h4>{{dict.images.imageList}}</h4>
+        <div class="image-list-container">
+            <ul>
+                <li ng-repeat="image in imageData">
+                    <img ng-click="setPreview(image.secure_url, image.friendlyName)" class="thumb" ng-src="{{image.secure_url}}" id="{{image.friendlyName}}" alt="{{image.friendlyName}}"/>
+                    <div class="image-details">
+                        <p>
+                            <span class="name" ng-click="setPreview(image.secure_url, image.friendlyName)">{{image.friendlyName}}</span>
+                            <span class="size">{{convertBytes(image.bytes)}}</span>
+                        </p>
+                        <p class="date">
+                            <span>{{dict.images.createdOn}}:</span>
+                            <span ng-bind="convertToDate(image.created_at) | date:'short'"></span>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
 
+    </div>
+    <div class="image-preview">
+        <h4>{{dict.images.imagePreview}}: {{imagePreviewText}}</h4>
+        <div class="image-preview-container">
+            <img ng-src="{{imagePreview}}" id="{{imagePreviewText}}" alt="{{imagePreviewText}}"/>
+        </div>
+     </div>
 </div>

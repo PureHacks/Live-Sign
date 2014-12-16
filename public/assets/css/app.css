@@ -44,29 +44,75 @@ li {
 }
 
 .image-container .image-list {
+    width: 50%;
+    float: left;
+}
+
+.image-container .image-list .image-list-container{
     height: 500px;
     overflow: scroll;
-    display: block;
 }
 
 .image-container .image-list li {
     display: inline-block;
+    min-height: 90px;
     width: 90%;
     border-bottom: 1px solid black;
     padding: 10px;
-}
-
-.image-container .image-list span {
-    font-weight: bold;
-    float: left;
-    margin: 0 10px 0 10px;
+    position: relative;
 }
 
 .image-container .image-list .thumb {
     max-width: 100px;
     float: left;
+    cursor: pointer;
  }
 
  .image-container .image-list li.selected {
     background-color: pink;
  }
+
+.image-container .image-list .image-details {
+    float: right;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 300px;
+}
+
+.image-container .image-list .image-details .name {
+    cursor: pointer;
+}
+
+.image-container .image-list .image-details .date {
+    float: right;
+}
+
+.image-container .image-list .image-details p {
+    clear: both;
+}
+
+.image-container .image-list .image-details span {
+    float: left;
+    font-size: 14px;
+}
+
+.image-container .image-list .image-details .size {
+    float: right;
+}
+
+.image-container .image-preview {
+    width: 45%;
+    float: left;
+    margin: 0 2.5% 2.5% 2.5%;
+}
+
+.image-container .image-preview .image-preview-container {
+    border: 1px solid black;
+    min-height: 350px;
+    background-color: #cccccc;
+}
+
+.image-container .image-preview img {
+    width: 100%;
+}
