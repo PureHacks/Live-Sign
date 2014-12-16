@@ -263,4 +263,3 @@ var EndDateTimePicker = function ($scope, $timeout) {
     $scope.timeToggleMode = function() {
         $scope.showMeridian = !$scope.showMeridian;
     };
-};
