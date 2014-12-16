@@ -10,7 +10,7 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(multer()); // for parsing multipart/form-data
 
-var cloudinary = require("./public/controllers/cloudinary");
+var cloudinary = require("./controllers/cloudinary");
 
 var ObjectID = require('mongodb').ObjectID,
 	uri = 'mongodb://livesign:livesign@ds053190.mongolab.com:53190/heroku_app32455663',
@@ -23,14 +23,13 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/public/layouts"));
 
 app.saveImage = function(req, res) {
-
 	var filePath = req.files.imageFileName.path;
 	var fileName = req.body.friendlyName || "Image name undefined";
+
 	cloudinary.upload(filePath, fileName, function(result){
 			app.saveImageUrlToDataBase(result);
 			res.redirect('/admin.html'); //where to go next
 	});
-
 };
 
 app.saveImageUrlToDataBase = function(data) {
