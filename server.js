@@ -74,11 +74,12 @@ app.createCampaign = function(req, res) {
 	campaign.description = req.body.description || "No description";
 	campaign.images = req.body.images;
 
-	app.saveCampaignToDataBase(campaign);
-
+	app.saveCampaignToDataBase(campaign, function(){
+		res.status(200).end('{"success": "Inserted Campaign into DB"}');
+	});
 };
 
-app.saveCampaignToDataBase = function(data) {
+app.saveCampaignToDataBase = function(data, callback) {
 	var nosql = {
 		"collection" : "campaigns",
 		"document": data
@@ -89,6 +90,7 @@ app.saveCampaignToDataBase = function(data) {
 			console.warn(err.message);
 		} else {
 			console.info("Added new campaign:", object[0]._id);
+			callback();
 		}
 	});
 };

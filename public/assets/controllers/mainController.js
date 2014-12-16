@@ -107,10 +107,15 @@ function CampaignController($scope, $http){
 			data: campaign,
 			headers: { 'Content-type': 'application/json'}
 		})
-		.success(function(data, status, headers, config){
+		.success(function(data, status, headers, config) {
 			$scope.selectedImages = [];
+			$scope.selectedIndex = [];
 			$scope.campaignName = "";
-			$scope.description = "";
+			$scope.campaignDescription = "";
+			console.log("successfully saved campaign.");
+		})
+		.error(function(data, status, headers, config) {
+			console.error(data.error);
 		});
 	}
 }
