@@ -1,9 +1,9 @@
 <div ng-controller="ImageController" ng-init="init()">
     <h4>{{dict.images.addNewImage}}</h4>
     <form action="/api/saveImage" method="POST" enctype="multipart/form-data">
-        <input type="file" name="imagefile">
-        <label for="imageName">{{dict.images.imageName}}</label>
-        <input type="text" name="friendlyName" id="imageName" placeholder="{{dict.images.imageNamePlaceholder}}"/>
+        <input type="file" name="imageFileName">
+        <label for="friendlyName">{{dict.images.imageName}}</label>
+        <input type="text" name="friendlyName" id="friendlyName" placeholder="{{dict.images.imageNamePlaceholder}}"/>
         <button type="submit">{{dict.images.saveImage}}</button>
     </form>
     <div class="image-list">

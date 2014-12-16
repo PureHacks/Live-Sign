@@ -8,12 +8,20 @@ cloudinary.config({
 
 var cloud = {};
 
-cloud.upload = function(image) {
-	console.log(image);
-	if (image) {
-		cloudinary.uploader.upload(image, function(result) { 
-			return result; 
-		});
+cloud.upload = function(filepath) {
+	console.log(filepath);
+	if (filepath) {
+
+		cloudinary.uploader.upload(filepath, function(result) {
+			if (result.error) {
+				console.log(result.error.message);
+			} else {
+				console.log("cloudinary upload success");
+				result.friendlyName = friendlyName;
+				app.saveImageUrlToDataBase(result);
+				res.redirect('/admin.html'); //where to go next
+			}
+		})
 	}
 	return false;
 }
