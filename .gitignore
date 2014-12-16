@@ -28,7 +28,7 @@ node_modules
 .lock-wscript
 
 .idea
-
+matts*
 
 bower_components
 tmp
