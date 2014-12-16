@@ -44,6 +44,9 @@ li {
 }
 
 .image-container .image-list {
+    height: 500px;
+    overflow: scroll;
+    display: block;
 }
 
 .image-container .image-list li {

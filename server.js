@@ -1,17 +1,15 @@
-var express = require('express');
-var bodyParser = require("body-parser");
-var fs = require("fs");
-var multer = require("multer");
-var app = express();
-var http = require('http');
+var express = require('express'),
+	bodyParser = require("body-parser"),
+	fs = require("fs"),
+	multer = require("multer"),
+	cloudinary = require("./controllers/cloudinary"),
+	app = express();
 
 var	port = 8888;
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(multer()); // for parsing multipart/form-data
-
-var cloudinary = require("./controllers/cloudinary");
 
 var ObjectID = require('mongodb').ObjectID,
 	uri = 'mongodb://livesign:livesign@ds053190.mongolab.com:53190/heroku_app32455663',
