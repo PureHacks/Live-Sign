@@ -1,14 +1,14 @@
 var express = require('express');
 var bodyParser = require("body-parser");
 var fs = require("fs");
-var busboy = require('connect-busboy');
 var multer = require("multer");
-var app = express(),
-	port = 8888;
+var app = express();
 
-	app.use(bodyParser.json()); // for parsing application/json
-	app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-	app.use(multer()); // for parsing multipart/form-data
+var	port = 8888;
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(multer()); // for parsing multipart/form-data
 
 var cloudinary = require("./public/controllers/cloudinary");
 
@@ -22,42 +22,15 @@ ml.uri = uri;
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/public/layouts"));
 
-app.use(busboy({
-	immediate: true
-}));
-
 app.saveImage = function(req, res) {
 
-	console.log(req.files, req.body, req.body.friendlyName);
-
-	var friendlyName = req.body.friendlyName || "Image name undefined";
-
-
-	req.busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-		console.log(req.busboy);
-		console.log(fieldname, filename, encoding, mimetype);
-		console.log("Uploading: " + filename);
-
-		//Path where image will be uploaded
-		fstream = fs.createWriteStream(__dirname + '/tmp/' + filename);
-		file.pipe(fstream);
-
-		fstream.on('close', function() {
-			console.log("Uploaded to NODE server finished: " + filename);
-
-			var filepath = __dirname + "/tmp/" + filename;
-			cloudinary.upload(filepath);
-
-		});
-
-		// res.status(200).send("<h2>"+filename+"</h2>");
+	var filePath = req.files.imageFileName.path;
+	var fileName = req.body.friendlyName || "Image name undefined";
+	cloudinary.upload(filePath, fileName, function(result){
+			app.saveImageUrlToDataBase(result);
+			res.redirect('/admin.html'); //where to go next
 	});
 
-	req.busboy.on('field', function(key, value, keyTruncated, valueTruncated) {
-
-	});
-
-	req.pipe(req.busboy);
 };
 
 app.saveImageUrlToDataBase = function(data) {

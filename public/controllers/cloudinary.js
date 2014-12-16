@@ -8,18 +8,16 @@ cloudinary.config({
 
 var cloud = {};
 
-cloud.upload = function(filepath) {
-	console.log(filepath);
-	if (filepath) {
+cloud.upload = function(filepath, filename, callback) {
 
+	if (filepath) {
 		cloudinary.uploader.upload(filepath, function(result) {
 			if (result.error) {
 				console.log(result.error.message);
 			} else {
 				console.log("cloudinary upload success");
-				result.friendlyName = friendlyName;
-				app.saveImageUrlToDataBase(result);
-				res.redirect('/admin.html'); //where to go next
+				result.friendlyName = filename;
+				callback(result);
 			}
 		})
 	}
