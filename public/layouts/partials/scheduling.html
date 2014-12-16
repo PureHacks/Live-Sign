@@ -1,17 +1,24 @@
 <div ng-controller="ScheduleController" ng-init="init()">
-    <div class="add-schedule">
+    <div class="create-schedule">
         <h4>{{dict.schedule.scheduleCampaign}}</h4>
-        <div class="image-container">
-            <ul class="image-list">
+        <div class="create-schedule-container">
+            <newscheduleitem></newscheduleitem>
+        </div>
+    </div>
+    <div class="show-schedule">
+        <h4>{{dict.schedule.showCampaigns}}</h4>
+        <div class="schedule-container">
+            <ul class="schedule-list">
                 <li ng-repeat="campaign in campaigns">
                     <img class="thumb" ng-src="{{campaign.images[0].secure_url}}">
-                    <span>{{campaign.name}}</span>
-                    <span>{{campaign.description}}</span>
+                    <div class="campaign-details">
+                        <p>
+                            <span>{{campaign.name}}</span>
+                            <span>{{campaign.description}}</span>
+                        </p>
+                    </div>
                 </li>
             </ul>
         </div>
-    </div>
-    <div class="add-schedule">
-        <h4>Schedule a campaign</h4>
     </div>
 </div>

@@ -134,6 +134,32 @@ function ScheduleController($scope, $http){
 	};
 
 	$scope.campaigns = [];
+    
+    $scope.createCampaign = function(){
+        console.log('create campaign!');
+        /*
+        var campaign = {};
+        campaign.images = $scope.selectedImages;
+        campaign.name = $scope.campaignName;
+        campaign.description = $scope.campaignDescription;
+        console.log(campaign);
+        $http({
+            method: "POST",
+            url:"/api/createCampaign",
+            data: campaign,
+        headers: { 'Content-type': 'application/json'}
+        })
+        .success(function(data, status, headers, config) {
+            $scope.selectedImages = [];
+            $scope.selectedIndex = [];
+            $scope.campaignName = "";
+            $scope.campaignDescription = "";
+            console.log("successfully saved campaign.");
+        })
+        .error(function(data, status, headers, config) {
+            console.error(data.error);
+        });*/
+    }
 
 	$scope.getCampaigns = function() {
 		$http({
