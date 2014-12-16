@@ -44,7 +44,7 @@ app.saveImageUrlToDataBase = function(data) {
 		if (err) {
 			console.warn(err.message);
 		} else {
-			console.info("Added new image", object[0]._id);
+			console.info("Added new image", object[0]._id);			
 		}
 	});
 };
@@ -63,6 +63,7 @@ app.getImages = function(req, res) {
 			res.send(200, {
 				"images": result
 			});
+			io.emit("getImages", result);
 		}
 	});
 };
