@@ -57,15 +57,15 @@ body, html{
 				// connect to the socket server
 				var socket = io.connect();
 
-				// if we get an "info" emit from the socket server then console.log the data we recive
-				socket.on('getImages', function(data) {
+				// if we get an "publishCampaign" emit from the socket server then console.log the data we recive
+				socket.on('publishCampaign', function(data) {
 					
 					console.log(data);
 					
 					var imageDom = "";
 					
-					for (var i = data.length - 1; i >= 0; i--) {
-						  imageDom+='<li style="background-image: url(\'' + data[i].url + '\');"></li>';
+					for (var i = data.images.length - 1; i >= 0; i--) {
+						  imageDom+='<li style="background-image: url(\'' + data.images[i].url + '\');"></li>';
 					};
 
 					slider.html(imageDom).reloadSlider({mode:'fade',auto:true});

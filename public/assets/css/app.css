@@ -44,6 +44,9 @@ li {
 }
 
 .image-container .image-list {
+    height: 500px;
+    overflow: scroll;
+    display: block;
 }
 
 .image-container .image-list li {
@@ -62,4 +65,8 @@ li {
 .image-container .image-list .thumb {
     max-width: 100px;
     float: left;
+ }
+
+ .image-container .image-list li.selected {
+    background-color: pink;
  }
