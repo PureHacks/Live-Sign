@@ -5,61 +5,61 @@
 		<title>Live Sign - Admin Panel</title>
 	</head>
 	<body ng-app="app" ng-controller="MainController" ng-init="init()">
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header live-sign-logo">Live Sign</div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation"><a href="#scheduling" ng-click="changeView(scheduling)" aria-controls="{{scheduling}}" role="tab" data-toggle="tab">{{scheduling}}</a></li>
-                        <li role="presentation"><a href="#campaign" ng-click="changeView(campaign)" aria-controls="{{campaign}}" role="tab" data-toggle="tab">{{campaign}}</a></li>
-                        <li role="presentation" class="active"><a href="#images" ng-click="changeView(images)" ng-model="images" aria-controls="{{images}}" role="tab" data-toggle="tab">{{images}}</a></li>
-                    </ul>
-                </div><!--/.navbar-collapse -->
-            </div>
-        </nav>
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header live-sign-logo">Live Sign</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" role="tablist">
+						<li role="presentation"><a href="#scheduling" ng-click="changeView(scheduling)" aria-controls="{{scheduling}}" role="tab" data-toggle="tab">{{scheduling}}</a></li>
+						<li role="presentation"><a href="#campaign" ng-click="changeView(campaign)" aria-controls="{{campaign}}" role="tab" data-toggle="tab">{{campaign}}</a></li>
+						<li role="presentation" class="active"><a href="#images" ng-click="changeView(images)" ng-model="images" aria-controls="{{images}}" role="tab" data-toggle="tab">{{images}}</a></li>
+					</ul>
+				</div><!--/.navbar-collapse -->
+			</div>
+		</nav>
 
-        <!-- Main jumbotron for a primary marketing message or call to action -->
-        <div class="jumbotron">
-            <div class="container">
-                <h2>{{pageView}}</h2>
-                <div ng-switch on="pageView">
-                    {{component}}
-                    <div ng-switch-when="Scheduling" class="scheduling-container">
-                        <span ng-include="'layouts/partials/scheduling.html'"/>
-                    </div>
-                    <div ng-switch-when="Campaign" class="campaign-container">
-                        <span ng-include="'layouts/partials/campaign.html'"/>
-                    </div>
-                    <div ng-switch-when="Images" class="image-container">
-                        <span ng-include="'layouts/partials/images.html'"/>
-                    </div>
-                    <div ng-switch-default></div>
-                </div>
-            </div>
-        </div>
+		<!-- Main jumbotron for a primary marketing message or call to action -->
+		<div class="jumbotron">
+			<div class="container">
+				<h2>{{pageView}}</h2>
+				<div ng-switch on="pageView">
+					{{component}}
+					<div ng-switch-when="Scheduling" class="scheduling-container">
+						<span ng-include="'layouts/partials/scheduling.html'"/>
+					</div>
+					<div ng-switch-when="Campaign" class="campaign-container">
+						<span ng-include="'layouts/partials/campaign.html'"/>
+					</div>
+					<div ng-switch-when="Images" class="image-container">
+						<span ng-include="'layouts/partials/images.html'"/>
+					</div>
+					<div ng-switch-default></div>
+				</div>
+			</div>
+		</div>
 
-        <div class="container">
-            <hr>
-            <footer>
-                <p>&copy; Team Live Design - Dec 2014</p>
-            </footer>
-        </div> <!-- /container -->
+		<div class="container">
+			<hr>
+			<footer>
+				<p>&copy; Team Live Design - Dec 2014</p>
+			</footer>
+		</div> <!-- /container -->
 
 	</body>
-    <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js'></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js'></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 	<script src="assets/app.js"></script>
 	<script src="assets/lib/dictionary.js"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <!-- LiveSign style sheets -->
-    <link rel="stylesheet" href="assets/css/app.css">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <!-- controllers -->
-    <script src="assets/controllers/mainController.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<!-- LiveSign style sheets -->
+	<link rel="stylesheet" href="assets/css/app.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<!-- controllers -->
+	<script src="assets/controllers/mainController.js"></script>
 </html>
