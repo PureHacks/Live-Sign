@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var fs = require("fs");
 var multer = require("multer");
 var app = express();
+var http = require('http');
 
 var	port = 8888;
 
@@ -79,6 +80,13 @@ app.get("/", function (req, res) {
 	}
 })
 
-app.listen(port, function() {
+var server = app.listen(port, function() {
 	console.log("listening on localhost:" + port);
+});
+
+var io = require('socket.io').listen(server); // this tells socket.io to use our express server
+
+io.sockets.on('connection', function (socket) {
+    console.log('A new user connected!');
+    socket.emit('info', { msg: 'The world is round, there is no up or down.' });
 });
