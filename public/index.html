@@ -21,7 +21,6 @@
 			var socket = io.connect();
 
 			// if we get an "publishCampaign" emit from the socket server then console.log the data we recive
-
 			socket.on('publishCampaign', function(campaigns) {
 				console.log(campaigns);
 				var imageDom = "";
@@ -31,6 +30,7 @@
 						imageDom += '<li style="background-image: url(\'' + campaigns[c].images[i].url + '\');"></li>';
 					};
 				};
+
 				slider.html(imageDom).reloadSlider({
 					mode: 'fade',
 					auto: true,
