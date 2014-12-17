@@ -197,10 +197,12 @@ var StartDateTimePicker = function ($scope, $timeout) {
        console.log('changed');
     });
 
-    $scope.revealDateTime = function (){
-        console.log('edit date time');
-    };
+    $scope.editTime = false;
 
+    $scope.revealDateTime = function (bool){
+        console.log('edit date time: ',bool);
+        $scope.editTime = bool;
+    };
     // Disable weekend selection
     $scope.disabled = function(calendarDate, mode) {
         return mode === 'day' && ( calendarDate.getDay() === 0 || calendarDate.getDay() === 6 );
@@ -242,8 +244,11 @@ var EndDateTimePicker = function ($scope, $timeout) {
         console.log('changed');
     });
 
-    $scope.revealDateTime = function (){
-        console.log('edit date time');
+    $scope.editTime = false;
+
+    $scope.revealDateTime = function (bool){
+        console.log('edit date time: ',bool);
+        $scope.editTime = bool;
     };
 
     // Disable weekend selection

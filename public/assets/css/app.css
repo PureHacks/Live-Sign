@@ -130,16 +130,15 @@ li {
     width: 100%;
     float: left;
     clear: both;
+    margin-bottom: 20px;
 }
 
 .new-schedule-item .campaign-date-container {
-    margin-top: 10px;
     float: left;
     width: 75%;
 }
 
 .new-schedule-item .campaign-submit-container {
-    margin-top: 10px;
     width: 25%;
     float: right;
 }
@@ -183,8 +182,25 @@ li {
 }
 
 .create-schedule .create-schedule-container .date-text {
-    width: 30%;
+    width: 35%;
     display: inline-block;
+}
+
+.create-schedule .create-schedule-container .date-text em {
+    display: inline-block;
+    width: 85%;
+    text-align: center;
+}
+
+.create-schedule .create-schedule-container .date-text b {
+    display: inline-block;
+    width: 10%;
+}
+
+.rounded {
+    border: 1px solid black;
+    border-radius: 12px;
+    padding: 10px;
 }
 
 .create-schedule .create-schedule-container .campaign-name-dd {
