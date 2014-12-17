@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Html5</title>
+	<title>Live Sign</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -15,7 +15,7 @@
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			var slider = $('.bxslider').bxSlider();
+			var slider = $('.bxslider').bxSlider({pager: false});
 
 			// connect to the socket server
 			var socket = io.connect();
@@ -31,16 +31,23 @@
 					};
 				};
 
+				if (!imageDom) {
+					imageDom = '<li style="background-image: url(/assets/images/default.jpg)"></li>';
+				} 
+
 				slider.html(imageDom).reloadSlider({
 					mode: 'fade',
 					auto: true,
-					pager: false
+					pager: false,
+					pause: 6000
 				});
 			});
 		});
 	</script>
 </head>
 <body>
-	<ul class="bxslider"></ul>	
+	<ul class="bxslider">
+		<li style="background-image: url('/assets/img/default.jpg')"></li>
+	</ul>	
 </body>
 </html>
