@@ -47,6 +47,7 @@ function ImageController($scope,$http){
 			type: 'GET'
 		}).success(function(data, status, headers, config){
 			$scope.imageData = data.images;
+            $scope.setPreview(0);
 		}).error(function(data, status, headers, config){
 			console.log('image failed:',status);
 			$scope.error = 'image failed: '+status;
@@ -55,6 +56,8 @@ function ImageController($scope,$http){
 
     $scope.imagePreview = '';
     $scope.imagePreviewText = '';
+    $scope.imagePreviewDate = '';
+    $scope.imagePreviewSize = '';
 
     $scope.convertToDate = function (stringDate){
         var dateOut = new Date(stringDate);
@@ -62,9 +65,13 @@ function ImageController($scope,$http){
         return dateOut;
     };
 
-    $scope.setPreview = function(url, name){
-        $scope.imagePreview = url;
-        $scope.imagePreviewText = name;
+    $scope.setPreview = function(index){
+        var image = $scope.imageData[index];
+        console.log('image['+index+']:',image);
+        $scope.imagePreview = image.url;
+        $scope.imagePreviewText = image.friendlyName;
+        $scope.imagePreviewDate = image.created_at;
+        $scope.imagePreviewSize = image.bytes;
     };
 
 };
@@ -72,12 +79,17 @@ function ImageController($scope,$http){
 function CampaignController($scope, $http){
 	$scope.init = function(){
 		$scope.getImages();
-
+		$scope.getAllCampaigns();
 	};
 
-	$scope.imageData = [];
+	// all the images in our DB
+	$scope.repoImages = [];
+
+	// ALL Campaigns
+	$scope.campaigns = [];
+
 	$scope.selectedImages = [];
-	$scope.selectedIndex = [];
+
 	$scope.error = '';
 	$scope.campaignDescription = "";
 	$scope.campaignName = "";
@@ -87,7 +99,7 @@ function CampaignController($scope, $http){
 		$http({url: '/api/getImages'
 			, type: 'GET'
 		}).success(function(data, status, headers, config){
-			$scope.imageData = data.images;
+			$scope.repoImages = data.images;
 			$scope.selectedImages;
 		}).error(function(data, status, headers, config){
 			console.log('image failed:',status);
@@ -96,10 +108,23 @@ function CampaignController($scope, $http){
 	};
 
 	$scope.addImage = function(index) {
-		image = $scope.imageData[index];
-		$scope.selectedIndex[index] = true;
+		image = $scope.repoImages[index];
 		$scope.selectedImages.push(image);
 	};
+
+	// populate $scope.campaigns
+	// should be a controller...
+    $scope.getAllCampaigns = function() {
+    	$http({
+			url: '/api/getAllCampaigns',
+			type: 'GET'
+		}).success(function(data, status, headers, config){
+			$scope.campaigns = data.campaigns;
+		}).error(function(data, status, headers, config){
+			console.log('get all campaigns failed:',status);
+			$scope.error = 'get all campaigns failed: '+status;
+		});
+    }
 
 	$scope.saveCampaign = function() {
 		// need validation
@@ -116,7 +141,6 @@ function CampaignController($scope, $http){
 		})
 		.success(function(data, status, headers, config) {
 			$scope.selectedImages = [];
-			$scope.selectedIndex = [];
 			$scope.campaignName = "";
 			$scope.campaignDescription = "";
 			console.log("successfully saved campaign.");
@@ -124,7 +148,7 @@ function CampaignController($scope, $http){
 		.error(function(data, status, headers, config) {
 			console.error(data.error);
 		});
-	}
+	};
 };
 
 function ScheduleController($scope, $http){
@@ -140,22 +164,28 @@ function ScheduleController($scope, $http){
 	// ALL Campaigns
 	$scope.campaigns = [];
 
-	// ng-model
-	$scope.selectedCampaign = {};
+    $scope.addSchedule = false;
 
+    $scope.showAddSchedule = function(bool){
+        $scope.addSchedule = bool;
+    }
 
-	$scope.getAllSchedules = function() {
-		$http({
-			url: '/api/getAllSchedules',
-			type: 'GET'
-		}).success(function(data, status, headers, config){
-			$scope.schedules = data.schedules;
-			$scope.populateSchedules();
-		}).error(function(data, status, headers, config){
-			console.log('failed: ',status);
-			$scope.error = 'failed: '+status;
-		});
-	};
+    // ng-model
+    $scope.selectedCampaign = {};
+
+    $scope.getAllSchedules = function() {
+        $http({
+            url: '/api/getAllSchedules',
+            type: 'GET'
+        }).success(function(data, status, headers, config){
+            $scope.schedules = data.schedules;
+            $scope.populateSchedules();
+        }).error(function(data, status, headers, config){
+            // TODO: implement modal
+            console.log('failed: ',status);
+            $scope.error = 'failed: '+status;
+        });
+    };
 
 	// retrieve the campaign for each schedule
 	$scope.populateSchedules = function() {
@@ -171,32 +201,45 @@ function ScheduleController($scope, $http){
 		}
 	}
 
+    $scope.cancelSchedule = function(){
+        $scope.campaignNameDD='0';
+        $scope.data.startDate='';
+        $scope.data.endDate='';
+        $scope.showAddSchedule(false);
+    }
+
 	$scope.saveSchedule = function() {
-		// need validation
-		var schedule = {};
-		schedule.id = $scope.selectedCampaign._id;
-		
-		// Wil can you wire these to your datepicker?
-		schedule.start = new Date();
-		schedule.end = new Date(Date.now() + 3600000); //default 1 hr
-		
-		console.log("saving sched ", schedule);
-		$http({
-			method: "POST",
-			url:"/api/createSchedule",
-			data: schedule,
-			headers: { 'Content-type': 'application/json'}
-		})
-		.success(function(data, status, headers, config) {
-			$scope.selectedImages = [];
-			$scope.selectedIndex = [];
-			$scope.campaignName = "";
-			$scope.campaignDescription = "";
-			console.log("successfully saved Schedule.");
-		})
-		.error(function(data, status, headers, config) {
-			console.error(data.error);
-		});
+		// validate schedule info
+        $scope.showAddSchedule(false);
+		if($scope.data.startDate === '' || $scope.data.endDate === '' || $scope.campaignNameDD === ' 0' ){
+           // TODO: implement alert error
+            console.error('validation failed');
+        } else {
+            // create json object
+            var schedule = {};
+            schedule.id = $scope.campaignNameDD._id;
+            schedule.start = $scope.data.startDate;
+            schedule.end = $scope.data.endDate;
+            // make ajax
+            $http({
+                method: "POST",
+                url:"/api/createSchedule",
+                data: schedule,
+                headers: { 'Content-type': 'application/json'}
+            })
+            .success(function(data, status, headers, config) {
+                $scope.selectedImages = [];
+                $scope.selectedIndex = [];
+                $scope.campaignName = "";
+                $scope.campaignDescription = "";
+                // TODO: implement success alert
+                console.log("successfully saved Schedule.");
+            })
+            .error(function(data, status, headers, config) {
+                    // TODO: implement failure modal
+                console.error(data.error);
+            });
+        }
 	}
 
 	// populate $scope.campaigns
@@ -207,6 +250,7 @@ function ScheduleController($scope, $http){
 		}).success(function(data, status, headers, config){
 			$scope.campaigns = data.campaigns;
 		}).error(function(data, status, headers, config){
+            // TODO: implement modal
 			console.log('get all campaigns failed:',status);
 			$scope.error = 'get all campaigns failed: '+status;
 		});
@@ -214,7 +258,6 @@ function ScheduleController($scope, $http){
 
     // callback assigns data to schedules[i].campaign
     $scope.getCampaign = function(campaignID, index, cb) {
-    	console.log("search:", campaignID, index);
     	$http({
 			url: '/api/getCampaign/'+campaignID,
 			type: 'GET'
@@ -226,99 +269,4 @@ function ScheduleController($scope, $http){
 			$scope.error = 'get all campaigns failed: '+status;
 		});
     }	
-};
-
-var StartDateTimePicker = function ($scope, $timeout) {
-    $scope.dateTimeNow = function() {
-        $scope.date = new Date();
-    };
-    $scope.dateTimeNow();
-
-    $scope.toggleMinDate = function() {
-        $scope.minDate = $scope.minDate ? null : new Date();
-    };
-
-    $scope.maxDate = new Date('2014-06-22');
-    $scope.toggleMinDate();
-
-    $scope.dateOptions = {
-        startingDay: 1,
-        showWeeks: false
-    };
-
-    $scope.$watch('date', function () {
-       console.log('changed');
-    });
-
-    $scope.editTime = false;
-
-    $scope.revealDateTime = function (bool){
-        console.log('edit date time: ',bool);
-        $scope.editTime = bool;
-    };
-    // Disable weekend selection
-    $scope.disabled = function(calendarDate, mode) {
-        return mode === 'day' && ( calendarDate.getDay() === 0 || calendarDate.getDay() === 6 );
-    };
-
-    $scope.hourStep = 1;
-    $scope.minuteStep = 15;
-
-    $scope.timeOptions = {
-        hourStep: [1, 2, 3],
-        minuteStep: [1, 5, 10, 15, 25, 30]
-    };
-
-    $scope.showMeridian = true;
-    $scope.timeToggleMode = function() {
-        $scope.showMeridian = !$scope.showMeridian;
-    };
-};
-
-var EndDateTimePicker = function ($scope, $timeout) {
-    $scope.dateTimeNow = function() {
-        $scope.date = new Date();
-    };
-    $scope.dateTimeNow();
-
-    $scope.toggleMinDate = function() {
-        $scope.minDate = $scope.minDate ? null : new Date();
-    };
-
-    $scope.maxDate = new Date('2014-06-22');
-    $scope.toggleMinDate();
-
-    $scope.dateOptions = {
-        startingDay: 1,
-        showWeeks: false
-    };
-
-    $scope.$watch('date', function () {
-        console.log('changed');
-    });
-
-    $scope.editTime = false;
-
-    $scope.revealDateTime = function (bool){
-        console.log('edit date time: ',bool);
-        $scope.editTime = bool;
-    };
-
-    // Disable weekend selection
-    $scope.disabled = function(calendarDate, mode) {
-        return mode === 'day' && ( calendarDate.getDay() === 0 || calendarDate.getDay() === 6 );
-    };
-
-    $scope.hourStep = 1;
-    $scope.minuteStep = 15;
-
-    $scope.timeOptions = {
-        hourStep: [1, 2, 3],
-        minuteStep: [1, 5, 10, 15, 25, 30]
-    };
-
-    $scope.showMeridian = true;
-    $scope.timeToggleMode = function() {
-        $scope.showMeridian = !$scope.showMeridian;
-    };
 };

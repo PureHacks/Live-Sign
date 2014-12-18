@@ -5,29 +5,47 @@ app.directive('newscheduleitem', function() {
         // can be used as attribute or element
         restrict: 'AE',
         // which markup this directive generates
-        template:'<div class="new-schedule-item">' +
-                    '<div class="campaign-name-container">' +
-                        '<span>{{dict.schedule.campaign}}:&nbsp;</span>'+
-                        '<select class="campaign-name-dd" ng-model="selectedCampaign" ng-options="campaign.name for campaign in campaigns">' +
-                            '<option value="">{{dict.schedule.selectCampaign}}</option>' +
-                        '</select>' +
-                    '</div>' +
-                    '<div class="campaign-date-container">' +
-                        '<span ng-controller="StartDateTimePicker" class="rounded">' +
-                        '<span class="date-text"><b>{{dict.schedule.startTime}}:</b>&nbsp;<em>{{date | date:"shortTime" }}, {{date | date:"fullDate" }}</em></span>' +
-                        '<datetimepicker min-date="minDate" show-weeks="showWeeks" hour-step="hourStep" minute-step="minuteStep" ng-model="date" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>' +
-                        '<button class="reveal-date-time" ng-click="revealDateTime(true)">{{dict.schedule.edit}}</button>' +
-                        '</span>' +
-                        '<span ng-controller="EndDateTimePicker" class="rounded">' +
-                        '<span class="date-text"><b>{{dict.schedule.endTime}}:</b>&nbsp;<em>{{date | date:"shortTime" }}, {{date | date:"fullDate" }}</em></span>' +
-                        '<datetimepicker min-date="minDate" show-weeks="showWeeks" hour-step="hourStep" minute-step="minuteStep" ng-model="date" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>' +
-                        '<button class="reveal-date-time" ng-click="revealDateTime(true)">{{dict.schedule.edit}}</button>' +
-                        '</span>' +
-                    '</div>' +
-                    '<div class="campaign-submit-container">' +
-                        '<button ng-click="saveSchedule()">{{dict.schedule.scheduleCampaign}}'+
-                        '</button>'+
-                    '</div>' +
-                '</div>'
+        template: '<div class="new-schedule-item">' +
+            '<div class="campaign-name-container">' +
+            '<span><b>{{dict.schedule.campaign}}:&nbsp;</b></span>'+
+            '<select class="campaign-name-dd" ng-model="campaignNameDD" ng-options="campaign.name for campaign in campaigns">' +
+            '<option value="">{{dict.schedule.selectCampaign}}</option>' +
+            '</select>' +
+            '</div>' +
+            '<div class="campaign-date-container">' +
+            '<div class="time-heading"><b>{{dict.schedule.startTime}}</b></div>' +
+            '<div class="dropdown">' +
+            '<a class="dropdown-toggle" id="startDate" role="button" data-toggle="dropdown" data-target="#" href="">' +
+            '<div class="input-group">' +
+            '<input type="text" class="form-control" data-ng-model="data.startDate">' +
+            '<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>' +
+            '</div>' +
+            '</a>' +
+            '<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">' +
+            '<datetimepicker data-ng-model="data.startDate" data-datetimepicker-config="{ dropdownSelector: \'#startDate\' }">' +
+            '</datetimepicker>' +
+            '</ul>' +
+            '</div>' +
+            '<div class="time-heading"><b>{{dict.schedule.endTime}}</b></div>' +
+            '<div class="dropdown">' +
+            '<a class="dropdown-toggle" id="endDate" role="button" data-toggle="dropdown" data-target="#" href="">' +
+            '<div class="input-group">' +
+            '<input type="text" class="form-control" data-ng-model="data.endDate">' +
+            '<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>' +
+            '</div>' +
+            '</a>' +
+            '<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">' +
+            '<datetimepicker data-ng-model="data.endDate" data-datetimepicker-config="{ dropdownSelector: \'#endDate\' }">' +
+            '</datetimepicker>' +
+            '</ul>' +
+            '</div>' +
+            '</div>'+
+            '</span>' +
+            '<div class="campaign-submit-container">' +
+            '<button class="cancel-button" ng-click="cancelSchedule()">{{dict.schedule.cancel}}'+
+            '<button ng-click="saveSchedule()">{{dict.schedule.scheduleCampaign}}'+
+            '</button>'+
+            '</div>' +
+            '</div>'
     };
 });

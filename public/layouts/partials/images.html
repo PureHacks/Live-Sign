@@ -11,10 +11,10 @@
         <div class="image-list-container">
             <ul>
                 <li ng-repeat="image in imageData">
-                    <img ng-click="setPreview(image.secure_url, image.friendlyName)" class="thumb" ng-src="{{image.secure_url}}" id="{{image.friendlyName}}" alt="{{image.friendlyName}}"/>
+                    <img ng-click="setPreview($index)" class="thumb" ng-src="{{image.secure_url}}" id="{{image.friendlyName}}" alt="{{image.friendlyName}}"/>
                     <div class="image-details">
                         <p>
-                            <span class="name" ng-click="setPreview(image.secure_url, image.friendlyName)">{{image.friendlyName}}</span>
+                            <span class="name" ng-click="setPreview($index)">{{image.friendlyName}}</span>
                             <span class="size">{{convertBytes(image.bytes)}}</span>
                         </p>
                         <p class="date">
@@ -31,6 +31,10 @@
         <h4>{{dict.images.imagePreview}}: {{imagePreviewText}}</h4>
         <div class="image-preview-container">
             <img ng-src="{{imagePreview}}" id="{{imagePreviewText}}" alt="{{imagePreviewText}}"/>
+        </div>
+        <div class="preview-text">
+            <span ng-bind="convertToDate(imagePreviewDate) | date:'short'"></span>
+            <span class="size">{{convertBytes(imagePreviewSize)}}</span>
         </div>
      </div>
 </div>

@@ -1,12 +1,15 @@
 <div ng-controller="ScheduleController" ng-init="init()">
-    <div class="create-schedule">
-        <h4>{{dict.schedule.scheduleCampaign}}</h4>
-        <div class="create-schedule-container">
-            <newscheduleitem></newscheduleitem>
-        </div>
+    <div class="show-add-schedule" collapse="addSchedule" ng-click="showAddSchedule(true)">{{dict.schedule.scheduleNewCampaign}}</div>
+    <div class="heading">
+        <span class="campaign">{{dict.schedule.campaign}}</span>
+        <span class="start-time">{{dict.schedule.startTime}}</span>
+        <span class="end-time">{{dict.schedule.endTime}}</span>
+        <span class="controls">{{dict.schedule.controls}}</span>
     </div>
     <div class="show-schedule">
-        <h4>{{dict.schedule.showCampaigns}}</h4>
+        <div class="create-schedule-container" collapse="!addSchedule">
+            <newscheduleitem></newscheduleitem>
+        </div>
         <div class="schedule-container">
             <ul class="schedule-list">
                 <li ng-repeat="schedule in schedules">
@@ -36,15 +39,3 @@
         </div>
     </div>
 </div>
-
-
-
-<!-- <li ng-repeat="campaign in campaigns">
-                    <img class="thumb" ng-src="{{campaign.images[0].secure_url}}">
-                    <div class="campaign-details">
-                        <p>
-                            <span>{{campaign.name}}</span>
-                            <span>{{campaign.description}}</span>
-                        </p>
-                    </div>
-                </li> -->
