@@ -85,7 +85,22 @@ var server = app.listen(port, function() {
 
 io = require('socket.io').listen(server); // this tells socket.io to use our express server
 
-io.sockets.on('connection', function (socket) {
-    console.log('A new user connected!');
-    socket.emit('info', { msg: 'The world is round, there is no up or down.' });
+io.sockets.on('connection', function(socket) {
+	console.log('A new user connected!');
+
+	var ml = require("./controllers/db");
+	var ObjectID = require("mongodb").ObjectID;
+	var nosql = {
+		"collection": "campaigns",
+		"selector": {
+			"_id": ObjectID("5490ce2f6d9a5ec0590d440a")
+		}
+	};
+
+	ml.getData(nosql, function(err, result) {
+		if (!err) {
+			socket.emit('publishCampaign', result);
+		}
+	});
+
 });
