@@ -12,7 +12,7 @@ window.dictionary.images = {
 };
 
 window.dictionary.campaign = {
-    "createCampaignTitle" : "Create a new Campaign",
+    "createNewCampaign" : "+ Create a new Campaign",
     "allCampaigns" : "All Campaigns",
     "createCampaign" : "Create campaign",
     "addImage" : "Add Image",
@@ -20,7 +20,16 @@ window.dictionary.campaign = {
     "campaignName" : "Campaign Name",
     "createButton" : "Save Campaign",
     "scheduleCampaign" : "Schedule Campaign",
-    "campaignDescription" : "Campaign Description"
+    "campaignDescription" : "Campaign Description",
+    "cancel" : "Cancel",
+    "campaignNameDesc" : "Campaign Name & Description",
+    "images": "Images",
+    "actions" : "Actions",
+    "editList" : "Edit List",
+    "deleteList" : "Delete List",
+    "addMore" : "Add more images",
+    "imagesInCampaign" : "Images in this campaign"
+
 }
 
 window.dictionary.schedule = {
