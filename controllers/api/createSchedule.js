@@ -5,8 +5,8 @@ var createSchedule = function(req, res) {
 	
 	var schedule = {}
 	schedule.campaignID = req.body.id || 0;
-	schedule.start = new Date(req.body.start) || new Date();
-	schedule.end = new Date(req.body.end) || new Date(Date.now() + 3600000); //default 1 hr
+	schedule.start = req.body.start || new Date();
+	schedule.end = req.body.end || new Date(Date.now() + 3600000); //default 1 hr
 	console.log("hit POST api/createSchedule", schedule);
 	saveScheduleToDataBase(schedule, function(){
 		res.status(200).end('{"success": "Inserted schedule into DB"}');
