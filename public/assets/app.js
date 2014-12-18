@@ -8,7 +8,7 @@ app.directive('newscheduleitem', function() {
         template: '<div class="new-schedule-item">' +
             '<div class="campaign-name-container">' +
             '<span><b>{{dict.schedule.campaign}}:&nbsp;</b></span>'+
-            '<select class="campaign-name-dd" ng-model="campaignName" ng-options="campaign.name for campaign in campaigns">' +
+            '<select class="campaign-name-dd" ng-model="campaignNameDD" ng-options="campaign.name for campaign in campaigns">' +
             '<option value="">{{dict.schedule.selectCampaign}}</option>' +
             '</select>' +
             '</div>' +
@@ -41,27 +41,9 @@ app.directive('newscheduleitem', function() {
             '</div>' +
             '</div>'+
             '</span>' +
-
-
-
-            /*'<span class="time" ng-show="!editTime">' +
-            '<span class="date-text"><b>{{dict.schedule.startTime}}:&nbsp;</b><em>{{date | date:"shortTime" }}, {{date | date:"medium" }}</em></span>' +
-            '<button class="reveal-date-time" ng-click="revealDateTime(true)">{{dict.schedule.edit}}</button>' +
-            '</span>' +
-
-            '<div style="display:inline-block; min-height:290px;">'+
-            '<datepicker ng-model="sdt" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>' +
-            '</div>'+
-
-           // '<datetimepicker ng-show="editTime" min-date="minDate" show-weeks="showWeeks" hour-step="hourStep" minute-step="minuteStep" ng-model="date" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>' +
-           /* '<span ng-controller="EndDateTimePicker" class="time">' +
-            '<span class="date-text"><b>{{dict.schedule.endTime}}:&nbsp;</b><em>{{date | date:"shortTime" }}, {{date | date:"shortDate" }}</em></span>' +
-            //'<datetimepicker min-date="minDate" show-weeks="showWeeks" hour-step="hourStep" minute-step="minuteStep" ng-model="date" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>' +
-            '<button class="reveal-date-time" ng-click="revealDateTime(true)">{{dict.schedule.edit}}</button>' +
-            '</span>' +
-            '</div>' +*/
             '<div class="campaign-submit-container">' +
-            '<button ng-click="scheduleCampaign()">{{dict.schedule.scheduleCampaign}}'+
+            '<button class="cancel-button" ng-click="cancelSchedule()">{{dict.schedule.cancel}}'+
+            '<button ng-click="saveSchedule()">{{dict.schedule.scheduleCampaign}}'+
             '</button>'+
             '</div>' +
             '</div>'

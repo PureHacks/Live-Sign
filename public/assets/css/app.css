@@ -8,7 +8,7 @@ body {
     border: none;
 }
 
-ul, lo {
+ul, li {
     margin-bottom: 0px;
     margin-top: 10px;
 }
@@ -50,7 +50,8 @@ li {
     float: left;
 }
 
-.image-container .image-list .image-list-container{
+.image-container .image-list .image-list-container,
+.image-container.image-repo {
     height: 500px;
     overflow: scroll;
 }
@@ -64,15 +65,88 @@ li {
     position: relative;
 }
 
-.image-container .image-list .thumb {
+.image-container .thumb {
     max-width: 100px;
     float: left;
     cursor: pointer;
+    max-height: 100px;
  }
 
- .image-container .image-list li.selected {
-    background-color: pink;
- }
+.create-campaign .campaign-details {
+    float: left;
+    width: 30%;
+}
+
+.create-campaign .campaign-image-select {
+    float: left;
+    width: 70%;
+}
+
+/*style form*/
+.create-campaign .campaign-details * {
+    width:100%;
+}
+
+.create-campaign .campaign-details {
+    padding: 0 10px;
+    padding-right: 50px;
+}
+
+.create-campaign .campaign-details label {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+/* style campaign image selector lists */
+.create-campaign .image-item {
+    padding: 10px 5px;
+    width: 100%;
+    border-bottom: 1px solid grey;
+    min-height: 125px;
+}
+
+.create-campaign .image-campaign h4 {
+    border-bottom: 1px solid gray;
+}
+.create-campaign .image-campaign {
+    float: left;
+    margin-bottom: 25px;
+    padding-right: 25px;
+    width: 48%;
+}
+
+.create-campaign .image-campaign ul {
+    height: 500px;
+    overflow: scroll;
+}
+
+.create-campaign .image-campaign:nth-child(2){
+    margin-right:4%;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.list-view table .table-campaign .thumb {
+    float: left;
+    width: 20%;
+}
+
+.list-view {
+    border-top: 5px solid black;
+}
+
+.table-campaign .col-1 {
+    width: 30%;
+}
+
+.table-campaign td {
+    padding: 10px;
+    border-top: gray 1px solid;
+    border-bottom: gray 1px solid;
+}
 
 .image-container .image-list .image-details {
     float: right;
@@ -154,7 +228,7 @@ li {
 .show-add-schedule {
     width: 100%;
     text-align: right;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: bold;
     margin-bottom: 20px;
     cursor: pointer;
@@ -171,6 +245,13 @@ li {
 .new-schedule-item .campaign-name-container {
     width: 35%;
     height: 30px;
+    width: 100%;
+    display: inline-block;
+}
+.new-schedule-item .campaign-date-container {
+    float: left;
+    width: 75%;
+    display: inline-block;
 }
 
 .new-schedule-item .campaign-date-container div {
@@ -190,13 +271,14 @@ li {
 }
 
 .new-schedule-item .campaign-submit-container {
-    width: 100%;
-    margin-top: 10px;
+    width: 25%;
+    padding: 5px;
     text-align: right;
+    display: inline-block;
 }
 
-.new-schedule-item .campaign-submit-container button{
-    margin-bottom: 0px;
+.new-schedule-item .campaign-submit-container button.cancel-button{
+    margin-right: 15px;
 }
 
 .create-schedule {
@@ -212,29 +294,8 @@ li {
     background-color: #cccccc;
 }
 
-.create-schedule .create-schedule-container .reveal-date-time {
-    margin-left: 10px;
-    display: inline-block;
-}
-
-.create-schedule .create-schedule-container .time {
-    width: 50%;
-    float: right;
-}
-
-.create-schedule .create-schedule-container .date-text em {
-    display: inline-block;
-    width: 75%;
-    text-align: center;
-}
-
-.create-schedule .create-schedule-container .date-text b {
-    display: inline-block;
-    width: 10%;
-}
-
 .create-schedule .create-schedule-container .campaign-name-dd {
-    width: 75%;
+    width: 100%;
 }
 
 .show-schedule {
@@ -242,10 +303,6 @@ li {
     width: 100%;
     height: 500px;
     overflow-y: scroll;
-}
-
-.schedule-container .schedule-list {
-    -webkit-padding-start: 0px;
 }
 
 .schedule-container .schedule-list li {
@@ -280,3 +337,48 @@ li {
     float: left;
     font-size: 14px;
 }
+
+.schedule-spec {
+    float: left;
+    width: 33%;
+    height:100%;
+    padding: 0;
+    text-align: left;
+}
+
+.schedule-spec.image-container {
+    width: 20%;
+}
+
+.show-schedule .schedule-list .schedule-spec .thumb {
+    width: 75%;
+}
+
+.schedule-spec.schedule-buttons {
+    width: 10%;
+}
+
+.schedule-spec.schedule-buttons button {
+    width: 100%;
+} 
+
+.show-schedule .date-end,
+.show-schedule .date-start  {
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+
+.show-schedule h5 span {
+    display: block;
+}
+
+.show-schedule h5 .top {
+    font-size: 18px;
+    font-weight:bold;
+} 
+
+.show-schedule h5 .bottom {
+    font-size: 16px;
+    font-weight:bold;
+} 

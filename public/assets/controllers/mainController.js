@@ -72,12 +72,17 @@ function ImageController($scope,$http){
 function CampaignController($scope, $http){
 	$scope.init = function(){
 		$scope.getImages();
-
+		$scope.getAllCampaigns();
 	};
 
-	$scope.imageData = [];
+	// all the images in our DB
+	$scope.repoImages = [];
+
+	// ALL Campaigns
+	$scope.campaigns = [];
+
 	$scope.selectedImages = [];
-	$scope.selectedIndex = [];
+
 	$scope.error = '';
 	$scope.campaignDescription = "";
 	$scope.campaignName = "";
@@ -87,7 +92,7 @@ function CampaignController($scope, $http){
 		$http({url: '/api/getImages'
 			, type: 'GET'
 		}).success(function(data, status, headers, config){
-			$scope.imageData = data.images;
+			$scope.repoImages = data.images;
 			$scope.selectedImages;
 		}).error(function(data, status, headers, config){
 			console.log('image failed:',status);
@@ -96,10 +101,23 @@ function CampaignController($scope, $http){
 	};
 
 	$scope.addImage = function(index) {
-		image = $scope.imageData[index];
-		$scope.selectedIndex[index] = true;
+		image = $scope.repoImages[index];
 		$scope.selectedImages.push(image);
 	};
+
+	// populate $scope.campaigns
+	// should be a controller...
+    $scope.getAllCampaigns = function() {
+    	$http({
+			url: '/api/getAllCampaigns',
+			type: 'GET'
+		}).success(function(data, status, headers, config){
+			$scope.campaigns = data.campaigns;
+		}).error(function(data, status, headers, config){
+			console.log('get all campaigns failed:',status);
+			$scope.error = 'get all campaigns failed: '+status;
+		});
+    }
 
 	$scope.saveCampaign = function() {
 		// need validation
@@ -116,7 +134,6 @@ function CampaignController($scope, $http){
 		})
 		.success(function(data, status, headers, config) {
 			$scope.selectedImages = [];
-			$scope.selectedIndex = [];
 			$scope.campaignName = "";
 			$scope.campaignDescription = "";
 			console.log("successfully saved campaign.");
@@ -124,64 +141,125 @@ function CampaignController($scope, $http){
 		.error(function(data, status, headers, config) {
 			console.error(data.error);
 		});
-	}
+	};
 };
 
 function ScheduleController($scope, $http){
 	
 	$scope.init = function() {
-		$scope.getCampaigns();
+		$scope.getAllSchedules();
+		$scope.getAllCampaigns();
 	};
 
+	// all schedules
+	$scope.schedules = [];
+	
+	// ALL Campaigns
 	$scope.campaigns = [];
 
     $scope.addSchedule = false;
 
     $scope.showAddSchedule = function(bool){
-        console.log('showAddSchedule:',bool);
         $scope.addSchedule = bool;
     }
-    
-    $scope.scheduleCampaign = function(){
-        console.log('schedule campaign!');
-        // temp - on success, show add schedule button
-        $scope.showAddSchedule(false);
-        /*
-        var campaign = {};
-        campaign.images = $scope.selectedImages;
-        campaign.name = $scope.campaignName;
-        campaign.description = $scope.campaignDescription;
-        console.log(campaign);
+
+    // ng-model
+    $scope.selectedCampaign = {};
+
+    $scope.getAllSchedules = function() {
         $http({
-            method: "POST",
-            url:"/api/createCampaign",
-            data: campaign,
-        headers: { 'Content-type': 'application/json'}
-        })
-        .success(function(data, status, headers, config) {
-            $scope.selectedImages = [];
-            $scope.selectedIndex = [];
-            $scope.campaignName = "";
-            $scope.campaignDescription = "";
-            console.log("successfully saved campaign.");
-            // show add schedule button
-            $scope.showAddSchedule(false);
-        })
-        .error(function(data, status, headers, config) {
-            console.error(data.error);
-        });*/
+            url: '/api/getAllSchedules',
+            type: 'GET'
+        }).success(function(data, status, headers, config){
+            $scope.schedules = data.schedules;
+            $scope.populateSchedules();
+        }).error(function(data, status, headers, config){
+            // TODO: implement modal
+            console.log('failed: ',status);
+            $scope.error = 'failed: '+status;
+        });
+    };
+
+	// retrieve the campaign for each schedule
+	$scope.populateSchedules = function() {
+		var length = $scope.schedules.length;
+
+		for (var i = 0; i < length; i++) {
+			var schedule = $scope.schedules[i];
+			// async get campaign continue iterating.
+			$scope.getCampaign(schedule.campaignID, i, function(data, index) {
+				// when get data reinsert at index
+				$scope.schedules[index].campaign = data.campaign;	
+			});
+		}
+	}
+
+    $scope.cancelSchedule = function(){
+        $scope.campaignNameDD='0';
+        $scope.data.startDate='';
+        $scope.data.endDate='';
+        $scope.showAddSchedule(false);
     }
 
-	$scope.getCampaigns = function() {
-		$http({
-			url: '/api/getCampaigns',
+	$scope.saveSchedule = function() {
+		// validate schedule info
+        $scope.showAddSchedule(false);
+		if($scope.data.startDate === '' || $scope.data.endDate === '' || $scope.campaignNameDD === ' 0' ){
+           // TODO: implement alert error
+            console.error('validation failed');
+        } else {
+            // create json object
+            var schedule = {};
+            schedule.id = $scope.campaignNameDD._id;
+            schedule.start = $scope.data.startDate;
+            schedule.end = $scope.data.endDate;
+            // make ajax
+            $http({
+                method: "POST",
+                url:"/api/createSchedule",
+                data: schedule,
+                headers: { 'Content-type': 'application/json'}
+            })
+            .success(function(data, status, headers, config) {
+                $scope.selectedImages = [];
+                $scope.selectedIndex = [];
+                $scope.campaignName = "";
+                $scope.campaignDescription = "";
+                // TODO: implement success alert
+                console.log("successfully saved Schedule.");
+            })
+            .error(function(data, status, headers, config) {
+                    // TODO: implement failure modal
+                console.error(data.error);
+            });
+        }
+	}
+
+	// populate $scope.campaigns
+    $scope.getAllCampaigns = function() {
+    	$http({
+			url: '/api/getAllCampaigns',
 			type: 'GET'
 		}).success(function(data, status, headers, config){
 			$scope.campaigns = data.campaigns;
-			$scope.selectedImages;
 		}).error(function(data, status, headers, config){
-			console.log('image failed:',status);
-			$scope.error = 'image failed: '+status;
+            // TODO: implement modal
+			console.log('get all campaigns failed:',status);
+			$scope.error = 'get all campaigns failed: '+status;
 		});
-	};
+    }
+
+    // callback assigns data to schedules[i].campaign
+    $scope.getCampaign = function(campaignID, index, cb) {
+    	$http({
+			url: '/api/getCampaign/'+campaignID,
+			type: 'GET'
+		}).success(function(data, status, headers, config){
+			console.log("got campaign:", data);
+			cb(data, index);
+		}).error(function(data, status, headers, config){
+			console.log('get all campaigns failed:',status);
+			$scope.error = 'get all campaigns failed: '+status;
+		});
+    }	
 };
