@@ -21,6 +21,6 @@ var deleteCampaign = function(req, res) {
 	});
 };
 
-router.get("/:campaignID", deleteCamapign);
+router.get("/:campaignID", deleteCampaign);
 
 module.exports = router;
