@@ -1,5 +1,3 @@
-console.log("WE HERE!");
-
 var router = require("express").Router(),
 	ml = require("../db");
 
