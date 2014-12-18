@@ -18,8 +18,14 @@
                         <h5>{{schedule.campaign[0].description}}</h5>
                     </div>
                     <div class="schedule-spec schedule-time">
-                        <h5>start: {{schedule.start}}</h5>
-                        <h5>end: {{schedule.end}}</h5>    
+                        <h5 class="date-start">
+                            <span class="date-start-end top">{{schedule.start| date:"EEE MMM d" }}</span>
+                            <span class="date-start-end bottom">{{schedule.start| date:"hh:m a" }}</span>
+                        </h5>
+                        <h5 class="date-end">
+                            <span class="date-start-end top">{{schedule.end| date:"EEE MMM d" }}</span>
+                            <span class="date-start-end bottom">{{schedule.end| date:"hh:m a" }}</span>
+                        </h5>    
                     </div>
                     <div class="schedule-spec schedule-buttons">
                         <button class="button">Edit</button>

@@ -250,17 +250,16 @@ li {
     float: left;
     width: 33%;
     height:100%;
-    padding-top: 25px;
+    padding: 0;
     text-align: left;
 }
 
 .schedule-spec.image-container {
-    padding: 25px;
     width: 20%;
 }
 
 .show-schedule .schedule-list .schedule-spec .thumb {
-    width: 100%;
+    width: 75%;
 }
 
 .schedule-spec.schedule-buttons {
@@ -269,4 +268,25 @@ li {
 
 .schedule-spec.schedule-buttons button {
     width: 100%;
+} 
+
+.show-schedule .date-end,
+.show-schedule .date-start  {
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+
+.show-schedule h5 span {
+    display: block;
+}
+
+.show-schedule h5 .top {
+    font-size: 18px;
+    font-weight:bold;
+} 
+
+.show-schedule h5 .bottom {
+    font-size: 16px;
+    font-weight:bold;
 } 

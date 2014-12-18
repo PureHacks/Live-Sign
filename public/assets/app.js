@@ -1,5 +1,4 @@
-var app = angular.module("app", []);
-// var app = angular.module('app',['ui.bootstrap', 'ui.bootstrap.datetimepicker']);
+var app = angular.module('app',['ui.bootstrap', 'ui.bootstrap.datetimepicker']);
 
 app.directive('newscheduleitem', function() {
     return {
@@ -21,7 +20,7 @@ app.directive('newscheduleitem', function() {
                         '</span>' +
                         '<span ng-controller="EndDateTimePicker" class="rounded">' +
                         '<span class="date-text"><b>{{dict.schedule.endTime}}:</b>&nbsp;<em>{{date | date:"shortTime" }}, {{date | date:"fullDate" }}</em></span>' +
-                        //'<datetimepicker min-date="minDate" show-weeks="showWeeks" hour-step="hourStep" minute-step="minuteStep" ng-model="date" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>' +
+                        '<datetimepicker min-date="minDate" show-weeks="showWeeks" hour-step="hourStep" minute-step="minuteStep" ng-model="date" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>' +
                         '<button class="reveal-date-time" ng-click="revealDateTime(true)">{{dict.schedule.edit}}</button>' +
                         '</span>' +
                     '</div>' +

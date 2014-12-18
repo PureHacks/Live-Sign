@@ -143,32 +143,6 @@ function ScheduleController($scope, $http){
 	// ng-model
 	$scope.selectedCampaign = {};
 
-    $scope.getAllCampaigns = function() {
-    	$http({
-			url: '/api/getAllCampaigns',
-			type: 'GET'
-		}).success(function(data, status, headers, config){
-			$scope.campaigns = data.campaigns;
-		}).error(function(data, status, headers, config){
-			console.log('get all campaigns failed:',status);
-			$scope.error = 'get all campaigns failed: '+status;
-		});
-    }
-
-    // callback assigns data to schedules[i].campaign
-    $scope.getCampaign = function(campaignID, index, cb) {
-    	console.log("search:", campaignID, index);
-    	$http({
-			url: '/api/getCampaign/'+campaignID,
-			type: 'GET'
-		}).success(function(data, status, headers, config){
-			console.log("got campaign:", data);
-			cb(data, index);
-		}).error(function(data, status, headers, config){
-			console.log('get all campaigns failed:',status);
-			$scope.error = 'get all campaigns failed: '+status;
-		});
-    }
 
 	$scope.getAllSchedules = function() {
 		$http({
@@ -201,9 +175,12 @@ function ScheduleController($scope, $http){
 		// need validation
 		var schedule = {};
 		schedule.id = $scope.selectedCampaign._id;
-		schedule.start = "" + new Date();
-		schedule.end = "" + new Date(Date.now() + 3600000); //default 1 hr
-		console.log("saving sched ",schedule);
+		
+		// Wil can you wire these to your datepicker?
+		schedule.start = new Date();
+		schedule.end = new Date(Date.now() + 3600000); //default 1 hr
+		
+		console.log("saving sched ", schedule);
 		$http({
 			method: "POST",
 			url:"/api/createSchedule",
@@ -222,7 +199,33 @@ function ScheduleController($scope, $http){
 		});
 	}
 
-	
+	// populate $scope.campaigns
+    $scope.getAllCampaigns = function() {
+    	$http({
+			url: '/api/getAllCampaigns',
+			type: 'GET'
+		}).success(function(data, status, headers, config){
+			$scope.campaigns = data.campaigns;
+		}).error(function(data, status, headers, config){
+			console.log('get all campaigns failed:',status);
+			$scope.error = 'get all campaigns failed: '+status;
+		});
+    }
+
+    // callback assigns data to schedules[i].campaign
+    $scope.getCampaign = function(campaignID, index, cb) {
+    	console.log("search:", campaignID, index);
+    	$http({
+			url: '/api/getCampaign/'+campaignID,
+			type: 'GET'
+		}).success(function(data, status, headers, config){
+			console.log("got campaign:", data);
+			cb(data, index);
+		}).error(function(data, status, headers, config){
+			console.log('get all campaigns failed:',status);
+			$scope.error = 'get all campaigns failed: '+status;
+		});
+    }	
 };
 
 var StartDateTimePicker = function ($scope, $timeout) {

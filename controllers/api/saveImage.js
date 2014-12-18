@@ -8,7 +8,7 @@ var saveImage = function(req, res) {
 
 	cloudinary.upload(filePath, fileName, function(result){
 		saveImageUrlToDataBase(result);
-		res.redirect('/admin.html'); //where to go next
+		res.redirect('back'); //where to go next
 	});
 };
 
