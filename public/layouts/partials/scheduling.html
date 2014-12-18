@@ -8,13 +8,22 @@
     <div class="show-schedule">
         <h4>{{dict.schedule.showCampaigns}}</h4>
         <div class="schedule-container">
+
+            <div class="form">
+            
+                
+            </div>
             <ul class="schedule-list">
-                <li ng-repeat="campaign in campaigns">
-                    <img class="thumb" ng-src="{{campaign.images[0].secure_url}}">
-                    <div class="campaign-details">
+                <li ng-repeat="schedule in schedules">
+                    <img class="thumb" ng-src="{{schedule.images[0].secure_url}}">
+                    <div class="schedule-details">
                         <p>
-                            <span>{{campaign.name}}</span>
-                            <span>{{campaign.description}}</span>
+                            <span>{{schedule.name}}</span>
+                            <span>{{schedule.description}}</span>
+                            <span>{{schedule.start}}</span>
+                            <span>{{schedule.end}}</span>
+                            <button class="button">Edit</button>
+                            <button class="button">Delete</button>
                         </p>
                     </div>
                 </li>
@@ -22,3 +31,15 @@
         </div>
     </div>
 </div>
+
+
+
+<!-- <li ng-repeat="campaign in campaigns">
+                    <img class="thumb" ng-src="{{campaign.images[0].secure_url}}">
+                    <div class="campaign-details">
+                        <p>
+                            <span>{{campaign.name}}</span>
+                            <span>{{campaign.description}}</span>
+                        </p>
+                    </div>
+                </li> -->

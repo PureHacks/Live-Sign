@@ -43,10 +43,14 @@ app.use("/api/saveImage", require("./controllers/api/saveImage"));
 
 app.use("/api/createCampaign", require("./controllers/api/createCampaign"));
 
-app.use("/api/getCampaigns", require("./controllers/api/getCampaigns"));
+app.use("/api/getAllCampaigns", require("./controllers/api/getAllCampaigns"));
+
+app.use("/api/getAllSchedules", require("./controllers/api/getAllSchedules"));
+
+app.use("/api/createSchedule", require("./controllers/api/createSchedule"));
+
 
 app.use("/api/publishCampaign/:campaignID", app.publishCampaign);
-
 app.use("/", require("./controllers/static"));
 
 

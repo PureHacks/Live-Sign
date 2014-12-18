@@ -130,13 +130,20 @@ function CampaignController($scope, $http){
 function ScheduleController($scope, $http){
 	
 	$scope.init = function() {
-		$scope.getCampaigns();
+		$scope.getSchedules();
+		$scope.getAllCampaigns();
 	};
 
-	$scope.campaigns = [];
+	$scope.schedules = [];
+	$scope.campaigns = {};
+	$scope.selectedCampaign = {};
     
     $scope.scheduleCampaign = function(){
         console.log('schedule campaign!');
+
+
+
+
         /*
         var campaign = {};
         campaign.images = $scope.selectedImages;
@@ -161,18 +168,60 @@ function ScheduleController($scope, $http){
         });*/
     }
 
-	$scope.getCampaigns = function() {
-		$http({
-			url: '/api/getCampaigns',
+    $scope.getAllCampaigns = function(campaignID) {
+    	$http({
+			url: '/api/getAllCampaigns',
 			type: 'GET'
 		}).success(function(data, status, headers, config){
 			$scope.campaigns = data.campaigns;
-			$scope.selectedImages;
+			console.log(data.campaigns);
 		}).error(function(data, status, headers, config){
 			console.log('image failed:',status);
 			$scope.error = 'image failed: '+status;
 		});
+    }
+
+	$scope.getSchedules = function() {
+		$http({
+			url: '/api/getAllSchedules',
+			type: 'GET'
+		}).success(function(data, status, headers, config){
+			$scope.schedules = data.schedules;
+			console.log($scope.schedules);
+		}).error(function(data, status, headers, config){
+			console.log('failed: ',status);
+			$scope.error = 'failed: '+status;
+		});
 	};
+
+	$scope.saveSchedule = function() {
+		// need validation
+		var schedule = {};
+		schedule.id = $scope.selectedCampaign._id;
+		schedule.start = new Date();
+		schedule.end = new Date(Date.now() + 3600000); //default 1 hr
+		console.log("saving sched ",schedule);
+		$http({
+			method: "POST",
+			url:"/api/createSchedule",
+			data: schedule,
+			headers: { 'Content-type': 'application/json'}
+		})
+		.success(function(data, status, headers, config) {
+			$scope.selectedImages = [];
+			$scope.selectedIndex = [];
+			$scope.campaignName = "";
+			$scope.campaignDescription = "";
+			console.log("successfully saved campaign.");
+		})
+		.error(function(data, status, headers, config) {
+			console.error(data.error);
+		});
+	}
+
+	$scope.populateSchedules = function() {
+
+	}
 };
 
 var StartDateTimePicker = function ($scope, $timeout) {
