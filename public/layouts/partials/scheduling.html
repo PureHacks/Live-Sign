@@ -10,12 +10,18 @@
         <div class="schedule-container">
             <ul class="schedule-list">
                 <li ng-repeat="schedule in schedules">
-                    <img class="thumb" ng-src="{{schedule.campaign[0].images[0].url}}">
-                    <div class="schedule-details">
-                        <span>{{schedule.campaign.name}}</span>
-                        <span>{{schedule.campaign[0].description}}</span>
-                        <span>{{schedule.start}}</span>
-                        <span>{{schedule.end}}</span>
+                    <div class="schedule-spec image-container">
+                        <img class="thumb" ng-src="{{schedule.campaign[0].images[0].url}}">
+                    </div>
+                    <div class="schedule-spec schedule-details">
+                        <h4>{{schedule.campaign[0].name}}</h4>
+                        <h5>{{schedule.campaign[0].description}}</h5>
+                    </div>
+                    <div class="schedule-spec schedule-time">
+                        <h5>start: {{schedule.start}}</h5>
+                        <h5>end: {{schedule.end}}</h5>    
+                    </div>
+                    <div class="schedule-spec schedule-buttons">
                         <button class="button">Edit</button>
                         <button class="button">Delete</button>
                     </div>

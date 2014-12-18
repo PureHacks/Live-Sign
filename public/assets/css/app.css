@@ -245,3 +245,28 @@ li {
     float: left;
     font-size: 14px;
 }
+
+.schedule-spec {
+    float: left;
+    width: 33%;
+    height:100%;
+    padding-top: 25px;
+    text-align: left;
+}
+
+.schedule-spec.image-container {
+    padding: 25px;
+    width: 20%;
+}
+
+.show-schedule .schedule-list .schedule-spec .thumb {
+    width: 100%;
+}
+
+.schedule-spec.schedule-buttons {
+    width: 10%;
+}
+
+.schedule-spec.schedule-buttons button {
+    width: 100%;
+} 
