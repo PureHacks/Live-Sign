@@ -36,6 +36,60 @@ app.publishCampaign = function(req, res) {
 	});
 };
 
+
+app.getScheduledCampaings = function() {
+	var ml = require("./controllers/db");
+
+	var now = new Date();
+
+	var nosql = {
+		"collection": "schedules",
+		"selector": {
+			"$and": [{
+				"start": {
+					"$lte": now.toISOString()
+				}
+			}, {
+				"end": {
+					"$gte": now.toISOString()
+				}
+			}]
+		}
+	};
+
+	ml.getData(nosql, function(err, result) {
+		if (!err) {
+			app.getCampaign(result);
+		}
+	});
+};
+
+app.getCampaign = function(campaigns) {
+	console.log("getCampaign campaigns = ", campaigns);
+	var ml = require("./controllers/db");
+	var campaignIDs = [];
+
+	for (var i = campaigns.length - 1; i >= 0; i--) {
+		campaignIDs.push({"_id" : ml.ObjectID(campaigns[i].campaignID)});
+	};
+
+	var nosql = {
+		"collection": "campaigns",
+		"selector" : {
+			"$or": campaignIDs
+		}
+	};
+
+	console.log("campaignIDs", campaignIDs);
+
+	ml.getData(nosql, function(err, result) {
+		if (!err) {
+			console.log("Results", result);
+			io.emit('publishCampaign', result);		
+		}
+	});
+};
+
 app.use("/api/getImages", require("./controllers/api/getImages"));
 
 app.use("/api/saveImage", require("./controllers/api/saveImage"));
@@ -68,19 +122,6 @@ io = require('socket.io').listen(server); // this tells socket.io to use our exp
 io.sockets.on('connection', function(socket) {
 	console.log('A new user connected!');
 
-	var ml = require("./controllers/db");
-	var ObjectID = require("mongodb").ObjectID;
-	var nosql = {
-		"collection": "campaigns",
-		"selector": {
-			"_id": ObjectID("5490ce2f6d9a5ec0590d440a")
-		}
-	};
-
-	ml.getData(nosql, function(err, result) {
-		if (!err) {
-			socket.emit('publishCampaign', result);
-		}
-	});
+	app.getScheduledCampaings();
 
 });
