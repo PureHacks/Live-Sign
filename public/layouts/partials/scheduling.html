@@ -10,9 +10,9 @@
         <div class="schedule-container">
             <ul class="schedule-list">
                 <li ng-repeat="schedule in schedules">
-                    <img class="thumb" ng-src="{{schedule.campaign[0].images[0].secure_url}}">
+                    <img class="thumb" ng-src="{{schedule.campaign[0].images[0].url}}">
                     <div class="schedule-details">
-                        <span>{{schedule.campaign[0].name}}</span>
+                        <span>{{schedule.campaign.name}}</span>
                         <span>{{schedule.campaign[0].description}}</span>
                         <span>{{schedule.start}}</span>
                         <span>{{schedule.end}}</span>

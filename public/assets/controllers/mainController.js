@@ -156,13 +156,14 @@ function ScheduleController($scope, $http){
     }
 
     // callback assigns data to schedules[i].campaign
-    $scope.getCampaign = function(campaignID, cb) {
+    $scope.getCampaign = function(campaignID, index, cb) {
+    	console.log("search:", campaignID, index);
     	$http({
 			url: '/api/getCampaign/'+campaignID,
 			type: 'GET'
 		}).success(function(data, status, headers, config){
 			console.log("got campaign:", data);
-			cb(data);
+			cb(data, index);
 		}).error(function(data, status, headers, config){
 			console.log('get all campaigns failed:',status);
 			$scope.error = 'get all campaigns failed: '+status;
@@ -188,9 +189,10 @@ function ScheduleController($scope, $http){
 
 		for (var i = 0; i < length; i++) {
 			var schedule = $scope.schedules[i];
-			// async get campaign, continue iterating.
-			$scope.getCampaign(schedule.campaignID, function(data) {
-				schedule.campaign = data.campaign;	
+			// async get campaign continue iterating.
+			$scope.getCampaign(schedule.campaignID, i, function(data, index) {
+				// when get data reinsert at index
+				$scope.schedules[index].campaign = data.campaign;	
 			});
 		}
 	}
@@ -199,8 +201,8 @@ function ScheduleController($scope, $http){
 		// need validation
 		var schedule = {};
 		schedule.id = $scope.selectedCampaign._id;
-		schedule.start = new Date();
-		schedule.end = new Date(Date.now() + 3600000); //default 1 hr
+		schedule.start = "" + new Date();
+		schedule.end = "" + new Date(Date.now() + 3600000); //default 1 hr
 		console.log("saving sched ",schedule);
 		$http({
 			method: "POST",
