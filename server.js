@@ -99,6 +99,9 @@ app.use("/api/createCampaign", require("./controllers/api/createCampaign"));
 // /api/getCampaign/:id
 app.use("/api/getCampaign/", require("./controllers/api/getCampaign"));
 
+// /api/deleteCampaign/:id
+app.use("/api/deleteCampaign/", require("./controllers/api/deleteCampaign"));
+
 app.use("/api/getAllCampaigns", require("./controllers/api/getAllCampaigns"));
 
 app.use("/api/getAllSchedules", require("./controllers/api/getAllSchedules"));
