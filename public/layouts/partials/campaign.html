@@ -1,22 +1,70 @@
 <div ng-controller="CampaignController" ng-init="init()">
 	<h4>{{dict.campaign.createCampaignTitle}}</h4>
-	<form >
-		<label>{{dict.campaign.campaignName}}
-		<input type="text" ng-model="campaignName" name="campaignName">
-		</label>
-		<label for="campaignDescription">{{dict.campaign.campaignDescription}}</label>
-		<textarea ng-model="campaignDescription" name="campaignDescription" id="campaignDescription" cols="10" rows="3"></textarea>
-		<button ng-click="saveCampaign()">{{dict.campaign.createCampaign}}</button>
 
-		<div class="image-container">
-			<ul class="image-list">
-				<li ng-repeat="image in imageData"
-					ng-class="{'selected': selectedIndex[$index] === true}">
-					<img class="thumb" ng-src="{{image.secure_url}}" id="{{image.friendlyName}}"/>
-					<span>{{image.friendlyName}}</span>
-					<button ng-hide="selectedIndex[$index] === true" ng-click="addImage($index)">{{dict.campaign.addImage}}</button>
-				</li>
-			</ul>
-		</div>
-	</form>
+	<div class="create-campaign clearfix">
+		<form >
+			<div class="campaign-details">
+				<label>{{dict.campaign.campaignName}}
+				<input type="text" ng-model="campaignName" name="campaignName">
+				</label>
+				<label for="campaignDescription">{{dict.campaign.campaignDescription}}</label>
+				<textarea ng-model="campaignDescription" name="campaignDescription" id="campaignDescription" cols="10" rows="3"></textarea>
+				<button ng-click="saveCampaign()">{{dict.campaign.createCampaign}}</button>
+			</div>
+			<div class="image-campaign">
+				<h4>Available Images</h4>
+				<ul>
+					<li class= "image-item" ng-repeat="image in repoImages">
+						<div class="image-container">
+							<img class="thumb" ng-src="{{image.url | trusted}}" id="{{image.friendlyName}}"/>
+						</div>	
+						<div class="image-details">
+							<span>{{image.friendlyName}}</span>
+							<button ng-click="addImage($index)">{{dict.campaign.addImage}}</button>
+							
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="image-campaign">
+				<h4>Images Added</h4>
+				<ul>
+					<li class= "image-item" ng-repeat="image in selectedImages track by $index">
+						<div class="image-container">
+							<img class="thumb" ng-src="{{image.secure_url | trusted }}"/>
+						</div>
+						<span>{{image.friendlyName}}</span>
+						<button ng-click="removeImage($index)">{{dict.campaign.removeImage}}</button>
+					</li>
+				</ul>
+			</div>
+		</form>
+	</div>
+	<div class="list-view">
+		<h4>Created Campaigns</h4>
+		<table>
+			<tr>
+				<th>Campaign Name & Description</th>
+				<th>Images</th>
+				<th>Actions</th>
+			</tr>
+			<tr class="table-campaign" ng-repeat="campaign in campaigns">
+				<td class="col-1">
+					<span>{{campaign.name}}</span>
+					<span>{{campaign.description}}</span>
+				</td>
+				<td>
+					<div class="image-container" ng-repeat="image in campaign.images | limitTo:5">
+						<img class="thumb" ng-src="{{image.secure_url | trusted}}" alt="{{image.friendlyName}}">
+					</div>
+				</td>
+				<td>
+					<button class="button" ng-click="">Edit List</button>
+				</td>
+				<td>
+					<button class="button" ng-click="">Delete List</button>
+				</td>
+			</tr>
+		</table>
+	</div>
 </div>

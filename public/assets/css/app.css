@@ -50,7 +50,8 @@ li {
     float: left;
 }
 
-.image-container .image-list .image-list-container{
+.image-container .image-list .image-list-container,
+.image-container.image-repo {
     height: 500px;
     overflow: scroll;
 }
@@ -64,15 +65,61 @@ li {
     position: relative;
 }
 
-.image-container .image-list .thumb {
+.image-container .thumb {
     max-width: 100px;
     float: left;
     cursor: pointer;
+    max-height: 100px;
  }
 
- .image-container .image-list li.selected {
-    background-color: pink;
- }
+.create-campaign .image-item {
+    padding: 10px 5px;
+    width: 100%;
+    border-bottom: 1px solid grey;
+    min-height: 125px;
+}
+
+.create-campaign .image-campaign h4 {
+    border-bottom: 1px solid gray;
+}
+.create-campaign .image-campaign {
+    float: left;
+    margin: 25px 0;
+    width: 48%;
+}
+
+.create-campaign .image-campaign ul {
+    height: 500px;
+    overflow: scroll;
+}
+
+.create-campaign .image-campaign:nth-child(2){
+    margin-right:4%;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.list-view table .table-campaign .thumb {
+    float: left;
+    width: 20%;
+}
+
+.list-view {
+    border-top: 5px solid black;
+}
+
+.table-campaign .col-1 {
+    width: 30%;
+}
+
+.table-campaign td {
+    padding: 10px;
+    border-top: gray 1px solid;
+    border-bottom: gray 1px solid;
+}
 
 .image-container .image-list .image-details {
     float: right;

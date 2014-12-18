@@ -16,6 +16,7 @@ window.dictionary.campaign = {
     "allCampaigns" : "All Campaigns",
     "createCampaign" : "Create campaign",
     "addImage" : "Add Image",
+    "removeImage" : "Remove Image",
     "campaignName" : "Campaign Name",
     "createButton" : "Save Campaign",
     "scheduleCampaign" : "Schedule Campaign",

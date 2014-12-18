@@ -31,3 +31,24 @@ app.directive('newscheduleitem', function() {
                 '</div>'
     };
 });
+
+app.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}]);
+
+app.config(function($sceDelegateProvider) {
+  $sceDelegateProvider.resourceUrlWhitelist([
+    // Allow same origin resource loads.
+    'self',
+    // Allow loading from our assets domain.  Notice the difference between * and **.
+    'https://res.cloudinary.com/**',
+    'http://res.cloudinary.com/**'
+  ]);
+
+  // The blacklist overrides the whitelist so the open redirect here is blocked.
+  $sceDelegateProvider.resourceUrlBlacklist([
+    'http://myapp.example.com/clickThru**'
+  ]);
+});

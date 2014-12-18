@@ -72,12 +72,17 @@ function ImageController($scope,$http){
 function CampaignController($scope, $http){
 	$scope.init = function(){
 		$scope.getImages();
-
+		$scope.getAllCampaigns();
 	};
 
-	$scope.imageData = [];
+	// all the images in our DB
+	$scope.repoImages = [];
+
+	// ALL Campaigns
+	$scope.campaigns = [];
+
 	$scope.selectedImages = [];
-	$scope.selectedIndex = [];
+
 	$scope.error = '';
 	$scope.campaignDescription = "";
 	$scope.campaignName = "";
@@ -87,7 +92,7 @@ function CampaignController($scope, $http){
 		$http({url: '/api/getImages'
 			, type: 'GET'
 		}).success(function(data, status, headers, config){
-			$scope.imageData = data.images;
+			$scope.repoImages = data.images;
 			$scope.selectedImages;
 		}).error(function(data, status, headers, config){
 			console.log('image failed:',status);
@@ -96,10 +101,23 @@ function CampaignController($scope, $http){
 	};
 
 	$scope.addImage = function(index) {
-		image = $scope.imageData[index];
-		$scope.selectedIndex[index] = true;
+		image = $scope.repoImages[index];
 		$scope.selectedImages.push(image);
 	};
+
+	// populate $scope.campaigns
+	// should be a controller...
+    $scope.getAllCampaigns = function() {
+    	$http({
+			url: '/api/getAllCampaigns',
+			type: 'GET'
+		}).success(function(data, status, headers, config){
+			$scope.campaigns = data.campaigns;
+		}).error(function(data, status, headers, config){
+			console.log('get all campaigns failed:',status);
+			$scope.error = 'get all campaigns failed: '+status;
+		});
+    }
 
 	$scope.saveCampaign = function() {
 		// need validation
@@ -116,7 +134,6 @@ function CampaignController($scope, $http){
 		})
 		.success(function(data, status, headers, config) {
 			$scope.selectedImages = [];
-			$scope.selectedIndex = [];
 			$scope.campaignName = "";
 			$scope.campaignDescription = "";
 			console.log("successfully saved campaign.");
@@ -124,7 +141,7 @@ function CampaignController($scope, $http){
 		.error(function(data, status, headers, config) {
 			console.error(data.error);
 		});
-	}
+	};
 };
 
 function ScheduleController($scope, $http){
