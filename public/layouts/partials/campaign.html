@@ -11,32 +11,34 @@
 				<textarea ng-model="campaignDescription" name="campaignDescription" id="campaignDescription" cols="10" rows="3"></textarea>
 				<button ng-click="saveCampaign()">{{dict.campaign.createCampaign}}</button>
 			</div>
-			<div class="image-campaign">
-				<h4>Available Images</h4>
-				<ul>
-					<li class= "image-item" ng-repeat="image in repoImages">
-						<div class="image-container">
-							<img class="thumb" ng-src="{{image.url | trusted}}" id="{{image.friendlyName}}"/>
-						</div>	
-						<div class="image-details">
+			<div class="campaign-image-select">
+				<div class="image-campaign">
+					<h4>Add more images</h4>
+					<ul>
+						<li class= "image-item" ng-repeat="image in repoImages">
+							<div class="image-container">
+								<img class="thumb" ng-src="{{image.url | trusted}}" id="{{image.friendlyName}}"/>
+							</div>	
+							<div class="image-details">
+								<span>{{image.friendlyName}}</span>
+								<button ng-click="addImage($index)">{{dict.campaign.addImage}}</button>
+								
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="image-campaign">
+					<h4>Images in this campaign</h4>
+					<ul>
+						<li class= "image-item" ng-repeat="image in selectedImages track by $index">
+							<div class="image-container">
+								<img class="thumb" ng-src="{{image.secure_url | trusted }}"/>
+							</div>
 							<span>{{image.friendlyName}}</span>
-							<button ng-click="addImage($index)">{{dict.campaign.addImage}}</button>
-							
-						</div>
-					</li>
-				</ul>
+							<button ng-click="removeImage($index)">{{dict.campaign.removeImage}}</button>
+						</li>
+					</ul>
 			</div>
-			<div class="image-campaign">
-				<h4>Images Added</h4>
-				<ul>
-					<li class= "image-item" ng-repeat="image in selectedImages track by $index">
-						<div class="image-container">
-							<img class="thumb" ng-src="{{image.secure_url | trusted }}"/>
-						</div>
-						<span>{{image.friendlyName}}</span>
-						<button ng-click="removeImage($index)">{{dict.campaign.removeImage}}</button>
-					</li>
-				</ul>
 			</div>
 		</form>
 	</div>

@@ -8,7 +8,7 @@ body {
     border: none;
 }
 
-ul, lo {
+ul, li {
     margin-bottom: 0px;
     margin-top: 10px;
 }
@@ -72,6 +72,32 @@ li {
     max-height: 100px;
  }
 
+.create-campaign .campaign-details {
+    float: left;
+    width: 30%;
+}
+
+.create-campaign .campaign-image-select {
+    float: left;
+    width: 70%;
+}
+
+/*style form*/
+.create-campaign .campaign-details * {
+    width:100%;
+}
+
+.create-campaign .campaign-details {
+    padding: 0 10px;
+    padding-right: 50px;
+}
+
+.create-campaign .campaign-details label {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+/* style campaign image selector lists */
 .create-campaign .image-item {
     padding: 10px 5px;
     width: 100%;
@@ -84,7 +110,8 @@ li {
 }
 .create-campaign .image-campaign {
     float: left;
-    margin: 25px 0;
+    margin-bottom: 25px;
+    padding-right: 25px;
     width: 48%;
 }
 
