@@ -77,6 +77,22 @@ li {
     max-height: 100px;
  }
 
+/* campaign */
+
+.show-add-campaign {
+    width: 100%;
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.create-campaign .hide-add-campaign{
+    width: 100%;
+    text-align: right;
+}
+
 .create-campaign .campaign-details {
     float: left;
     width: 30%;
@@ -143,8 +159,26 @@ ul {
     border-top: 5px solid black;
 }
 
+.list-view .heading {
+    background-color: #000000;
+    color: white;
+}
+
+.list-view .heading th {
+    padding: 5px;
+}
+
 .table-campaign .col-1 {
     width: 30%;
+}
+
+.table-campaign .col-1 span {
+    float: left;
+    clear: both;
+}
+
+.table-campaign .col-1 .campaign-name {
+    font-weight: bold;
 }
 
 .table-campaign td {

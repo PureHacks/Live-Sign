@@ -1,8 +1,12 @@
 <div ng-controller="CampaignController" ng-init="init()">
-	<h4>{{dict.campaign.createCampaignTitle}}</h4>
 
-	<div class="create-campaign clearfix">
-		<form >
+    <div class="show-add-campaign" collapse="addCampaign" ng-click="showAddCampaign(true)">{{dict.campaign.createNewCampaign}}</div>
+
+	<div class="create-campaign clearfix" collapse="!addCampaign">
+        <div class="hide-add-campaign">
+            <button ng-click="cancelCampaign()">{{dict.campaign.cancel}}</button>
+        </div>
+		<form>
 			<div class="campaign-details">
 				<label>{{dict.campaign.campaignName}}
 				<input type="text" ng-model="campaignName" name="campaignName">
@@ -13,7 +17,7 @@
 			</div>
 			<div class="campaign-image-select">
 				<div class="image-campaign">
-					<h4>Add more images</h4>
+					<h4>{{dict.campaign.addMore}}</h4>
 					<ul>
 						<li class= "image-item" ng-repeat="image in repoImages">
 							<div class="image-container">
@@ -28,7 +32,7 @@
 					</ul>
 				</div>
 				<div class="image-campaign">
-					<h4>Images in this campaign</h4>
+					<h4>{{dict.campaign.imagesInCampaign}}</h4>
 					<ul>
 						<li class= "image-item" ng-repeat="image in selectedImages track by $index">
 							<div class="image-container">
@@ -42,17 +46,16 @@
 			</div>
 		</form>
 	</div>
-	<div class="list-view">
-		<h4>Created Campaigns</h4>
+	<div class="list-view" collapse="addCampaign">
 		<table>
-			<tr>
-				<th>Campaign Name & Description</th>
-				<th>Images</th>
-				<th>Actions</th>
+			<tr class="heading">
+				<th>{{dict.campaign.campaignNameDesc}}</th>
+				<th>{{dict.campaign.images}}</th>
+				<th colspan="2">{{dict.campaign.actions}}</th>
 			</tr>
 			<tr class="table-campaign" ng-repeat="campaign in campaigns">
 				<td class="col-1">
-					<span>{{campaign.name}}</span>
+					<span class="campaign-name">{{campaign.name}}</span>
 					<span>{{campaign.description}}</span>
 				</td>
 				<td>
@@ -61,10 +64,10 @@
 					</div>
 				</td>
 				<td>
-					<button class="button" ng-click="">Edit List</button>
+					<button class="button" ng-click="">{{dict.campaign.editList}}</button>
 				</td>
 				<td>
-					<button class="button" ng-click="">Delete List</button>
+					<button class="button" ng-click="">{{dict.campaign.deleteList}}</button>
 				</td>
 			</tr>
 		</table>

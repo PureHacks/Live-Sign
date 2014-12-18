@@ -82,6 +82,19 @@ function CampaignController($scope, $http){
 		$scope.getAllCampaigns();
 	};
 
+    $scope.addCampaign = false;
+
+    $scope.showAddCampaign = function(bool){
+        $scope.addCampaign = bool;
+    }
+
+    $scope.cancelCampaign = function(){
+        $scope.selectedImages = [];
+        $scope.campaignDescription = "";
+        $scope.campaignName = "";
+        $scope.showAddCampaign(false);
+    }
+
 	// all the images in our DB
 	$scope.repoImages = [];
 
@@ -127,27 +140,35 @@ function CampaignController($scope, $http){
     }
 
 	$scope.saveCampaign = function() {
-		// need validation
-		var campaign = {};
-		campaign.images = $scope.selectedImages;
-		campaign.name = $scope.campaignName;
-		campaign.description = $scope.campaignDescription;
-		console.log(campaign);
-		$http({
-			method: "POST",
-			url:"/api/createCampaign",
-			data: campaign,
-			headers: { 'Content-type': 'application/json'}
-		})
-		.success(function(data, status, headers, config) {
-			$scope.selectedImages = [];
-			$scope.campaignName = "";
-			$scope.campaignDescription = "";
-			console.log("successfully saved campaign.");
-		})
-		.error(function(data, status, headers, config) {
-			console.error(data.error);
-		});
+        if($scope.campaignName === '' || $scope.selectedImages.length == 0){
+            console.error('validation fail');
+            // TODO: implement modals
+        } else {
+            var campaign = {};
+            campaign.images = $scope.selectedImages;
+            campaign.name = $scope.campaignName;
+            campaign.description = $scope.campaignDescription;
+            // TODO: implement success alert
+            console.log(campaign);
+            $http({
+                method: "POST",
+                url:"/api/createCampaign",
+                data: campaign,
+                headers: { 'Content-type': 'application/json'}
+            })
+                .success(function(data, status, headers, config) {
+                    $scope.selectedImages = [];
+                    $scope.campaignName = "";
+                    $scope.campaignDescription = "";
+                    // show list
+                    $scope.showAddCampaign(false);
+                    // TODO: tie in success alert
+                    console.log("successfully saved campaign.");
+                })
+                .error(function(data, status, headers, config) {
+                    console.error(data.error);
+                });
+        }
 	};
 };
 
