@@ -23,6 +23,7 @@
 		<div class="jumbotron">
 			<div class="container">
 				<h2>{{pageView}}</h2>
+                <alert ng-repeat="alert in alerts" ng-hide="hidden" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 				<div ng-switch on="pageView">
 					{{component}}
 					<div ng-switch-when="Scheduling" class="scheduling-container">

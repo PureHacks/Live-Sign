@@ -1,4 +1,4 @@
-function MainController($scope,$http){
+function MainController($scope,$http,$timeout){
 	window.mc_scope = $scope;
 	// scope variables
 	$scope.pageView = "";
@@ -9,11 +9,30 @@ function MainController($scope,$http){
 	$scope.campaign = "Campaign";
 	$scope.images = "Images";
 
-	$scope.setFilterDate = function(date) {
-		$scope.filterDate = date;
-	};
+    $scope.alerts = [];
+
+    $scope.addAlert = function(msg, type) {
+        $scope.alerts.push({"msg": msg, "type":type});
+        if(type === "success"){
+            $scope.hideAlert();
+        }
+    };
+
+    $scope.hideAlert = function () {
+        $scope.startFade = true;
+        //TODO: add  'ng-class="{fade: startFade}" ' to the alert. I kept getting errors
+        $timeout(function(){
+            $scope.hidden = true;
+        }, 2000);
+
+    };
+
+    $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
+    };
 
 	$scope.changeView = function(viewName){
+        $scope.alerts = [];
 		$scope.pageView = viewName;
 	};
 
@@ -148,8 +167,6 @@ function CampaignController($scope, $http){
             campaign.images = $scope.selectedImages;
             campaign.name = $scope.campaignName;
             campaign.description = $scope.campaignDescription;
-            // TODO: implement success alert
-            console.log(campaign);
             $http({
                 method: "POST",
                 url:"/api/createCampaign",
@@ -162,8 +179,8 @@ function CampaignController($scope, $http){
                     $scope.campaignDescription = "";
                     // show list
                     $scope.showAddCampaign(false);
-                    // TODO: tie in success alert
-                    console.log("successfully saved campaign.");
+                    // success alert
+                    $scope.addAlert($scope.dict.campaign.successfulAdd,"success");
                 })
                 .error(function(data, status, headers, config) {
                     console.error(data.error);
@@ -253,8 +270,8 @@ function ScheduleController($scope, $http){
                 $scope.selectedIndex = [];
                 $scope.campaignName = "";
                 $scope.campaignDescription = "";
-                // TODO: implement success alert
-                console.log("successfully saved Schedule.");
+                    // success alert
+                    $scope.addAlert($scope.dict.schedule.successfullySavedSchedule,"success");
             })
             .error(function(data, status, headers, config) {
                     // TODO: implement failure modal
