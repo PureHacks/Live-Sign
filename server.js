@@ -36,17 +36,43 @@ app.publishCampaign = function(req, res) {
 	});
 };
 
+app.getCampaign = function(req, res) {
+	var ml = require("./controllers/db");
+	var nosql = {
+		"collection": "campaigns",
+		"selector" : {"_id" : ml.ObjectID(req.param("campaignID"))}
+	};
+
+	console.log("we hit it", nosql.selector._id);
+
+	ml.getData(nosql, function(err, result) {
+		if (err) {
+			res.send(200, {
+				"error": "Something is wrong with your query" + err.message
+			});
+		} else {
+			res.send(200, {
+				"campaign": result
+			});
+			
+		}
+	});
+};
+
 app.use("/api/getImages", require("./controllers/api/getImages"));
 
 app.use("/api/saveImage", require("./controllers/api/saveImage"));
 
 app.use("/api/createCampaign", require("./controllers/api/createCampaign"));
 
+app.use("/api/getCampaign/:campaignID", app.getCampaign);
+
 app.use("/api/getAllCampaigns", require("./controllers/api/getAllCampaigns"));
 
 app.use("/api/getAllSchedules", require("./controllers/api/getAllSchedules"));
 
 app.use("/api/createSchedule", require("./controllers/api/createSchedule"));
+
 
 
 app.use("/api/publishCampaign/:campaignID", app.publishCampaign);

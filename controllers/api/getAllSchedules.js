@@ -13,7 +13,7 @@ var getSchedules = function(req, res) {
 			});
 		} else {
 			res.send(200, {
-				"campaigns": result
+				"schedules": result
 			});
 		}
 	});
