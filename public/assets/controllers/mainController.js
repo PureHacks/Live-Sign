@@ -134,9 +134,18 @@ function ScheduleController($scope, $http){
 	};
 
 	$scope.campaigns = [];
+
+    $scope.addSchedule = false;
+
+    $scope.showAddSchedule = function(bool){
+        console.log('showAddSchedule:',bool);
+        $scope.addSchedule = bool;
+    }
     
     $scope.scheduleCampaign = function(){
         console.log('schedule campaign!');
+        // temp - on success, show add schedule button
+        $scope.showAddSchedule(false);
         /*
         var campaign = {};
         campaign.images = $scope.selectedImages;
@@ -155,6 +164,8 @@ function ScheduleController($scope, $http){
             $scope.campaignName = "";
             $scope.campaignDescription = "";
             console.log("successfully saved campaign.");
+            // show add schedule button
+            $scope.showAddSchedule(false);
         })
         .error(function(data, status, headers, config) {
             console.error(data.error);
@@ -173,99 +184,4 @@ function ScheduleController($scope, $http){
 			$scope.error = 'image failed: '+status;
 		});
 	};
-};
-
-var StartDateTimePicker = function ($scope, $timeout) {
-    $scope.dateTimeNow = function() {
-        $scope.date = new Date();
-    };
-    $scope.dateTimeNow();
-
-    $scope.toggleMinDate = function() {
-        $scope.minDate = $scope.minDate ? null : new Date();
-    };
-
-    $scope.maxDate = new Date('2014-06-22');
-    $scope.toggleMinDate();
-
-    $scope.dateOptions = {
-        startingDay: 1,
-        showWeeks: false
-    };
-
-    $scope.$watch('date', function () {
-       console.log('changed');
-    });
-
-    $scope.editTime = false;
-
-    $scope.revealDateTime = function (bool){
-        console.log('edit date time: ',bool);
-        $scope.editTime = bool;
-    };
-    // Disable weekend selection
-    $scope.disabled = function(calendarDate, mode) {
-        return mode === 'day' && ( calendarDate.getDay() === 0 || calendarDate.getDay() === 6 );
-    };
-
-    $scope.hourStep = 1;
-    $scope.minuteStep = 15;
-
-    $scope.timeOptions = {
-        hourStep: [1, 2, 3],
-        minuteStep: [1, 5, 10, 15, 25, 30]
-    };
-
-    $scope.showMeridian = true;
-    $scope.timeToggleMode = function() {
-        $scope.showMeridian = !$scope.showMeridian;
-    };
-};
-
-var EndDateTimePicker = function ($scope, $timeout) {
-    $scope.dateTimeNow = function() {
-        $scope.date = new Date();
-    };
-    $scope.dateTimeNow();
-
-    $scope.toggleMinDate = function() {
-        $scope.minDate = $scope.minDate ? null : new Date();
-    };
-
-    $scope.maxDate = new Date('2014-06-22');
-    $scope.toggleMinDate();
-
-    $scope.dateOptions = {
-        startingDay: 1,
-        showWeeks: false
-    };
-
-    $scope.$watch('date', function () {
-        console.log('changed');
-    });
-
-    $scope.editTime = false;
-
-    $scope.revealDateTime = function (bool){
-        console.log('edit date time: ',bool);
-        $scope.editTime = bool;
-    };
-
-    // Disable weekend selection
-    $scope.disabled = function(calendarDate, mode) {
-        return mode === 'day' && ( calendarDate.getDay() === 0 || calendarDate.getDay() === 6 );
-    };
-
-    $scope.hourStep = 1;
-    $scope.minuteStep = 15;
-
-    $scope.timeOptions = {
-        hourStep: [1, 2, 3],
-        minuteStep: [1, 5, 10, 15, 25, 30]
-    };
-
-    $scope.showMeridian = true;
-    $scope.timeToggleMode = function() {
-        $scope.showMeridian = !$scope.showMeridian;
-    };
 };

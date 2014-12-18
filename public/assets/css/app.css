@@ -121,51 +121,86 @@ li {
 
 /* Schedule view */
 
-.new-schedule-item {
-    width: 100%;
+.heading {
+    color: white;
+    font-weight: bold;
+    background-color: black;
+    height: 30px;
+}
+
+.heading span {
+    float: left;
     display: inline-block;
+    margin: 5px;
+    text-align: right;
+}
+
+.heading .campaign {
+    width: 35%;
+}
+
+.heading .start-time {
+    width: 15%;
+}
+
+.heading .end-time {
+    width: 15%;
+}
+
+.heading .controls {
+    width: 30%;
+}
+
+.show-add-schedule {
+    width: 100%;
+    text-align: right;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.new-schedule-item {
+    border: 1px solid grey;
+    background-color: #ffffff;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .new-schedule-item .campaign-name-container {
-    width: 100%;
-    float: left;
-    clear: both;
-    margin-bottom: 20px;
+    width: 35%;
+    height: 30px;
 }
 
-.new-schedule-item .campaign-date-container {
+.new-schedule-item .campaign-date-container div {
     float: left;
-    width: 75%;
+}
+
+.new-schedule-item .campaign-date-container .time-heading {
+    margin: 10px 10px 0 10px;
+}
+
+.new-schedule-item .campaign-date-container .dropdown {
+    width: 40%;
+}
+
+.new-schedule-item .campaign-date-container .dropdown .input-group .form-control {
+    width: 100%;
 }
 
 .new-schedule-item .campaign-submit-container {
-    width: 25%;
-    float: right;
+    width: 100%;
+    margin-top: 10px;
+    text-align: right;
 }
 
-.new-schedule-item .campaign-submit-container button {
-    float: right;
-}
-
-.new-schedule-item span {
-    margin: 0 10px 0 0;
-}
-
-.new-schedule-item button {
-    margin: 0 10px;
-}
-
-.show-schedule {
-    width: 90%;
-    float: left;
-    clear: both;
+.new-schedule-item .campaign-submit-container button{
+    margin-bottom: 0px;
 }
 
 .create-schedule {
     width: 100%;
-    float: left;
-    clear: both;
-    margin: 0 auto;
 }
 
 .create-schedule .create-schedule-container {
@@ -178,17 +213,18 @@ li {
 }
 
 .create-schedule .create-schedule-container .reveal-date-time {
-    margin: 0 10px;
+    margin-left: 10px;
+    display: inline-block;
 }
 
-.create-schedule .create-schedule-container .date-text {
-    width: 35%;
-    display: inline-block;
+.create-schedule .create-schedule-container .time {
+    width: 50%;
+    float: right;
 }
 
 .create-schedule .create-schedule-container .date-text em {
     display: inline-block;
-    width: 85%;
+    width: 75%;
     text-align: center;
 }
 
@@ -197,23 +233,22 @@ li {
     width: 10%;
 }
 
-.rounded {
-    border: 1px solid black;
-    border-radius: 12px;
-    padding: 10px;
-}
-
 .create-schedule .create-schedule-container .campaign-name-dd {
-    width: 20%;
+    width: 75%;
 }
 
 .show-schedule {
+    display: inline-block;
     width: 100%;
     height: 500px;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
-.show-schedule .schedule-container .schedule-list li {
+.schedule-container .schedule-list {
+    -webkit-padding-start: 0px;
+}
+
+.schedule-container .schedule-list li {
     float: left;
     width: 100%;
     min-height: 100px;
@@ -224,24 +259,24 @@ li {
     text-align: right;
 }
 
-.show-schedule .schedule-list .campaign-details {
+.schedule-list .campaign-details {
     width: 85%;
     float: right;
     position: absolute;
     bottom: 10px;
     right: 10px;
 }
-.show-schedule .schedule-list .thumb {
+.schedule-list .thumb {
     width: 10%;
     float: left;
     padding: 5px;
 }
 
-.show-schedule .schedule-list .campaign-details p {
+.schedule-list .campaign-details p {
     clear: both;
 }
 
-.show-schedule .schedule-list .campaign-details span {
+.schedule-list .campaign-details span {
     float: left;
     font-size: 14px;
 }

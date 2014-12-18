@@ -23,12 +23,13 @@ window.dictionary.campaign = {
 }
 
 window.dictionary.schedule = {
-    "scheduleCampaign" : "Schedule a campaign",
-    "showCampaigns" : "Show Scheduled Campaigns",
-    "selectCampaign" : "Select Campaign",
     "scheduleCampaign" : "Schedule Campaign",
+    "showCampaigns" : "All Scheduled Campaigns",
+    "selectCampaign" : "Select Campaign",
+    "scheduleNewCampaign" : "+ Schedule A New Campaign",
     "campaign" : "Campaign",
     "startTime" : "Starts",
     "endTime" : "Ends",
-    "edit" : "Edit"
+    "edit" : "Edit",
+    "controls" : "Controls"
 }
