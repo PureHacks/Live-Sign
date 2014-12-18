@@ -1,15 +1,13 @@
-console.log("WE HERE!");
-
 var router = require("express").Router(),
 	ml = require("../db");
 
-var getCampaign = function(req, res) {
+var publishCampaign = function(req, res) {
 	var nosql = {
 		"collection": "campaigns",
 		"selector" : {"_id" : ml.ObjectID(req.param("campaignID"))}
 	};
-	console.log("Getting campaign: ", nosql.selector._id);
-
+	console.log("publish campaign!");
+	
 	ml.getData(nosql, function(err, result) {
 		if (err) {
 			res.send(200, {
@@ -17,13 +15,13 @@ var getCampaign = function(req, res) {
 			});
 		} else {
 			res.send(200, {
-				"campaign": result
+				"campaigns": result
 			});
-			
+			io.emit("publishCampaign", result)
 		}
 	});
 };
 
-router.get("/:campaignID", getCampaign);
+router.get("/:campaignID", publishCampaign);
 
 module.exports = router;
