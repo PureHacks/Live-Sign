@@ -47,6 +47,7 @@ function ImageController($scope,$http){
 			type: 'GET'
 		}).success(function(data, status, headers, config){
 			$scope.imageData = data.images;
+            $scope.setPreview(0);
 		}).error(function(data, status, headers, config){
 			console.log('image failed:',status);
 			$scope.error = 'image failed: '+status;
@@ -55,6 +56,8 @@ function ImageController($scope,$http){
 
     $scope.imagePreview = '';
     $scope.imagePreviewText = '';
+    $scope.imagePreviewDate = '';
+    $scope.imagePreviewSize = '';
 
     $scope.convertToDate = function (stringDate){
         var dateOut = new Date(stringDate);
@@ -62,9 +65,13 @@ function ImageController($scope,$http){
         return dateOut;
     };
 
-    $scope.setPreview = function(url, name){
-        $scope.imagePreview = url;
-        $scope.imagePreviewText = name;
+    $scope.setPreview = function(index){
+        var image = $scope.imageData[index];
+        console.log('image['+index+']:',image);
+        $scope.imagePreview = image.url;
+        $scope.imagePreviewText = image.friendlyName;
+        $scope.imagePreviewDate = image.created_at;
+        $scope.imagePreviewSize = image.bytes;
     };
 
 };

@@ -39,6 +39,10 @@ li {
     display: block;
 }
 
+.image-container form label {
+    float: left;
+}
+
 .image-container input {
     float: left;
     margin: 0 10px 0 10px;
@@ -184,9 +188,16 @@ ul {
 }
 
 .image-container .image-preview .image-preview-container {
-    border: 1px solid black;
-    min-height: 350px;
+    border: 3px solid black;
     background-color: #cccccc;
+}
+
+.preview-text {
+    padding-top: 5px;
+}
+
+.preview-text .size {
+    float: right;
 }
 
 .image-container .image-preview img {
