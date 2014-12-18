@@ -16,6 +16,7 @@ ul, li {
 li {
     width: 150px;
     text-align: center;
+    list-style: none;
 }
 
 .live-sign-logo {
