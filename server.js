@@ -17,10 +17,9 @@ app.use(express.static(__dirname + "/public/layouts"));
 
 app.publishCampaign = function(req, res) {
 	var ml = require("./controllers/db");
-	var ObjectID = require("mongodb").ObjectID;
 	var nosql = {
 		"collection": "campaigns",
-		"selector" : {"_id" : ObjectID(req.param("campaignID"))}
+		"selector" : {"_id" : ml.ObjectID(req.param("campaignID"))}
 	};
 
 	ml.getData(nosql, function(err, result) {
