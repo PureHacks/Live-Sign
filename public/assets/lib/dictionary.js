@@ -8,7 +8,8 @@ window.dictionary.images = {
     "imageName" : "Image Name: ",
     "createdOn" : "Created on",
     "imageList" : "Available Images",
-    "imagePreview" : "Preview"
+    "imagePreview" : "Preview",
+    "successfulAdd" : "Image added successfully"
 };
 
 window.dictionary.campaign = {
@@ -28,7 +29,8 @@ window.dictionary.campaign = {
     "editList" : "Edit List",
     "deleteList" : "Delete List",
     "addMore" : "Add more images",
-    "imagesInCampaign" : "Images in this campaign"
+    "imagesInCampaign" : "Images in this campaign",
+    "successfulAdd" : "Campaign added successfully"
 
 }
 
@@ -42,5 +44,6 @@ window.dictionary.schedule = {
     "endTime" : "Ends",
     "edit" : "Edit",
     "controls" : "Controls",
-    "cancel" : "Cancel"
+    "cancel" : "Cancel",
+    "successfullySavedSchedule": "Successfully Saved Schedule."
 }
