@@ -156,18 +156,19 @@ function CampaignController($scope, $http){
                 data: campaign,
                 headers: { 'Content-type': 'application/json'}
             })
-                .success(function(data, status, headers, config) {
-                    $scope.selectedImages = [];
-                    $scope.campaignName = "";
-                    $scope.campaignDescription = "";
-                    // show list
-                    $scope.showAddCampaign(false);
-                    // TODO: tie in success alert
-                    console.log("successfully saved campaign.");
-                })
-                .error(function(data, status, headers, config) {
-                    console.error(data.error);
-                });
+            .success(function(data, status, headers, config) {
+                $scope.selectedImages = [];
+                $scope.campaignName = "";
+                $scope.campaignDescription = "";
+                // show list
+                $scope.showAddCampaign(false);
+                // TODO: tie in success alert
+                console.log("successfully saved campaign.");
+                $scope.getAllCampaigns();
+            })
+            .error(function(data, status, headers, config) {
+                console.error(data.error);
+            });
         }
 	};
 };
@@ -255,6 +256,7 @@ function ScheduleController($scope, $http){
                 $scope.campaignDescription = "";
                 // TODO: implement success alert
                 console.log("successfully saved Schedule.");
+                $scope.getAllSchedules();
             })
             .error(function(data, status, headers, config) {
                     // TODO: implement failure modal

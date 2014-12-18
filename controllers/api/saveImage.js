@@ -3,6 +3,7 @@ var router = require("express").Router(),
 	cloudinary = require("../cloudinary");
 
 var saveImage = function(req, res) {
+	console.log(req.files,req.body);
 	var filePath = req.files.imageFileName.path;
 	var fileName = req.body.friendlyName || "Image name undefined";
 
