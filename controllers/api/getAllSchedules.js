@@ -2,6 +2,7 @@ var router = require("express").Router(),
 	ml = require("../db");
 
 var getSchedules = function(req, res) {
+	console.log("getAllSchedules.getSchedules");
 	var nosql = {
 		"collection": "schedules"
 	};
