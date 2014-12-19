@@ -47,26 +47,31 @@
 		</form>
 	</div>
 	<div class="list-view" collapse="addCampaign">
-		<table>
-			<tr class="heading">
-				<th>{{dict.campaign.campaignNameDesc}}</th>
-				<th>{{dict.campaign.images}}</th>
-				<th colspan="2">{{dict.campaign.actions}}</th>
-			</tr>
-			<tr class="table-campaign" ng-repeat="campaign in campaigns">
-				<td class="col-1">
-					<span class="campaign-name">{{campaign.name}}</span>
-					<span>{{campaign.description}}</span>
-				</td>
-				<td>
-					<div class="image-container" ng-repeat="image in campaign.images | limitTo:5">
-						<img class="thumb" ng-src="{{image.secure_url}}" alt="{{image.friendlyName}}">
-					</div>
-				</td>
-				<td class="col-3">
-					<button class="btn-danger" ng-click="deleteCampaign($index)">{{dict.campaign.deleteList}}</button>
-				</td>
-			</tr>
-		</table>
+        <div class="heading">
+            <span class="campaign-title">{{dict.campaign.campaignNameDesc}}</span>
+            <span class="images-title">{{dict.campaign.images}}</span>
+            <span class="actions-title">{{dict.campaign.actions}}</span>
+        </div>
+
+        <div class="show-campaigns">
+            <div class="campaign-container">
+                <ul class="campaign-list">
+                    <li ng-repeat="campaign in campaigns">
+                        <div class="col-1">
+                            <span class="campaign-name">{{campaign.name}}</span>
+                            <span>{{campaign.description}}</span>
+                        </div>
+
+                        <div class="image-container">
+                            <img class="thumb" ng-repeat="image in campaign.images | limitTo:5" ng-src="{{image.secure_url}}" alt="{{image.friendlyName}}">
+                        </div>
+
+                        <div class="col-3">
+                            <button class="btn-danger" ng-click="deleteCampaign($index)">{{dict.campaign.deleteList}}</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
 	</div>
 </div>

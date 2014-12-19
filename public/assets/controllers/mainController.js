@@ -41,8 +41,14 @@ function MainController($scope,$http,$timeout){
 	};
 
 	$scope.changeView = function(viewName){
+        // clear alerts
 		$scope.alerts = [];
+        // set page view
 		$scope.pageView = viewName;
+        // set local storage
+        localStorage.setItem('lastTab', $scope.pageView);
+        // set tab to active
+        $('[href=#'+$scope.pageView.toLowerCase()+']').tab('show');
 	};
 
 	$scope.convertBytes = function(bytes) {
@@ -56,8 +62,8 @@ function MainController($scope,$http,$timeout){
 	};
 
 	$scope.init = function() {
-		// set page view to default of 'scheduling'
-		$scope.changeView($scope.scheduling);
+		// set page view to last visited tab or default of 'scheduling'
+		$scope.changeView(localStorage.getItem('lastTab') || $scope.scheduling);
 	};
 };
 
@@ -309,14 +315,16 @@ function ScheduleController($scope, $http){
 	$scope.saveSchedule = function() {
 		// validate schedule info
 		if(!$scope.data.startDate){
-		   // TODO: implement alert error
+		   // show warning
 		   	$scope.addAlert($scope.dict.schedule.errorStart, "warning");
 			console.error('start date validation failed');
 		} else if (!$scope.data.endDate) {
+            // show warning
 			$scope.addAlert($scope.dict.schedule.errorEnd , "warning");
 			console.error('end date validation failed');
 		}
 		else if ($scope.campaignNameDD == '0' ) {
+            // show warning
 			$scope.addAlert($scope.dict.schedule.errorCampaign);
 			console.error('selected campaign validation failed' , "warning");
 		}

@@ -217,17 +217,13 @@ ul {
 }
 
 
-.list-view table {
-    width: 100%;
-}
-
-.list-view table .table-campaign .thumb {
-    float: left;
-    width: 20%;
-}
 
 .list-view {
     border-top: 5px solid black;
+}
+
+.list-view table {
+    width: 100%;
 }
 
 .list-view .heading {
@@ -239,36 +235,59 @@ ul {
     padding: 5px;
 }
 
-.table-campaign .col-1 {
-    width: 30%;
+/* campaign */
+
+.show-campaigns {
+    display: inline-block;
+    width: 100%;
+    height: 500px;
+    overflow-y: scroll;
 }
 
-.table-campaign th {
-    text-align: center;
-}
-
-.table-campaign .col-1 span {
+.show-campaigns .campaign-list li {
     float: left;
-    clear: both;
-}
-
-.table-campaign .col-1 .campaign-name {
-    font-weight: bold;
-}
-
-.table-campaign .col-3 {
-    width: 15%;
-}
-
-.table-campaign th {
-    width: 15%;
+    width: 100%;
+    min-height: 100px;
+    display: inline-block;
+    border-bottom: 1px solid black;
+    margin-top: 10px;
+    position: relative;
     text-align: right;
 }
 
-.table-campaign td {
+.show-campaigns .campaign-list li .col-1 {
+    width: 30%;
+    float: left;
+}
+
+.show-campaigns .campaign-list li .col-1 span {
+    float: left;
+    clear: both;
+    text-align: left;
+}
+
+.show-campaigns .campaign-list li .col-3 {
+    float:left;
+    width: 20%;
+    text-align: right;
     padding: 10px;
-    border-top: gray 1px solid;
-    border-bottom: gray 1px solid;
+}
+
+.show-campaigns .campaign-list li .col-3 button {
+    margin-top: 10px;
+}
+
+.show-campaigns .campaign-list li .image-container {
+    width: 50%;
+    float: left;
+}
+
+.show-campaigns .campaign-list .campaign-details {
+    width: 85%;
+    float: right;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 }
 
 .image-container .image-list .image-details {
@@ -454,6 +473,7 @@ ul {
     bottom: 10px;
     right: 10px;
 }
+
 .schedule-list .thumb {
     width: 10%;
     float: left;
