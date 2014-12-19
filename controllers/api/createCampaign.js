@@ -24,7 +24,7 @@ var saveCampaignToDataBase = function(data, callback) {
 			console.warn(err.message);
 		} else {
 			console.info("Added new campaign:", object[0]._id);
-			callback();
+			callback();			
 		}
 	});
 };

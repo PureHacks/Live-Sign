@@ -85,10 +85,12 @@ app.getCampaign = function(campaigns) {
 	ml.getData(nosql, function(err, result) {
 		if (!err) {
 			console.log("Results", result);
-			io.emit('publishCampaign', result);		
+			io.getSocket().emit('publishCampaign', result);		
 		}
 	});
 };
+
+
 
 app.use("/api/getImages", require("./controllers/api/getImages"));
 
@@ -120,9 +122,11 @@ var server = app.listen(port, function() {
 	console.log("listening on localhost:" + port);
 });
 
-io = require('socket.io').listen(server); // this tells socket.io to use our express server
+io = require('./controllers/api/activePublish');
 
-io.sockets.on('connection', function(socket) {
+io.init(server);
+
+io.getSocket().sockets.on('connection', function(socket) {
 	console.log('A new user connected!');
 
 	app.getScheduledCampaings();
