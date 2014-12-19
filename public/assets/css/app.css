@@ -71,10 +71,18 @@ li {
     overflow: scroll;
 }
 
+.image-container .image-list .heading {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 5px;
+    font-size: 14px;
+}
+
+
 .image-container .image-list li {
     display: inline-block;
     min-height: 100px;
-    width: 90%;
+    width: 100%;
     border-bottom: 1px solid black;
     padding: 10px;
     position: relative;
@@ -97,7 +105,7 @@ li {
 }
 
 .images-view .btn-danger {
-    top: -40px;
+    top: -60px;
 }
 
 .campaign-view .image-item .name {
@@ -133,14 +141,6 @@ li {
     height: 200px;
     resize: none;
 }
-
-.images-view .image-list .image-details .name {
-    font-size: 25px;
-    position: absolute;
-    left: 15px;
-    bottom: 60%;
-}
-
 
 /* campaign */
 
@@ -221,7 +221,20 @@ ul {
     padding: 0;
 }
 
+.heading span.campaign-title {
+    width: 28%;
+    text-align: left;
+}
 
+.heading span.images-title {
+    width: 45%;
+    text-align: left;
+}
+
+.heading span.actions-title {
+    width: 20%;
+    text-align: right;
+}
 
 .list-view {
     border-top: 5px solid black;
@@ -271,6 +284,10 @@ ul {
     text-align: left;
 }
 
+.show-campaigns .campaign-list li .col-1 span.campaign-name {
+    font-weight: bold;
+}
+
 .show-campaigns .campaign-list li .col-3 {
     float:left;
     width: 20%;
@@ -295,17 +312,30 @@ ul {
     right: 10px;
 }
 
-.image-container .image-list .image-details {
-    float: right;
-    position: absolute;
-    padding-bottom: 0;
-    bottom: 10px;
-    right: 10px;
-    width: 300px;
+.image-container .image-list .image {
+    float: left;
+    width: 30%;
 }
+
+.image-container .image-list .image-details {
+    float: left;
+    widows: 50%;
+    padding-bottom: 0;
+    padding-top: 25px;
+    width: 50%;
+}
+
+.image-container .image-list .actions {
+    float: left;
+    width: 20%;
+    padding-bottom: 25px;
+}
+
 
 .image-container .image-list .image-details .name {
     cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
 }
 
 .image-container .image-list .image-details .date {
@@ -324,6 +354,8 @@ ul {
 .image-container .image-list .image-details .size {
     float: right;
 }
+
+
 
 .image-container .image-preview {
     width: 45%;

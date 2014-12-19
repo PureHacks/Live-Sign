@@ -7,11 +7,13 @@
         <button class="btn-primary" type="submit">{{dict.images.saveImage}}</button>
     </form>
     <div class="image-list">
-        <h4>{{dict.images.imageList}}</h4>
+        <div class="heading">{{dict.images.imageList}}</div>
         <div class="image-list-container">
             <ul>
                 <li ng-repeat="image in imageData">
-                    <img ng-click="setPreview($index)" class="thumb" ng-src="{{image.secure_url}}" id="{{image.friendlyName}}" alt="{{image.friendlyName}}"/>
+                    <div class="image">
+                        <img ng-click="setPreview($index)" class="thumb" ng-src="{{image.secure_url}}" id="{{image.friendlyName}}" alt="{{image.friendlyName}}"/>
+                    </div>
                     <div class="image-details">
                         <p>
                             <span class="name" ng-click="setPreview($index)">{{image.friendlyName}}</span>
@@ -21,7 +23,9 @@
                             <span>{{dict.images.createdOn}}:</span>
                             <span ng-bind="convertToDate(image.created_at) | date:'short'"></span>
                         </p>
-                        <button class="btn-danger" ng-click ="deleteImage($index)">Delete Image</button>
+                    </div>
+                    <div class="actions">
+                        <button class="btn-danger" ng-click ="deleteImage($index)">{{dict.images.delete}}</button>
                     </div>
                 </li>
             </ul>

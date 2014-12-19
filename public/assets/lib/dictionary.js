@@ -10,7 +10,8 @@ window.dictionary.images = {
     "imageList" : "Available Images",
     "imagePreview" : "Preview",
     "successfulAdd" : "Image added successfully",
-    "successfulDelete" : "Image successfully deleted"
+    "successfulDelete" : "Image successfully deleted",
+    "delete" : "Delete Image"
 };
 
 window.dictionary.campaign = {
@@ -34,7 +35,8 @@ window.dictionary.campaign = {
     "successfulAdd" : "Campaign added successfully",
     "successfulDelete" : "Campaign successfully deleted",
     "imageError" : "Select some images for your campaign.",
-    "nameError" : "Enter a name for your Campaign."
+    "nameError" : "Enter a name for your Campaign.",
+    "totalImages" : "Total Images"
 
 }
 

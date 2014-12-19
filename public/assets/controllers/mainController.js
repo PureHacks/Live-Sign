@@ -93,6 +93,7 @@ function ImageController($scope,$http){
 	$scope.deleteImage = function(index) {
 
 		var image = $scope.imageData[index];
+        console.log('delete: ',image);
 		var data = {};
 		data.id = image.public_id;
 		$http({
