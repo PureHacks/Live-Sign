@@ -30,7 +30,8 @@ window.dictionary.campaign = {
     "deleteList" : "Delete Campaign",
     "addMore" : "Add more images",
     "imagesInCampaign" : "Images in this campaign",
-    "successfulAdd" : "Campaign added successfully"
+    "successfulAdd" : "Campaign added successfully",
+    "successfulDelete" : "Campaign successfully deleted"
 
 }
 
@@ -38,12 +39,13 @@ window.dictionary.schedule = {
     "scheduleCampaign" : "Schedule Campaign",
     "showCampaigns" : "All Scheduled Campaigns",
     "selectCampaign" : "Select Campaign",
-    "scheduleNewCampaign" : "+ Schedule A New Campaign",
+    "scheduleNewCampaign" : "+ Schedule A Campaign",
     "campaign" : "Campaign",
     "startTime" : "Starts",
     "endTime" : "Ends",
     "edit" : "Edit",
     "controls" : "Controls",
     "cancel" : "Cancel",
-    "successfullySavedSchedule": "Successfully Saved Schedule."
+    "successfullySavedSchedule": "Successfully Saved Schedule.",
+    "successfulDelete" : "Successfully Deleted Schedule"
 }

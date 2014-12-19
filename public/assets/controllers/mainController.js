@@ -14,6 +14,7 @@ function MainController($scope,$http,$timeout){
 	$scope.addAlert = function(msg, type) {
 		$scope.alerts.push({"msg": msg, "type":type});
 		if(type === "success"){
+			$scope.hidden = false;
 			$scope.hideAlert();
 		}
 	};
@@ -22,6 +23,7 @@ function MainController($scope,$http,$timeout){
 		$scope.startFade = true;
 		//TODO: add  'ng-class="{fade: startFade}" ' to the alert. I kept getting errors
 		$timeout(function(){
+			$scope.alerts.shift();
 			$scope.hidden = true;
 		}, 2000);
 
@@ -197,7 +199,7 @@ function CampaignController($scope, $http){
 			method: 'DELETE'
 		}).success(function(data, status, headers, config){
 			$scope.getAllCampaigns();
-
+			$scope.addAlert($scope.dict.campaign.successfulDelete, "success");
 		}).error(function(data, status, headers, config){
 			console.log('Deleting campaign failed:', status);
 			$scope.error = 'Deleting campaign failed: ' + status;
@@ -306,7 +308,7 @@ function ScheduleController($scope, $http){
 			method: 'DELETE'
 		}).success(function(data, status, headers, config){
 			$scope.getAllSchedules();
-
+			$scope.addAlert($scope.dict.schedule.successfulDelete, "success");
 		}).error(function(data, status, headers, config){
 			console.log('Deleting schedule failed:', status);
 			$scope.error = 'Deleting schedule failed: ' + status;
