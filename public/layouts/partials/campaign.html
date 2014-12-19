@@ -4,7 +4,7 @@
 
 	<div class="create-campaign clearfix" collapse="!addCampaign">
         <div class="hide-add-campaign">
-            <button class="btn-warning" ng-click="cancelCampaign()">{{dict.campaign.cancel}}</button>
+            <button class="btn-primary" ng-click="saveCampaign()">{{dict.campaign.createCampaign}}</button> <button class="btn-warning" ng-click="cancelCampaign()">{{dict.campaign.cancel}}</button>
         </div>
 		<form>
 			<div class="campaign-details">
@@ -13,7 +13,7 @@
 				</label>
 				<label for="campaignDescription">{{dict.campaign.campaignDescription}}</label>
 				<textarea maxlength="240" ng-model="campaignDescription" name="campaignDescription" id="campaignDescription" cols="10" rows="3"></textarea>
-				<button class="btn-primary" ng-click="saveCampaign()">{{dict.campaign.createCampaign}}</button>
+
 			</div>
 			<div class="campaign-image-select">
 				<div class="image-campaign">

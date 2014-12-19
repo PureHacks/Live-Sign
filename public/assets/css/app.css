@@ -158,6 +158,11 @@ li {
     text-align: right;
 }
 
+.create-campaign .hide-add-campaign .btn-primary {
+    margin-right: 10px;
+    padding: 10px;
+}
+
 .create-campaign .campaign-details {
     float: left;
     width: 30%;
