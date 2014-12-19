@@ -32,7 +32,9 @@ window.dictionary.campaign = {
     "addMore" : "Add more images",
     "imagesInCampaign" : "Images in this campaign",
     "successfulAdd" : "Campaign added successfully",
-    "successfulDelete" : "Campaign successfully deleted"
+    "successfulDelete" : "Campaign successfully deleted",
+    "imageError" : "Select some images for your campaign.",
+    "nameError" : "Enter a name for your Campaign."
 
 }
 
@@ -48,5 +50,8 @@ window.dictionary.schedule = {
     "controls" : "Controls",
     "cancel" : "Cancel",
     "successfullySavedSchedule": "Successfully Saved Schedule.",
-    "successfulDelete" : "Successfully Deleted Schedule"
+    "successfulDelete" : "Successfully Deleted Schedule",
+    "errorStart" : "Select a Start Time for this Schedule",
+    "errorEnd" : "Select an End Time for this Schedule",
+    "errorCampaign" : "Select a Campaign to use for this Schedule"
 }

@@ -10,7 +10,7 @@ var deleteImage = function(req, res) {
 	console.log(cloudinaryId, imageID);
 	cloudinary.delete(cloudinaryId, function(result){
 		deleteImageFromDataBase(imageID, function(result){
-			res.status(200).send("success");
+			res.status(200).send("success");eeee
 		});
 	});
 };
