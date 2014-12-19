@@ -63,7 +63,7 @@ li {
 
 .image-container .image-list li {
     display: inline-block;
-    min-height: 90px;
+    min-height: 100px;
     width: 90%;
     border-bottom: 1px solid black;
     padding: 10px;
@@ -76,13 +76,62 @@ li {
     cursor: pointer;
     max-height: 100px;
  }
+/* matt images ... */
+ .images-view .btn-danger,
+ .campaign-view .image-item .btn-primary,
+ .campaign-view .image-item .btn-danger {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    border: none;
+}
+
+.images-view .btn-danger {
+    top: -40px;
+}
+
+.campaign-view .image-item .name {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 100%;
+    font-size: 22px;
+    text-align: right;
+}
+
+.image-item {
+    position: relative;
+}
+
+.btn-primary,
+.btn-warning,
+.btn-danger {
+    border: none !important;
+}
+
+.campaign-view form .btn-primary {
+    margin-top: 10px;
+    padding: 5px;
+}
+
+.campaign-view .btn-warning {
+    padding: 10px;
+}
+
+.images-view .image-list .image-details .name {
+    font-size: 25px;
+    position: absolute;
+    left: 15px;
+    bottom: 60%;
+}
+
 
 /* campaign */
 
 .show-add-campaign {
     width: 100%;
     text-align: right;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: bold;
     margin-bottom: 20px;
     cursor: pointer;
@@ -178,6 +227,10 @@ ul {
     width: 30%;
 }
 
+.table-campaign th {
+    text-align: center;
+}
+
 .table-campaign .col-1 span {
     float: left;
     clear: both;
@@ -185,6 +238,15 @@ ul {
 
 .table-campaign .col-1 .campaign-name {
     font-weight: bold;
+}
+
+.table-campaign .col-3 {
+    width: 15%;
+}
+
+.table-campaign th {
+    width: 15%;
+    text-align: right;
 }
 
 .table-campaign td {
@@ -196,6 +258,7 @@ ul {
 .image-container .image-list .image-details {
     float: right;
     position: absolute;
+    padding-bottom: 0;
     bottom: 10px;
     right: 10px;
     width: 300px;
@@ -262,25 +325,25 @@ ul {
 }
 
 .heading .campaign {
-    width: 35%;
+    width: 20%;
 }
 
 .heading .start-time {
-    width: 15%;
+    width: 40%;
 }
 
 .heading .end-time {
-    width: 15%;
+    width: 16%;
 }
 
 .heading .controls {
-    width: 30%;
+    width: 14%;
 }
 
 .show-add-schedule {
     width: 100%;
     text-align: right;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: bold;
     margin-bottom: 20px;
     cursor: pointer;
@@ -412,6 +475,7 @@ ul {
 
 .schedule-spec.schedule-buttons button {
     width: 100%;
+    margin-top: 28px;
 } 
 
 .show-schedule .date-end,
@@ -425,13 +489,18 @@ ul {
     display: block;
 }
 
+.show-schedule h4 {
+    font-size: 20px;
+}
+
 .show-schedule h5 .top {
-    font-size: 18px;
+    font-size: 16px;
     font-weight:bold;
+    margin-top: 15px;
 } 
 
 .show-schedule h5 .bottom {
-    font-size: 16px;
+    font-size: 14px;
     font-weight:bold;
 }
 

@@ -1,10 +1,10 @@
-<div ng-controller="CampaignController" ng-init="init()">
+<div ng-controller="CampaignController" ng-init="init()" class="campaign-view">
 
     <div class="show-add-campaign" collapse="addCampaign" ng-click="showAddCampaign(true)">{{dict.campaign.createNewCampaign}}</div>
 
 	<div class="create-campaign clearfix" collapse="!addCampaign">
         <div class="hide-add-campaign">
-            <button ng-click="cancelCampaign()">{{dict.campaign.cancel}}</button>
+            <button class="btn-warning" ng-click="cancelCampaign()">{{dict.campaign.cancel}}</button>
         </div>
 		<form>
 			<div class="campaign-details">
@@ -13,7 +13,7 @@
 				</label>
 				<label for="campaignDescription">{{dict.campaign.campaignDescription}}</label>
 				<textarea ng-model="campaignDescription" name="campaignDescription" id="campaignDescription" cols="10" rows="3"></textarea>
-				<button ng-click="saveCampaign()">{{dict.campaign.createCampaign}}</button>
+				<button class="btn-primary" ng-click="saveCampaign()">{{dict.campaign.createCampaign}}</button>
 			</div>
 			<div class="campaign-image-select">
 				<div class="image-campaign">
@@ -24,8 +24,8 @@
 								<img class="thumb" ng-src="{{image.secure_url}}" id="{{image.friendlyName}}"/>
 							</div>	
 							<div class="image-details">
-								<span>{{image.friendlyName}}</span>
-								<button ng-click="addImage($index)">{{dict.campaign.addImage}}</button>
+								<span class="name">{{image.friendlyName}}</span>
+								<button class="btn-primary"	ng-click="addImage($index)">{{dict.campaign.addImage}}</button>
 								
 							</div>
 						</li>
@@ -38,8 +38,8 @@
 							<div class="image-container">
 								<img class="thumb" ng-src="{{image.secure_url}}"/>
 							</div>
-							<span>{{image.friendlyName}}</span>
-							<button ng-click="removeImage($index)">{{dict.campaign.removeImage}}</button>
+							<span class="name">{{image.friendlyName}}</span>
+							<button class="btn-danger" ng-click="removeImage($index)">{{dict.campaign.removeImage}}</button>
 						</li>
 					</ul>
 			</div>
@@ -63,8 +63,8 @@
 						<img class="thumb" ng-src="{{image.secure_url}}" alt="{{image.friendlyName}}">
 					</div>
 				</td>
-				<td>
-					<button class="button" ng-click="deleteCampaign($index)">{{dict.campaign.deleteList}}</button>
+				<td class="col-3">
+					<button class="btn-danger" ng-click="deleteCampaign($index)">{{dict.campaign.deleteList}}</button>
 				</td>
 			</tr>
 		</table>

@@ -10,7 +10,7 @@ var deleteImage = function(req, res) {
 	console.log(cloudinaryId, imageID);
 	cloudinary.delete(cloudinaryId, function(result){
 		deleteImageFromDataBase(imageID, function(result){
-			res.status(200).send("success");eeee
+			res.status(200).send("success");
 		});
 	});
 };
@@ -34,8 +34,8 @@ var deleteImageFromDataBase = function(_id, callback) {
 	});
 };
 
-var deleteImageFromCampaigns = function(_id) {
-
+var deleteImageFromCampaigns = function(_id, callback) {
+	console.log("todo.");
 }
 
 router.delete("/:imageID", deleteImage);

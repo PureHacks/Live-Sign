@@ -42,8 +42,8 @@ app.directive('newscheduleitem', function() {
             '</div>'+
             '</span>' +
             '<div class="campaign-submit-container">' +
-            '<button class="cancel-button" ng-click="cancelSchedule()">{{dict.schedule.cancel}}'+
-            '<button ng-click="saveSchedule()">{{dict.schedule.scheduleCampaign}}'+
+            '<button class="btn-warning cancel-button" ng-click="cancelSchedule()">{{dict.schedule.cancel}}'+
+            '<button class="btn-primary" ng-click="saveSchedule()">{{dict.schedule.scheduleCampaign}}'+
             '</button>'+
             '</div>' +
             '</div>'
