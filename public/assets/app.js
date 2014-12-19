@@ -1,4 +1,4 @@
-var app = angular.module('app',['ui.bootstrap', 'ui.bootstrap.datetimepicker']);
+var app = angular.module('app',['ui.bootstrap', 'ui.bootstrap.datetimepicker','ngAnimate']);
 
 app.directive('newscheduleitem', function() {
     return {

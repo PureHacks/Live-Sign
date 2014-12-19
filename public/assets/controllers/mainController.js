@@ -13,28 +13,11 @@ function MainController($scope,$http,$timeout){
 
 	$scope.addAlert = function(msg, type) {
 		$scope.alerts.push({"msg": msg, "type":type});
-		$scope.hidden = false;
-		$scope.hideAlert();
-		if(type === "success"){
-			//$scope.hideAlert();
-		}
-		if (type === "warning") {
-			//$scope.hideAlert();
-		}
-		if (type === "danger") {
-			//$scope.hideAlert();
-		}
-	};
 
-	$scope.hideAlert = function () {
-		// $scope.startFade = true;
-		//TODO: add  'ng-class="{fade: startFade}" ' to the alert. I kept getting errors
-		$timeout(function(){
-			$scope.alerts.shift();
-			$scope.hidden = true;
-		}, 2000);
-
-	};
+        $timeout(function() {
+            $scope.alerts.splice($scope.alerts[0], 1);
+        }, 5000);
+    };
 
 	$scope.closeAlert = function(index) {
 		$scope.alerts.splice(index, 1);
@@ -101,7 +84,6 @@ function ImageController($scope,$http){
 
 	$scope.setPreview = function(index){
 		var image = $scope.imageData[index];
-		console.log('image['+index+']:',image);
 		$scope.imagePreview = image.url;
 		$scope.imagePreviewText = image.friendlyName;
 		$scope.imagePreviewDate = image.created_at;
@@ -120,10 +102,8 @@ function ImageController($scope,$http){
 			headers: { 'Content-type': 'application/json'}
 		}).success(function(data, status, headers, config){
 			$scope.getImages();
-			console.log("we the best");
 			$scope.addAlert($scope.dict.images.successfulDelete, "success");
 		}).error(function(data, status, headers, config){
-			console.log('Deleting image failed:', status);
 			$scope.error = 'Deleting image failed: ' + status;
 		});
 	};

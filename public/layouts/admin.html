@@ -23,7 +23,8 @@
 		<div class="jumbotron">
 			<div class="container">
 				<h2>{{pageView}}</h2>
-                <alert ng-repeat="alert in alerts" ng-hide="hidden" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+               <!-- <alert ng-repeat="alert in alerts" ng-animate="{hidden: 'example-hide'}" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert> -->
+                <div class="alert alert-{{alert.type}} animate-repeat" ng-repeat="alert in alerts">{{ alert.msg }}</div>
 				<div ng-switch on="pageView">
 					{{component}}
 					<div ng-switch-when="Scheduling" class="scheduling-container">
@@ -48,7 +49,9 @@
 		</div> <!-- /container -->
 
 	</body>
-	<script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js'></script>
+
+    <script data-require="angular.js@1.2.8" data-semver="1.2.8" src="http://code.angularjs.org/1.2.8/angular.min.js"></script>
+    <script src="http://code.angularjs.org/1.2.8/angular-animate.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
 
