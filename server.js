@@ -65,7 +65,6 @@ app.getScheduledCampaings = function() {
 };
 
 app.getCampaign = function(campaigns) {
-	console.log("getCampaign campaigns = ", campaigns);
 	var ml = require("./controllers/db");
 	var campaignIDs = [];
 
@@ -80,11 +79,8 @@ app.getCampaign = function(campaigns) {
 		}
 	};
 
-	console.log("campaignIDs", campaignIDs);
-
 	ml.getData(nosql, function(err, result) {
 		if (!err) {
-			console.log("Results", result);
 			io.emit('publishCampaign', result);		
 		}
 	});
@@ -107,6 +103,8 @@ app.use("/api/getAllCampaigns", require("./controllers/api/getAllCampaigns"));
 app.use("/api/getAllSchedules", require("./controllers/api/getAllSchedules"));
 
 app.use("/api/createSchedule", require("./controllers/api/createSchedule"));
+
+app.use("/api/deleteSchedule/", require("./controllers/api/deleteSchedule"));
 
 app.use("/api/publishCampaign/:campaignID", app.publishCampaign);
 
