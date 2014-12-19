@@ -95,6 +95,27 @@ function ImageController($scope,$http){
 		$scope.imagePreviewSize = image.bytes;
 	};
 
+	$scope.deleteImage = function(index) {
+
+		var image = $scope.imageData[index];
+		var data = {};
+		data.id = image.public_id;
+		$http({
+			url: '/api/deleteImage/'+image._id,
+			method: 'DELETE',
+			data: data,
+			headers: { 'Content-type': 'application/json'}
+		}).success(function(data, status, headers, config){
+			$scope.getImages();
+			console.log("we the best");
+			$scope.addAlert($scope.dict.images.successfulDelete, "success");
+		}).error(function(data, status, headers, config){
+			console.log('Deleting image failed:', status);
+			$scope.error = 'Deleting image failed: ' + status;
+		});
+	};
+
+
 };
 
 function CampaignController($scope, $http){

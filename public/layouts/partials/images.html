@@ -21,6 +21,7 @@
                             <span>{{dict.images.createdOn}}:</span>
                             <span ng-bind="convertToDate(image.created_at) | date:'short'"></span>
                         </p>
+                        <button class="button" ng-click ="deleteImage($index)">Delete {{image.friendlyName}}</button>
                     </div>
                 </li>
             </ul>

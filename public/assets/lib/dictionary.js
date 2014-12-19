@@ -9,7 +9,8 @@ window.dictionary.images = {
     "createdOn" : "Created on",
     "imageList" : "Available Images",
     "imagePreview" : "Preview",
-    "successfulAdd" : "Image added successfully"
+    "successfulAdd" : "Image added successfully",
+    "successfulDelete" : "Image successfully deleted"
 };
 
 window.dictionary.campaign = {
