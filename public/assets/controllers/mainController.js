@@ -188,6 +188,21 @@ function CampaignController($scope, $http){
 			});
 		}
 	};
+
+	$scope.deleteCampaign = function(index) {
+		var campaignID = $scope.campaigns[index]._id;
+
+		$http({
+			url: '/api/deleteCampaign/'+campaignID,
+			method: 'DELETE'
+		}).success(function(data, status, headers, config){
+			$scope.getAllCampaigns();
+
+		}).error(function(data, status, headers, config){
+			console.log('Deleting campaign failed:', status);
+			$scope.error = 'Deleting campaign failed: ' + status;
+		});
+	};
 };
 
 function ScheduleController($scope, $http){

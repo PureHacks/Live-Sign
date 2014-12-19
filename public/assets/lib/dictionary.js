@@ -27,7 +27,7 @@ window.dictionary.campaign = {
     "images": "Images",
     "actions" : "Actions",
     "editList" : "Edit List",
-    "deleteList" : "Delete List",
+    "deleteList" : "Delete Campaign",
     "addMore" : "Add more images",
     "imagesInCampaign" : "Images in this campaign",
     "successfulAdd" : "Campaign added successfully"

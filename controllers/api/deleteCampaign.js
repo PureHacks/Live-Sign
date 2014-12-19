@@ -7,20 +7,20 @@ var deleteCampaign = function(req, res) {
 		"selector" : {"_id" : ml.ObjectID(req.param("campaignID"))}
 	};
 	console.log("Deleting campaign: ", nosql.selector._id);
-
 	ml.deleteData(nosql, function(err, result) {
 		if (err) {
-			res.send(200, {
+			console.log("error:" + nosql);
+			res.send(403, {
 				"error": "Something is wrong with your query" + err.message
 			});
 		} else {
 			res.send(200, {
-				"campaign": result
+				"result": result
 			});
 		}
 	});
 };
 
-router.get("/:campaignID", deleteCampaign);
+router.delete("/:campaignID", deleteCampaign);
 
 module.exports = router;
