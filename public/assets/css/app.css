@@ -31,6 +31,16 @@ li {
     min-height: 600px;
 }
 
+.nav-tabs a {
+    color: white;
+    font-size: 17px;
+}
+
+.nav-tabs a:hover {
+    color: #3498db;
+    font-size: 17px;
+}
+
 /* image view */
 
 .image-container form{
