@@ -9,10 +9,10 @@
 		<form>
 			<div class="campaign-details">
 				<label>{{dict.campaign.campaignName}}
-				<input type="text" ng-model="campaignName" name="campaignName">
+				<input maxlength="25" type="text" ng-model="campaignName" name="campaignName">
 				</label>
 				<label for="campaignDescription">{{dict.campaign.campaignDescription}}</label>
-				<textarea maxlength="400" ng-model="campaignDescription" name="campaignDescription" id="campaignDescription" cols="10" rows="3"></textarea>
+				<textarea maxlength="240" ng-model="campaignDescription" name="campaignDescription" id="campaignDescription" cols="10" rows="3"></textarea>
 				<button class="btn-primary" ng-click="saveCampaign()">{{dict.campaign.createCampaign}}</button>
 			</div>
 			<div class="campaign-image-select">
