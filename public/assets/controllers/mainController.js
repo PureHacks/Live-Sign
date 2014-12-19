@@ -13,14 +13,21 @@ function MainController($scope,$http,$timeout){
 
 	$scope.addAlert = function(msg, type) {
 		$scope.alerts.push({"msg": msg, "type":type});
+		$scope.hidden = false;
+		$scope.hideAlert();
 		if(type === "success"){
-			$scope.hidden = false;
-			$scope.hideAlert();
+			//$scope.hideAlert();
+		}
+		if (type === "warning") {
+			//$scope.hideAlert();
+		}
+		if (type === "danger") {
+			//$scope.hideAlert();
 		}
 	};
 
 	$scope.hideAlert = function () {
-		$scope.startFade = true;
+		// $scope.startFade = true;
 		//TODO: add  'ng-class="{fade: startFade}" ' to the alert. I kept getting errors
 		$timeout(function(){
 			$scope.alerts.shift();
@@ -114,8 +121,6 @@ function ImageController($scope,$http){
 			$scope.error = 'Deleting image failed: ' + status;
 		});
 	};
-
-
 };
 
 function CampaignController($scope, $http){
@@ -164,8 +169,12 @@ function CampaignController($scope, $http){
 
 	$scope.addImage = function(index) {
 		image = $scope.repoImages[index];
-		$scope.selectedImages.push(image);
+		$scope.selectedImages.unshift(image);
 	};
+
+	$scope.removeImage = function(index) {
+		$scope.selectedImages.splice(index, 1);
+	}
 
 	// populate $scope.campaigns
 	// should be a controller...
@@ -182,10 +191,14 @@ function CampaignController($scope, $http){
 	}
 
 	$scope.saveCampaign = function() {
-		if($scope.campaignName === '' || $scope.selectedImages.length == 0){
-			console.error('validation fail');
-			// TODO: implement modals
-		} else {
+		if($scope.campaignName === ''){
+			console.error('Enter a name!');
+			$scope.addAlert($scope.dict.campaign.nameError , "danger");
+		} else if ($scope.selectedImages.length == 0) {
+			console.error('Select an image!');
+			$scope.addAlert( $scope.dict.campaign.imageError , "danger");
+		}
+		else {
 			var campaign = {};
 			campaign.images = $scope.selectedImages;
 			campaign.name = $scope.campaignName;
@@ -245,7 +258,15 @@ function ScheduleController($scope, $http){
 
 	$scope.showAddSchedule = function(bool){
 		$scope.addSchedule = bool;
-	}
+	};
+
+	$scope.data = {
+		startTime : "",
+		endTime : ""	
+	};
+	
+	$scope.campaignNameDD = 0;
+
 
 	// ng-model
 	$scope.selectedCampaign = {};
@@ -287,11 +308,19 @@ function ScheduleController($scope, $http){
 
 	$scope.saveSchedule = function() {
 		// validate schedule info
-		$scope.showAddSchedule(false);
-		if($scope.data.startDate === '' || $scope.data.endDate === '' || $scope.campaignNameDD === ' 0' ){
+		if(!$scope.data.startDate){
 		   // TODO: implement alert error
-			console.error('validation failed');
-		} else {
+		   	$scope.addAlert($scope.dict.schedule.errorStart, "warning");
+			console.error('start date validation failed');
+		} else if (!$scope.data.endDate) {
+			$scope.addAlert($scope.dict.schedule.errorEnd , "warning");
+			console.error('end date validation failed');
+		}
+		else if ($scope.campaignNameDD == '0' ) {
+			$scope.addAlert($scope.dict.schedule.errorCampaign);
+			console.error('selected campaign validation failed' , "warning");
+		}
+		else {
 			// create json object
 			var schedule = {};
 			schedule.id = $scope.campaignNameDD._id;
@@ -305,10 +334,10 @@ function ScheduleController($scope, $http){
 				headers: { 'Content-type': 'application/json'}
 			})
 			.success(function(data, status, headers, config) {
-				$scope.selectedImages = [];
-				$scope.selectedIndex = [];
-				$scope.campaignName = "";
-				$scope.campaignDescription = "";
+				$scope.showAddSchedule(false);
+				$scope.data.startDate = undefined;
+				$scope.data.endDate = undefined;
+				$scope.data.campaignNameDD = '0';
 				console.log("successfully saved Schedule.");
 				$scope.getAllSchedules();
 				// success alert
@@ -316,7 +345,9 @@ function ScheduleController($scope, $http){
 			})
 			.error(function(data, status, headers, config) {
 					// TODO: implement failure modal
+				$scope.addAlert("ERROR:!!!" + data.error, "danger");
 				console.error(data.error);
+
 			});
 		}
 	};

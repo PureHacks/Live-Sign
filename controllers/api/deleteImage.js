@@ -34,8 +34,8 @@ var deleteImageFromDataBase = function(_id, callback) {
 	});
 };
 
-var deleteImageFromCampaigns = function(_id) {
-
+var deleteImageFromCampaigns = function(_id, callback) {
+	console.log("todo.");
 }
 
 router.delete("/:imageID", deleteImage);

@@ -1,10 +1,10 @@
-<div ng-controller="ImageController" ng-init="init()">
+<div ng-controller="ImageController" ng-init="init()" class="images-view">
     <h4>{{dict.images.addNewImage}}</h4>
     <form action="/api/saveImage" method="POST" enctype="multipart/form-data">
-        <input type="file" name="imageFileName">
+        <input type="file" required="true"name="imageFileName">
         <label for="friendlyName">{{dict.images.imageName}}</label>
-        <input type="text" name="friendlyName" id="friendlyName" placeholder="{{dict.images.imageNamePlaceholder}}"/>
-        <button type="submit">{{dict.images.saveImage}}</button>
+        <input type="text" maxlength="22" required="true" name="friendlyName" id="friendlyName" placeholder="{{dict.images.imageNamePlaceholder}}"/>
+        <button class="btn-primary" type="submit">{{dict.images.saveImage}}</button>
     </form>
     <div class="image-list">
         <h4>{{dict.images.imageList}}</h4>
@@ -21,7 +21,7 @@
                             <span>{{dict.images.createdOn}}:</span>
                             <span ng-bind="convertToDate(image.created_at) | date:'short'"></span>
                         </p>
-                        <button class="button" ng-click ="deleteImage($index)">Delete {{image.friendlyName}}</button>
+                        <button class="btn-danger" ng-click ="deleteImage($index)">Delete Image</button>
                     </div>
                 </li>
             </ul>
