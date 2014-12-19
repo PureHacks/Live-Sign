@@ -6,7 +6,7 @@ var getImages = function(req, res) {
 		"collection": "images"
 	};
 
-	ml.getData(nosql, function(err, result) {
+	ml.getDataFiltered(nosql, function(err, result) {
 		if (err) {
 			res.send(200, {
 				"error": "Something is wrong with your query" + err.message

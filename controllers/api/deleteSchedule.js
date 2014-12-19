@@ -1,12 +1,12 @@
 var router = require("express").Router(),
 	ml = require("../db");
 
-var deleteCampaign = function(req, res) {
+var deleteSchedule = function(req, res) {
 	var nosql = {
-		"collection": "campaigns",
-		"selector" : {"_id" : ml.ObjectID(req.param("campaignID"))}
+		"collection": "schedules",
+		"selector" : {"_id" : ml.ObjectID(req.param("scheduleID"))}
 	};
-	console.log("Deleting campaign: ", nosql.selector._id);
+	console.log("Deleting schedule: ", nosql.selector._id);
 	ml.deleteData(nosql, function(err, result) {
 		if (err) {
 			console.log("error:" + nosql);
@@ -21,6 +21,6 @@ var deleteCampaign = function(req, res) {
 	});
 };
 
-router.delete("/:campaignID", deleteCampaign);
+router.delete("/:scheduleID", deleteSchedule);
 
 module.exports = router;

@@ -23,16 +23,16 @@
                     <div class="schedule-spec schedule-time">
                         <h5 class="date-start">
                             <span class="date-start-end top">{{schedule.start| date:"EEE MMM d" }}</span>
-                            <span class="date-start-end bottom">{{schedule.start| date:"hh:m a" }}</span>
+                            <span class="date-start-end bottom">{{schedule.start| date:"hh:mm a" }}</span>
                         </h5>
                         <h5 class="date-end">
                             <span class="date-start-end top">{{schedule.end| date:"EEE MMM d" }}</span>
-                            <span class="date-start-end bottom">{{schedule.end| date:"hh:m a" }}</span>
+                            <span class="date-start-end bottom">{{schedule.end| date:"hh:mm a" }}</span>
                         </h5>    
                     </div>
                     <div class="schedule-spec schedule-buttons">
-                        <button class="button">Edit</button>
-                        <button class="button">Delete</button>
+                        <button ng-click="deleteSchedule($index)"class="button">Delete</button>
+                        <!-- <button class="button">Edit</button> -->
                     </div>
                 </li>
             </ul>

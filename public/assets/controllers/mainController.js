@@ -14,6 +14,7 @@ function MainController($scope,$http,$timeout){
 	$scope.addAlert = function(msg, type) {
 		$scope.alerts.push({"msg": msg, "type":type});
 		if(type === "success"){
+			$scope.hidden = false;
 			$scope.hideAlert();
 		}
 	};
@@ -22,6 +23,7 @@ function MainController($scope,$http,$timeout){
 		$scope.startFade = true;
 		//TODO: add  'ng-class="{fade: startFade}" ' to the alert. I kept getting errors
 		$timeout(function(){
+			$scope.alerts.shift();
 			$scope.hidden = true;
 		}, 2000);
 
@@ -63,7 +65,7 @@ function ImageController($scope,$http){
 	$scope.getImages = function(){
 		$http({
 			url: '/api/getImages',
-			type: 'GET'
+			method: 'GET'
 		}).success(function(data, status, headers, config){
 			$scope.imageData = data.images;
 			$scope.setPreview(0);
@@ -92,6 +94,27 @@ function ImageController($scope,$http){
 		$scope.imagePreviewDate = image.created_at;
 		$scope.imagePreviewSize = image.bytes;
 	};
+
+	$scope.deleteImage = function(index) {
+
+		var image = $scope.imageData[index];
+		var data = {};
+		data.id = image.public_id;
+		$http({
+			url: '/api/deleteImage/'+image._id,
+			method: 'DELETE',
+			data: data,
+			headers: { 'Content-type': 'application/json'}
+		}).success(function(data, status, headers, config){
+			$scope.getImages();
+			console.log("we the best");
+			$scope.addAlert($scope.dict.images.successfulDelete, "success");
+		}).error(function(data, status, headers, config){
+			console.log('Deleting image failed:', status);
+			$scope.error = 'Deleting image failed: ' + status;
+		});
+	};
+
 
 };
 
@@ -129,7 +152,7 @@ function CampaignController($scope, $http){
 	// this should be a service...
 	$scope.getImages = function(){
 		$http({url: '/api/getImages'
-			, type: 'GET'
+			, method: 'GET'
 		}).success(function(data, status, headers, config){
 			$scope.repoImages = data.images;
 			$scope.selectedImages;
@@ -149,7 +172,7 @@ function CampaignController($scope, $http){
 	$scope.getAllCampaigns = function() {
 		$http({
 			url: '/api/getAllCampaigns',
-			type: 'GET'
+			method: 'GET'
 		}).success(function(data, status, headers, config){
 			$scope.campaigns = data.campaigns;
 		}).error(function(data, status, headers, config){
@@ -188,6 +211,21 @@ function CampaignController($scope, $http){
 			});
 		}
 	};
+
+	$scope.deleteCampaign = function(index) {
+		var campaignID = $scope.campaigns[index]._id;
+
+		$http({
+			url: '/api/deleteCampaign/'+campaignID,
+			method: 'DELETE'
+		}).success(function(data, status, headers, config){
+			$scope.getAllCampaigns();
+			$scope.addAlert($scope.dict.campaign.successfulDelete, "success");
+		}).error(function(data, status, headers, config){
+			console.log('Deleting campaign failed:', status);
+			$scope.error = 'Deleting campaign failed: ' + status;
+		});
+	};
 };
 
 function ScheduleController($scope, $http){
@@ -215,7 +253,7 @@ function ScheduleController($scope, $http){
 	$scope.getAllSchedules = function() {
 		$http({
 			url: '/api/getAllSchedules',
-			type: 'GET'
+			method: 'GET'
 		}).success(function(data, status, headers, config){
 			$scope.schedules = data.schedules;
 			$scope.populateSchedules();
@@ -238,14 +276,14 @@ function ScheduleController($scope, $http){
 				$scope.schedules[index].campaign = data.campaign;	
 			});
 		}
-	}
+	};
 
 	$scope.cancelSchedule = function(){
 		$scope.campaignNameDD='0';
 		$scope.data.startDate='';
 		$scope.data.endDate='';
 		$scope.showAddSchedule(false);
-	}
+	};
 
 	$scope.saveSchedule = function() {
 		// validate schedule info
@@ -281,13 +319,28 @@ function ScheduleController($scope, $http){
 				console.error(data.error);
 			});
 		}
-	}
+	};
+
+	$scope.deleteSchedule = function(index) {
+		var scheduleID = $scope.schedules[index]._id;
+
+		$http({
+			url: '/api/deleteSchedule/'+scheduleID,
+			method: 'DELETE'
+		}).success(function(data, status, headers, config){
+			$scope.getAllSchedules();
+			$scope.addAlert($scope.dict.schedule.successfulDelete, "success");
+		}).error(function(data, status, headers, config){
+			console.log('Deleting schedule failed:', status);
+			$scope.error = 'Deleting schedule failed: ' + status;
+		});
+	};
 
 	// populate $scope.campaigns
 	$scope.getAllCampaigns = function() {
 		$http({
 			url: '/api/getAllCampaigns',
-			type: 'GET'
+			method: 'GET'
 		}).success(function(data, status, headers, config){
 			$scope.campaigns = data.campaigns;
 		}).error(function(data, status, headers, config){
@@ -295,19 +348,18 @@ function ScheduleController($scope, $http){
 			console.log('get all campaigns failed:',status);
 			$scope.error = 'get all campaigns failed: '+status;
 		});
-	}
+	};
 
 	// callback assigns data to schedules[i].campaign
 	$scope.getCampaign = function(campaignID, index, cb) {
 		$http({
 			url: '/api/getCampaign/'+campaignID,
-			type: 'GET'
+			method: 'GET'
 		}).success(function(data, status, headers, config){
-			console.log("got campaign:", data);
 			cb(data, index);
 		}).error(function(data, status, headers, config){
 			console.log('get all campaigns failed:',status);
 			$scope.error = 'get all campaigns failed: '+status;
 		});
-	}	
+	};	
 };

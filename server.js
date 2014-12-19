@@ -65,7 +65,6 @@ app.getScheduledCampaings = function() {
 };
 
 app.getCampaign = function(campaigns) {
-	console.log("getCampaign campaigns = ", campaigns);
 	var ml = require("./controllers/db");
 	var campaignIDs = [];
 
@@ -79,8 +78,6 @@ app.getCampaign = function(campaigns) {
 			"$or": campaignIDs
 		}
 	};
-
-	console.log("campaignIDs", campaignIDs);
 
 	ml.getData(nosql, function(err, result) {
 		if (!err) {
@@ -96,6 +93,9 @@ app.use("/api/getImages", require("./controllers/api/getImages"));
 
 app.use("/api/saveImage", require("./controllers/api/saveImage"));
 
+// /api/deleteImage/:id
+app.use("/api/deleteImage/", require("./controllers/api/deleteImage"));
+
 app.use("/api/createCampaign", require("./controllers/api/createCampaign"));
 
 // /api/getCampaign/:id
@@ -109,6 +109,9 @@ app.use("/api/getAllCampaigns", require("./controllers/api/getAllCampaigns"));
 app.use("/api/getAllSchedules", require("./controllers/api/getAllSchedules"));
 
 app.use("/api/createSchedule", require("./controllers/api/createSchedule"));
+
+// /api/deleteSchedule/:id
+app.use("/api/deleteSchedule/", require("./controllers/api/deleteSchedule"));
 
 app.use("/api/publishCampaign/:campaignID", app.publishCampaign);
 

@@ -24,4 +24,18 @@ cloud.upload = function(filepath, filename, callback) {
 	return false;
 }
 
+cloud.delete = function (publicID, callback) {
+
+	if (publicID) {
+		cloudinary.uploader.destroy(publicID, function(result) {
+			if (result.error) {
+				console.log(result.error.message);
+			} else {
+				console.log("cloudinary delete success");
+				callback(result);
+			}
+		});
+	}
+}
+
 module.exports = cloud;
