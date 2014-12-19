@@ -5,7 +5,7 @@ var express = require('express'),
 	app = express(),
 	io;
 
-var	port = 8888;
+var	port = process.env.PORT || 8888;
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
