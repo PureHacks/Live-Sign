@@ -3,6 +3,16 @@ Live-Sign
 
 PureHacks
 
+## stack
+
+* MongoDB
+* Express
+* Angular
+* Node
+* Cloudinary
+* Bootstrap
+* BxSlider
+
 
 ## getting started
 
@@ -11,15 +21,9 @@ PureHacks
 	npm install
 	```
 
-* install nodemon
-	* nodemon automatically restarts node server after changes made
-	```
-	npm install -g nodemon
-	```
-
 * start node server
 	```
-	nodemon server.js
+	node server.js
 	```
 
 * open browser
