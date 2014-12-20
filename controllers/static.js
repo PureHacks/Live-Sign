@@ -6,7 +6,7 @@ router.get("/", function (req, res) {
 	}
 	else {
 		// overriden by index.html in /public
-		res.status(200).redirect("/admin.html");
+		res.status(200).redirect("/index.html");
 	}
 })
 
